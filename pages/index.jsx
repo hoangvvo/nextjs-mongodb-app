@@ -19,19 +19,19 @@ const IndexPage = () => {
   return (
     <Layout>
       <div>
-        <h1>
+        <h1>Next.js + MongoDB App</h1>
+        <h2>
           Hello,
           {' '}
-          {(isLoggedIn ? name : 'stranger.')}
-        </h1>
-
+          {(isLoggedIn ? name : 'stranger')}
+          .
+        </h2>
         {(!isLoggedIn ? (
           <>
-            <Link href="/login"><div><button>Login</button></div></Link>
-            <Link href="/signup"><div><button>Sign up</button></div></Link>
+            <Link href="/login"><button>Login</button></Link>
+            <Link href="/signup"><button>Sign up</button></Link>
           </>
         ) : <button onClick={handleLogout}>Logout</button>)}
-
       </div>
     </Layout>
   );
