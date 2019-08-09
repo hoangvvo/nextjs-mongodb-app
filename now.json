@@ -1,0 +1,10 @@
+{
+    "name": "nextjs-mongodb-app",
+    "version": 2,
+    "env": {
+        "MONGODB_URI": "mongodb+srv://justtestuser:dontreusethis@cluster0-ewx3k.mongodb.net/test?retryWrites=true&w=majority"
+    },
+    "builds": [
+        { "src": "package.json", "use": "@now/next@canary" }
+    ]
+}

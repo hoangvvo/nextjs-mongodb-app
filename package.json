@@ -24,7 +24,7 @@
     "axioswal": "^1.0.1",
     "connect-mongo": "^3.0.0",
     "mongodb": "^3.3.0-beta2",
-    "next": "^9.0.3",
+    "next": "^9.0.4-canary.2",
     "next-session": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
