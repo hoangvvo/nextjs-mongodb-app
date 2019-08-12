@@ -43,7 +43,7 @@ const LoginPage = () => {
           <div>
             <input
               type="password"
-              placeholder="Create a password"
+              placeholder="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
