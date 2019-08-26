@@ -4,7 +4,7 @@ A full-fledged app made with Next.JS and MongoDB.
 
 ## About this project
 
-`nextjs-mongodb-app` is a full-fledged app built with Next.JS and MongoDB. Most tutorials on the Internet are either *half-baked* or *not production-ready*. This project aims to fix that.
+`nextjs-mongodb-app` is a full-fledged app built with Next.JS and MongoDB. Most tutorials on the Internet are either _half-baked_ or _not production-ready_. This project aims to fix that.
 
 This project goes even further and attempts to integrate top features as seen in real-life apps, making it a full-fledged app.
 
@@ -28,7 +28,7 @@ This project uses the following dependencies:
 - `mongodb` - may be replaced by `mongoose`.
 - `axios`, `axioswal` - optional, may be replaced with any request library.
 - `next-session`, `connect-mongo` - may be replaced with any session management solution.
-- `argon2` - optional, may be replaced with any password-hashing library.
+- `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.
 
 #### Environmental variables
@@ -43,7 +43,7 @@ Required environmental variables in this project include:
 
 ### Features
 
-There are three states in feature development: 
+There are three states in feature development:
 
 - `developed`: The feature has been fully developed and is functional.
 - `developing`: The feature is being developed or being improved.
