@@ -1,5 +1,5 @@
 import isEmail from 'validator/lib/isEmail';
-import * as argon2 from 'argon2';
+import bcrypt from 'bcryptjs';
 import useMiddleware from '../../middlewares/useMiddleware';
 
 const handler = (req, res) => {
@@ -11,12 +11,14 @@ const handler = (req, res) => {
         message: 'The email you entered is invalid.',
       });
     }
-    return req.db.collection('users').countDocuments({ email })
+    return req.db
+      .collection('users')
+      .countDocuments({ email })
       .then((count) => {
         if (count) {
           return Promise.reject(Error('The email has already been used.'));
         }
-        return argon2.hash(password);
+        return bcrypt.hashSync(password);
       })
       .then(hashedPassword => req.db.collection('users').insertOne({
         email,
