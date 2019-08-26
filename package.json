@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
   "dependencies": {
-    "argon2": "^0.24.0",
     "axios": "^0.19.0",
     "axioswal": "^1.0.1",
+    "bcryptjs": "^2.4.3",
     "connect-mongo": "^3.0.0",
     "mongodb": "^3.3.0-beta2",
     "next": "^9.0.4-canary.2",
