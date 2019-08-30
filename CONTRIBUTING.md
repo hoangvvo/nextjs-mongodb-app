@@ -12,7 +12,7 @@ I welcome all contributions from the community. There are many ways to contribut
 - :children_crossing: Submit bug reports and feature requests.
 - :pencil: Improve documentation and writing examples.
 
-However, please avoid using the issue tracker for support questions. You can receive help from the community on [Stackoverflow](https://stackoverflow.com/) or [Spectrum](https://spectrum.chat) (I am a frequent visitor on the [Next.js community](https://spectrum.chat/next-js))
+However, please avoid using the issue tracker for support questions. You can receive help on my [Spectrum community](https://spectrum.chat/luvbitstudio).
 
 ## How to contribute
 
