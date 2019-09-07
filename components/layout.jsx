@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Link from 'next/link';
+import axioswal from 'axioswal';
+import { UserContext } from './UserContext';
 
-export default ({ children }) => (
-  <>
-    <style jsx global>
-      {`
+export default ({ children }) => {
+  const { state: { isLoggedIn }, dispatch } = useContext(UserContext);
+  const handleLogout = (event) => {
+    event.preventDefault();
+    axioswal
+      .delete('/api/session')
+      .then((data) => {
+        if (data.status === 'ok') {
+          dispatch({ type: 'clear' });
+        }
+      });
+  };
+  return (
+    <>
+      <style jsx global>
+        {`
         * {
           box-sizing: border-box;
           font-family: monospace;
@@ -36,27 +51,39 @@ export default ({ children }) => (
         }
       `}
 
-    </style>
-    { children }
-    <footer>
-      <p className="is-italic">
+      </style>
+      { children }
+      {(!isLoggedIn ? (
+        <>
+          <Link href="/login"><button type="button">Login</button></Link>
+          <Link href="/signup"><button type="button">Sign up</button></Link>
+        </>
+      ) : (
+        <>
+          <Link href="/profile"><button type="button">Profile</button></Link>
+          <button type="button" onClick={handleLogout}>Logout</button>
+        </>
+      ))}
+      <footer>
+        <p className="is-italic">
         Made with
-        {' '}
-        <span role="img" aria-label="Love">❤️</span>
+          {' '}
+          <span role="img" aria-label="Love">❤️</span>
         ,
-        {' '}
-        <span role="img" aria-label="Fire">🔥</span>
+          {' '}
+          <span role="img" aria-label="Fire">🔥</span>
         , and a keyboard by
-        {' '}
-        <a href="https://www.hoangvvo.com/">Hoang Vo</a>
+          {' '}
+          <a href="https://www.hoangvvo.com/">Hoang Vo</a>
         .
-      </p>
-      <p>
+        </p>
+        <p>
         Source code is on
-        {' '}
-        <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
+          {' '}
+          <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
         .
-      </p>
-    </footer>
-  </>
-);
+        </p>
+      </footer>
+    </>
+  );
+};
