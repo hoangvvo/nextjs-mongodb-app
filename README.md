@@ -13,6 +13,7 @@ This project goes even further and attempts to integrate top features as seen in
 This project accompanies the following posts:
 
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/
+- https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/
 
 ### Requirement
 
@@ -30,12 +31,17 @@ This project uses the following dependencies:
 - `next-session`, `connect-mongo` - may be replaced with any session management solution.
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.
+- `formidable` - may be replaced by other file parser.
+- `cloudinary` - optional, only if you are using [Cloudinary](https://cloudinary.com) for image upload.
 
 #### Environmental variables
 
 Required environmental variables in this project include:
 
 - `process.env.MONGODB_URI` The MongoDB Connection String (with credentials)
+- `process.env.CLOUDINARY_URL` Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
+
+I include my own MongoDB and Cloudinary environment variable in [now.json](now.json) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. In production, if you deploy with [Now](https://zeit.co/), consider using [Secret](https://zeit.co/docs/v2/environment-variables-and-secrets).
 
 ## Development
 
@@ -54,11 +60,17 @@ There are three states in feature development:
 - Session management
 - Allow users to sign up and log in/log out.
 
-#### User profile `developing`
+#### User profile
 
 - Avatar, name, email, location, etc.
 - User profile page
 - Edit user profile
+
+#### Social `developing`
+
+- Find other users with search functionality
+- View other users' profile page
+- Add/Remove friends
 
 Have any features in mind, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
 

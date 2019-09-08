@@ -31,7 +31,7 @@ const SignupPage = () => {
     <Layout>
       <div>
         <Link href="/"><a>Back to homepage</a></Link>
-        <h1>Sign up</h1>
+        <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <input

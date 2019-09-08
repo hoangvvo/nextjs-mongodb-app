@@ -30,7 +30,7 @@ const LoginPage = () => {
     <Layout>
       <div>
         <Link href="/"><a>Back to homepage</a></Link>
-        <h1>Log in</h1>
+        <h2>Log in</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <input
