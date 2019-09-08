@@ -7,7 +7,6 @@ const IndexPage = () => {
   return (
     <Layout>
       <div>
-        <h1>Next.js + MongoDB App</h1>
         <h2>
           Hello,
           {' '}

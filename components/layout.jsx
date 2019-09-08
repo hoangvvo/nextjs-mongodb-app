@@ -52,6 +52,7 @@ export default ({ children }) => {
       `}
 
       </style>
+      <Link href="/"><a><h1>Next.js + MongoDB App</h1></a></Link>
       { children }
       {(!isLoggedIn ? (
         <>
