@@ -2,7 +2,8 @@
     "name": "nextjs-mongodb-app",
     "version": 2,
     "env": {
-        "MONGODB_URI": "mongodb+srv://justtestuser:dontreusethis@cluster0-ewx3k.mongodb.net/test?retryWrites=true&w=majority"
+        "MONGODB_URI": "mongodb+srv://testuser:dontreusethis@cluster0-gc0a7.mongodb.net/nextjsmongodbapp?retryWrites=true&w=majority",
+        "CLOUDINARY_URL": "cloudinary://741947492169653:vkyuRmZ3EbSULnkfXJdtSqwhURw@dbplcha6k"
     },
     "builds": [
         { "src": "package.json", "use": "@now/next@canary" }
