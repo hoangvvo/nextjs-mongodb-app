@@ -3,12 +3,16 @@ import useMiddleware from '../../middlewares/useMiddleware';
 const handler = (req, res) => {
   if (req.method === 'GET') {
     if (req.user) {
-      const { name, email } = req.user;
+      const {
+        name, email, bio, profilePicture,
+      } = req.user;
       return res.status(200).send({
         status: 'ok',
         data: {
           isLoggedIn: true,
-          user: { name, email },
+          user: {
+            name, email, bio, profilePicture,
+          },
         },
       });
     }
