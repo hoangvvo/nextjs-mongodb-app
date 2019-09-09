@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import axioswal from 'axioswal';
-import Link from 'next/link';
 import { UserContext } from '../components/UserContext';
 import Layout from '../components/layout';
 import redirectTo from '../lib/redirectTo';
@@ -30,7 +29,6 @@ const SignupPage = () => {
   return (
     <Layout>
       <div>
-        <Link href="/"><a>Back to homepage</a></Link>
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           <div>
