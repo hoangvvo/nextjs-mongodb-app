@@ -55,10 +55,6 @@ There are three states in feature development:
 - `developing`: The feature is being developed or being improved.
 - `proposed`: The feature is proposed and may or may not be developed in the future.
 
-### Styles
-
-Despite the look, this project does not contain any stylesheets, and no component has classes. To remove the style, simply remove all `<style jsx>` and `<style jsx global>` tags.
-
 #### Authentication
 
 - Session management
@@ -77,6 +73,10 @@ Despite the look, this project does not contain any stylesheets, and no componen
 - Add/Remove friends
 
 Have any features in mind, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
+
+### Styles
+
+Despite the look, this project does not contain any stylesheets, and no component has classes. To remove the style, simply remove all `<style jsx>` and `<style jsx global>` tags.
 
 ## Contributing
 
