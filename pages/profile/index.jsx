@@ -35,7 +35,7 @@ const ProfilePage = () => {
             { email }
           </p>
         </div>
-        <Link href="/profile/settings"><a>Edit</a></Link>
+        <Link href="/profile/settings"><button type="button">Edit</button></Link>
       </div>
     </Layout>
   );
