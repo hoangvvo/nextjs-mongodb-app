@@ -19,54 +19,98 @@ export default ({ children }) => {
     <>
       <style jsx global>
         {`
-        * {
-          box-sizing: border-box;
-          font-family: monospace;
-        }
-        body {
-          color: #4a4a4a;
-          background-color: #f8f8f8;
-          padding: 2rem;
-          text-align: center;
-        }
-        a {
-          color: inherit!important;
-        }
-        input, textarea {
-          width: 100%;
-          margin-top: 1rem;
-          padding: 1rem;
-          border: none;
-          background-color: rgba(0, 0, 0, 0.05);
-        }
-        button {
-          color: #ecf0f1;
-          margin: 1rem;
-          background: #4a4a4a;
-          border: none;
-          padding: 1rem;
-        }
-        footer {
-          padding: 3rem 1.5rem 6rem;
-        }
-      `}
-
+          a {
+            text-decoration: none!important;
+            color: #00ad9f;
+          }
+          body {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+              "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+              "Helvetica Neue", sans-serif;
+            background-color: #f3f5f7;
+            text-align: center;
+          }
+          button, input, textarea {
+            padding: 0.4rem 1.2rem;
+            margin: 0.5rem;
+            background-color: #fff;
+            color: #00ad9f;
+            border: none;
+            border-radius: 4px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 10px 20px 1px;
+          }
+          button {
+            cursor: pointer;
+          }
+          button:hover, button:active {
+            background-color: #f3f4f4;
+          }
+        `}
       </style>
-      <Link href="/"><a><h1>Next.js + MongoDB App</h1></a></Link>
-      { children }
-      {(!isLoggedIn ? (
-        <>
-          <Link href="/login"><button type="button">Login</button></Link>
-          <Link href="/signup"><button type="button">Sign up</button></Link>
-        </>
-      ) : (
-        <>
-          <Link href="/profile"><button type="button">Profile</button></Link>
-          <button type="button" onClick={handleLogout}>Logout</button>
-        </>
-      ))}
+      <style jsx>
+        {`
+          nav {
+            background-color: #ffffff;
+            box-shadow: rgba(0, 0, 0, 0.05) 0 10px 20px 1px;
+            padding: 1rem 2rem;
+          }
+          nav div {
+            float: right;
+          }
+          nav div a {
+            font-size: 0.9rem;
+            margin-left: 1rem;
+          }
+          nav h1 {
+            font-size: 1rem;
+            color: #444 ;
+            margin: 0;
+            font-weight: 700;
+            float: left;
+          }
+          nav:after {
+            content: "";
+  clear: both;
+  display: table;
+          }
+          main {
+            padding: 1rem;
+          }
+          footer {
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            padding: 3rem;
+            color: #888;
+          }
+        `}
+      </style>
+      <nav>
+        <Link href="/">
+          <a><h1>Next.js + MongoDB App</h1></a>
+        </Link>
+        {(!isLoggedIn ? (
+          <div>
+            <Link href="/login"><a>Login</a></Link>
+            <Link href="/signup"><a>Sign up</a></Link>
+          </div>
+        ) : (
+          <div>
+            <Link href="/profile"><a>Profile</a></Link>
+            {/* eslint-disable-next-line */}
+            <a role="button" onClick={handleLogout}>Logout</a>
+          </div>
+        ))}
+      </nav>
+
+
+      <main>
+        { children }
+      </main>
       <footer>
-        <p className="is-italic">
+        <p>
         Made with
           {' '}
           <span role="img" aria-label="Love">❤️</span>

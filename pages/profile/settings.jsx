@@ -37,47 +37,60 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
   };
 
   return (
-    <section>
-      <h2>Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            required
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <textarea
-            type="text"
-            placeholder="Bio"
-            value={bio}
-            onChange={e => setBio(e.target.value)}
-          />
-        </div>
-        <button type="submit">
-          Save
-        </button>
-      </form>
-      <form action="/api/user/profilepicture" onSubmit={handleSubmitProfilePicture}>
-        <label htmlFor="avatar">
-          Profile picture
-          <input
-            type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/png, image/jpeg"
-            ref={profilePictureRef}
-            required
-          />
-        </label>
-        <button type="submit" disabled={isUploading}>
-          Upload
-        </button>
-      </form>
-    </section>
+    <>
+      <style jsx>
+        {`
+        label {
+          display: block
+        }
+      `}
+      </style>
+      <section>
+        <h2>Edit Profile</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name">
+            Name
+            <input
+              required
+              id="name"
+              type="text"
+              placeholder="Your name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+          </label>
+          <label htmlFor="bio">
+            Bio
+            <textarea
+              id="bio"
+              type="text"
+              placeholder="Bio"
+              value={bio}
+              onChange={e => setBio(e.target.value)}
+            />
+          </label>
+          <button type="submit">
+            Save
+          </button>
+        </form>
+        <form action="/api/user/profilepicture" onSubmit={handleSubmitProfilePicture}>
+          <label htmlFor="avatar">
+            Profile picture
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/png, image/jpeg"
+              ref={profilePictureRef}
+              required
+            />
+          </label>
+          <button type="submit" disabled={isUploading}>
+            Upload
+          </button>
+        </form>
+      </section>
+    </>
   );
 };
 
