@@ -1,6 +1,6 @@
 import formidable from 'formidable';
 import { v2 as cloudinary } from 'cloudinary';
-import useMiddleware from '../../../middlewares/useMiddleware';
+import withMiddleware from '../../../middlewares/withMiddleware';
 
 const handler = (req, res) => {
   if (req.method === 'PUT') {
@@ -36,4 +36,4 @@ export const config = {
   },
 };
 
-export default useMiddleware(handler);
+export default withMiddleware(handler);
