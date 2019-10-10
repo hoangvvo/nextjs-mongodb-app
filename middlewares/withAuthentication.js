@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-const useAuthentication = handler => (req, res) => {
+const withAuthentication = handler => (req, res) => {
   if (req.session.userId) {
     return req.db.collection('users').findOne(ObjectId(req.session.userId))
       .then((user) => {
@@ -11,4 +11,4 @@ const useAuthentication = handler => (req, res) => {
   return handler(req, res);
 };
 
-export default useAuthentication;
+export default withAuthentication;
