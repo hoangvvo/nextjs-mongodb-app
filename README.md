@@ -36,6 +36,8 @@ This project uses the following dependencies:
 
 #### Environmental variables
 
+Please see [this](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/#environmental-variables) on usage of `.env` file. If you use `now dev`, `.env` will work out-of-the-box.
+
 Required environmental variables in this project include:
 
 - `process.env.MONGODB_URI` The MongoDB Connection String (with credentials)
