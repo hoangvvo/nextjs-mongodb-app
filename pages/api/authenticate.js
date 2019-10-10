@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import useMiddleware from '../../middlewares/useMiddleware';
+import withMiddleware from '../../middlewares/withMiddleware';
 
 const handler = (req, res) => {
   if (req.method === 'POST') {
@@ -32,4 +32,4 @@ const handler = (req, res) => {
   return res.status(405).end();
 };
 
-export default useMiddleware(handler);
+export default withMiddleware(handler);
