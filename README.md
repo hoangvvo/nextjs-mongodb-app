@@ -1,4 +1,6 @@
-# nextjs-mongodb-app
+![nextjs-mongodb-app](https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd)
+
+# Next.js + MongoDB App
 
 A full-fledged app made with Next.JS and MongoDB.
 
