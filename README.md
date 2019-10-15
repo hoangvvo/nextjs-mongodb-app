@@ -1,12 +1,18 @@
-# nextjs-mongodb-app
+![nextjs-mongodb-app](https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd)
+
+# Next.js + MongoDB App
 
 A full-fledged app made with Next.JS and MongoDB.
 
 ## About this project
 
-`nextjs-mongodb-app` is a full-fledged app built with Next.JS and MongoDB. Most tutorials on the Internet are either _half-baked_ or _not production-ready_. This project aims to fix that.
+`nextjs-mongodb-app` is a continously developed app built with Next.JS and MongoDB. Most tutorials on the Internet are either _half-baked_ or _not production-ready_. This project aims to fix that.
 
-This project goes even further and attempts to integrate top features as seen in real-life apps, making it a full-fledged app.
+This project goes even further and attempts to integrate top features as seen in real-life apps.
+
+Give this project a big ol' 🌟 star motivates me to work on new features.
+
+Check out the [demo](https://nextjs-mongodb-app.hoangvvo.now.sh/).
 
 ## Using this project
 
