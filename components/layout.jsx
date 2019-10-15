@@ -104,9 +104,6 @@ export default ({ children }) => {
             <a><h1>Next.js + MongoDB App</h1></a>
           </Link>
           <div>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
             {(!isLoggedIn ? (
               <>
                 <Link href="/login"><a>Login</a></Link>
