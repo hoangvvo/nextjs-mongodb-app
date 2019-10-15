@@ -73,8 +73,8 @@ export default ({ children }) => {
           }
           nav:after {
             content: "";
-  clear: both;
-  display: table;
+            clear: both;
+            display: table;
           }
           main {
             padding: 1rem;
@@ -91,18 +91,23 @@ export default ({ children }) => {
         <Link href="/">
           <a><h1>Next.js + MongoDB App</h1></a>
         </Link>
-        {(!isLoggedIn ? (
-          <div>
-            <Link href="/login"><a>Login</a></Link>
-            <Link href="/signup"><a>Sign up</a></Link>
-          </div>
-        ) : (
-          <div>
-            <Link href="/profile"><a>Profile</a></Link>
-            {/* eslint-disable-next-line */}
+        <div>
+          <Link href="/about">
+            <a>About</a>
+          </Link>
+          {(!isLoggedIn ? (
+            <>
+              <Link href="/login"><a>Login</a></Link>
+              <Link href="/signup"><a>Sign up</a></Link>
+            </>
+          ) : (
+            <>
+              <Link href="/profile"><a>Profile</a></Link>
+              {/* eslint-disable-next-line */}
             <a role="button" onClick={handleLogout}>Logout</a>
-          </div>
-        ))}
+            </>
+          ))}
+        </div>
       </nav>
 
 
