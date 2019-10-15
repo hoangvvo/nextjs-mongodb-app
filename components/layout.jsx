@@ -23,6 +23,9 @@ export default ({ children }) => {
             text-decoration: none!important;
             color: #00ad9f;
           }
+          html {
+            font-size: 1.25rem;
+          }
           body {
             margin: 0;
             padding: 0;
@@ -34,8 +37,10 @@ export default ({ children }) => {
             text-align: center;
           }
           button, input, textarea {
-            padding: 0.4rem 1.2rem;
-            margin: 0.5rem;
+            display: block;
+            padding: .8rem 2.5rem;
+            font-size: 1rem;
+            margin: 1rem auto;
             background-color: #fff;
             color: #00ad9f;
             border: none;
@@ -52,9 +57,13 @@ export default ({ children }) => {
       </style>
       <style jsx>
         {`
-          nav {
+          header {
             background-color: #ffffff;
             box-shadow: rgba(0, 0, 0, 0.05) 0 10px 20px 1px;
+          }
+          nav {
+            max-width: 1040px;
+            margin: auto;
             padding: 1rem 2rem;
           }
           nav div {
@@ -73,11 +82,13 @@ export default ({ children }) => {
           }
           nav:after {
             content: "";
-  clear: both;
-  display: table;
+            clear: both;
+            display: table;
           }
           main {
             padding: 1rem;
+            max-width: 1040px;
+            margin: 0 auto;
           }
           footer {
             font-size: 0.8rem;
@@ -87,24 +98,30 @@ export default ({ children }) => {
           }
         `}
       </style>
-      <nav>
-        <Link href="/">
-          <a><h1>Next.js + MongoDB App</h1></a>
-        </Link>
-        {(!isLoggedIn ? (
+      <header>
+        <nav>
+          <Link href="/">
+            <a><h1>Next.js + MongoDB App</h1></a>
+          </Link>
           <div>
-            <Link href="/login"><a>Login</a></Link>
-            <Link href="/signup"><a>Sign up</a></Link>
-          </div>
-        ) : (
-          <div>
-            <Link href="/profile"><a>Profile</a></Link>
-            {/* eslint-disable-next-line */}
+            <Link href="/about">
+              <a>About</a>
+            </Link>
+            {(!isLoggedIn ? (
+              <>
+                <Link href="/login"><a>Login</a></Link>
+                <Link href="/signup"><a>Sign up</a></Link>
+              </>
+            ) : (
+              <>
+                <Link href="/profile"><a>Profile</a></Link>
+                {/* eslint-disable-next-line */}
             <a role="button" onClick={handleLogout}>Logout</a>
+              </>
+            ))}
           </div>
-        ))}
-      </nav>
-
+        </nav>
+      </header>
 
       <main>
         { children }
