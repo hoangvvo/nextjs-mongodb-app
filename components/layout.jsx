@@ -37,8 +37,10 @@ export default ({ children }) => {
             text-align: center;
           }
           button, input, textarea {
-            padding: 0.4rem 1.2rem;
-            margin: 0.5rem;
+            display: block;
+            padding: .8rem 2.5rem;
+            font-size: 1rem;
+            margin: 1rem auto;
             background-color: #fff;
             color: #00ad9f;
             border: none;
