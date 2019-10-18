@@ -16,6 +16,8 @@ Check out the [demo](https://nextjs-mongodb-app.hoangvvo.now.sh/).
 
 ## Using this project
 
+Before getting started, I welcome you to read this [issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues/13) on production readiness. The goal is not to use this project as it, but to implement your own version.
+
 This project accompanies the following posts:
 
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/
