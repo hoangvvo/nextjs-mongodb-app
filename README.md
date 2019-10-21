@@ -76,11 +76,17 @@ There are three states in feature development:
 - User profile page
 - Edit user profile
 
-#### Social `developing`
+#### Social `delayed`
 
 - Find other users with search functionality
 - View other users' profile page
 - Add/Remove friends
+
+#### Account management `developing`
+
+- Email verification
+- Password change
+- Password reset
 
 Have any features in mind, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
 
