@@ -1,7 +1,9 @@
 import nextConnect from 'next-connect';
-import withMiddleware from '../../middlewares/withMiddleware';
+import middleware from '../../middlewares/middleware';
 
 const handler = nextConnect();
+
+handler.use(middleware);
 
 handler.get((req, res) => {
   if (req.user) {
@@ -35,4 +37,4 @@ handler.delete((req, res) => {
   });
 });
 
-export default withMiddleware(handler);
+export default handler;

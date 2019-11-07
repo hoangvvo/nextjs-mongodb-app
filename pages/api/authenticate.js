@@ -1,8 +1,10 @@
 import nextConnect from 'next-connect';
 import bcrypt from 'bcryptjs';
-import withMiddleware from '../../middlewares/withMiddleware';
+import middleware from '../../middlewares/middleware';
 
 const handler = nextConnect();
+
+handler.use(middleware);
 
 handler.post((req, res) => {
   const { email, password } = req.body;
@@ -32,4 +34,4 @@ handler.post((req, res) => {
     }));
 });
 
-export default withMiddleware(handler);
+export default handler;

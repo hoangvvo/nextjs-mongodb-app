@@ -1,9 +1,11 @@
 import nextConnect from 'next-connect';
 import formidable from 'formidable';
 import { v2 as cloudinary } from 'cloudinary';
-import withMiddleware from '../../../middlewares/withMiddleware';
+import middleware from '../../../middlewares/middleware';
 
 const handler = nextConnect();
+
+handler.use(middleware);
 
 handler.put((req, res) => {
   if (!req.user) return res.status(401).send('You need to be logged in.');
@@ -36,4 +38,4 @@ export const config = {
   },
 };
 
-export default withMiddleware(handler);
+export default handler;

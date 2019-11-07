@@ -1,7 +1,9 @@
 import nextConnect from 'next-connect';
-import withMiddleware from '../../../middlewares/withMiddleware';
+import middleware from '../../../middlewares/middleware';
 
 const handler = nextConnect();
+
+handler.use(middleware);
 
 handler.patch((req, res) => {
   if (!req.user) return res.status(401).send('You need to be logged in.');
@@ -19,4 +21,4 @@ handler.patch((req, res) => {
     }));
 });
 
-export default withMiddleware(handler);
+export default handler;
