@@ -5,6 +5,8 @@ const client = new MongoClient(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
+export { client };
+
 export default function database(req, res, next) {
   if (!client.isConnected()) {
     return client.connect().then(() => {
