@@ -1,7 +1,8 @@
 import session from 'next-session';
 import connectMongo from 'connect-mongo';
-import { client } from './database';
 
 const MongoStore = connectMongo(session);
 
-export default session({ store: new MongoStore({ client }) });
+export default function (req, res, next) {
+  return session({ store: new MongoStore({ client: req.dbClient }) })(req, res, next);
+}
