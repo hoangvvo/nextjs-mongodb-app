@@ -23,6 +23,8 @@ This project accompanies the following posts:
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/
 
+*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) for middleware and method routing and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/commit/db910c259adb96494156b467834c65075ca90714).
+
 ### Requirement
 
 This project relies on the following components. Some of them are **optional** (can be used without) and some may be replaced by others with similar functionalities.

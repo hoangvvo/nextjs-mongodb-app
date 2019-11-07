@@ -1,37 +1,40 @@
-import withMiddleware from '../../middlewares/withMiddleware';
+import nextConnect from 'next-connect';
+import middleware from '../../middlewares/middleware';
 
-const handler = (req, res) => {
-  if (req.method === 'GET') {
-    if (req.user) {
-      const {
-        name, email, bio, profilePicture,
-      } = req.user;
-      return res.status(200).send({
-        status: 'ok',
-        data: {
-          isLoggedIn: true,
-          user: {
-            name, email, bio, profilePicture,
-          },
-        },
-      });
-    }
+const handler = nextConnect();
+
+handler.use(middleware);
+
+handler.get((req, res) => {
+  if (req.user) {
+    const {
+      name, email, bio, profilePicture,
+    } = req.user;
     return res.status(200).send({
       status: 'ok',
       data: {
-        isLoggedIn: false,
-        user: {},
+        isLoggedIn: true,
+        user: {
+          name, email, bio, profilePicture,
+        },
       },
     });
   }
-  if (req.method === 'DELETE') {
-    delete req.session.userId;
-    return res.status(200).send({
-      status: 'ok',
-      message: 'You have been logged out.',
-    });
-  }
-  return res.status(405).end();
-};
+  return res.status(200).send({
+    status: 'ok',
+    data: {
+      isLoggedIn: false,
+      user: {},
+    },
+  });
+});
 
-export default withMiddleware(handler);
+handler.delete((req, res) => {
+  delete req.session.userId;
+  return res.status(200).send({
+    status: 'ok',
+    message: 'You have been logged out.',
+  });
+});
+
+export default handler;
