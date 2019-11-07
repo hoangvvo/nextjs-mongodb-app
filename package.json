@@ -28,7 +28,7 @@
     "mongodb": "^3.3.0-beta2",
     "next": "^9.0.4-canary.2",
     "next-connect": "^0.4.0",
-    "next-session": "^2.1.0",
+    "next-session": "^2.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "validator": "^12.0.0"
