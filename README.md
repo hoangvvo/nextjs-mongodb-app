@@ -23,7 +23,7 @@ This project accompanies the following posts:
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/
 
-*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) for middleware and method routing and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/commit/db910c259adb96494156b467834c65075ca90714).
+*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) for middleware and method routing and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
 
 ### Requirement
 
@@ -37,6 +37,7 @@ This project uses the following dependencies:
 - `react` - v16.8 or above required for **react hooks**.
 - `react-dom` - v16.8 or above.
 - `mongodb` - may be replaced by `mongoose`.
+- `next-connect` - recommended if you want to use Express/Connect middleware.
 - `axios`, `axioswal` - optional, may be replaced with any request library.
 - `next-session`, `connect-mongo` - may be replaced with any session management solution.
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
