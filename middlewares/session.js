@@ -3,4 +3,6 @@ import connectMongo from 'connect-mongo';
 
 const MongoStore = connectMongo(session);
 
-export default session({ store: new MongoStore({ url: process.env.MONGODB_URI }) });
+export default function (req, res, next) {
+  return session({ store: new MongoStore({ client: req.dbClient }) })(req, res, next);
+}
