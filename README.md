@@ -57,7 +57,9 @@ Required environmental variables in this project include:
 - `process.env.CLOUDINARY_URL` Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
 - `process.env.DB_NAME` The name of the MongoDB database to be used.
 
-I include my own MongoDB and Cloudinary environment variable in [now.json](now.json) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. In production, if you deploy with [Now](https://zeit.co/), consider using [Secret](https://zeit.co/docs/v2/environment-variables-and-secrets).
+I include my own MongoDB and Cloudinary environment variable in [now.json](now.json) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. In development, running `now dev` will automatically inject those environment variables. If you are not using `now`, include the environment variables in a [`.env` file](https://www.npmjs.com/package/dotenv#usage).
+
+In production, if you deploy with [Now](https://zeit.co/), consider using [Secret](https://zeit.co/docs/v2/environment-variables-and-secrets).
 
 ## Development
 
