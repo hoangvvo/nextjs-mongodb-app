@@ -1,4 +1,11 @@
 {
-    "name": "nextjs-mongodb-app",
-    "version": 2
+  "name": "nextjs-mongodb-app",
+  "version": 2,
+  "build": {
+    "env": {
+      "MONGODB_URI": "@mongodb_uri",
+      "CLOUDINARY_URL": "@cloudinary_url",
+      "DB_NAME": "@db_name"
+    }
+  }
 }

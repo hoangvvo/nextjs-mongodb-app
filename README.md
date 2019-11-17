@@ -27,7 +27,7 @@ This project accompanies the following posts:
 
 ### Requirement
 
-This project relies on the following components. Some of them are **optional** (can be used without) and some may be replaced by others with similar functionalities.
+This project relies on the following components. Some of them are **optional** and some may be replaced by others with similar functionalities.
 
 #### Dependencies
 
@@ -47,8 +47,6 @@ This project uses the following dependencies:
 
 #### Environmental variables
 
-Environment variable will be read from `.env` file (which **should not** be commited) using [`dotenv`](https://www.npmjs.com/package/dotenv). In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers instead.
-
 The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) and thus should not be used in front-end codebase.
 
 Required environmental variables in this project include:
@@ -57,7 +55,9 @@ Required environmental variables in this project include:
 - `process.env.CLOUDINARY_URL` Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
 - `process.env.DB_NAME` The name of the MongoDB database to be used.
 
-I include my own MongoDB and Cloudinary environment variable in [now.json](now.json) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. In production, if you deploy with [Now](https://zeit.co/), consider using [Secret](https://zeit.co/docs/v2/environment-variables-and-secrets).
+I include my own MongoDB and Cloudinary environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can use them in development by renaming it into `.env`.
+
+In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers.
 
 ## Development
 
