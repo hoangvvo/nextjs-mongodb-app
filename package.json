@@ -24,6 +24,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.15.0",
     "connect-mongo": "^3.0.0",
+    "dotenv": "^8.2.0",
     "formidable": "^1.2.1",
     "mongodb": "^3.3.0-beta2",
     "next": "^9.0.4-canary.2",

@@ -9,11 +9,11 @@ export default function database(req, res, next) {
   if (!client.isConnected()) {
     return client.connect().then(() => {
       req.dbClient = client;
-      req.db = client.db('nextjsmongodbapp');
+      req.db = client.db(process.env.DB_NAME);
       return next();
     });
   }
   req.dbClient = client;
-  req.db = client.db('nextjsmongodbapp');
+  req.db = client.db(process.env.DB_NAME);
   return next();
 }
