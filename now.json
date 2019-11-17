@@ -1,11 +1,11 @@
 {
-    "name": "nextjs-mongodb-app",
-    "version": 2,
-    "build": {
-        "env": {
-            "MONGODB_URI": "mongodb+srv://testuser:dontreusethis@cluster0-gc0a7.mongodb.net/nextjsmongodbapp?retryWrites=true&w=majority",
-            "CLOUDINARY_URL": "cloudinary://741947492169653:vkyuRmZ3EbSULnkfXJdtSqwhURw@dbplcha6k",
-            "DB_NAME": "nextjsmongodbapp"
-        }
+  "name": "nextjs-mongodb-app",
+  "version": 2,
+  "build": {
+    "env": {
+      "MONGODB_URI": "@mongodb_uri",
+      "CLOUDINARY_URL": "@cloudinary_url",
+      "DB_NAME": "@db_name"
     }
+  }
 }
