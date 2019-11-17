@@ -47,9 +47,9 @@ This project uses the following dependencies:
 
 #### Environmental variables
 
-Environment variable will be read from `.env` file using [`dotenv`](https://www.npmjs.com/package/dotenv). In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers.
+Environment variable will be read from `.env` file (which **should not** be commited) using [`dotenv`](https://www.npmjs.com/package/dotenv). In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers instead.
 
-The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) and thus should not be included in front-end codebase.
+The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) and thus should not be used in front-end codebase.
 
 Required environmental variables in this project include:
 
@@ -62,6 +62,8 @@ I include my own MongoDB and Cloudinary environment variable in [now.json](now.j
 ## Development
 
 `nextjs-mongodb-app` is a long-term developing project. There is no constraint on numbers of features. I continuously accepts feature proposals and am actively developing and expanding functionalities.
+
+Start the development server by running `yarn dev` or `npm run dev`.
 
 ### Features
 
