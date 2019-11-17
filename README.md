@@ -47,18 +47,23 @@ This project uses the following dependencies:
 
 #### Environmental variables
 
-Please see [this](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/#environmental-variables) on usage of `.env` file. If you use `now dev`, `.env` will work out-of-the-box.
+Environment variable will be read from `.env` file (which **should not** be commited) using [`dotenv`](https://www.npmjs.com/package/dotenv). In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers instead.
+
+The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) and thus should not be used in front-end codebase.
 
 Required environmental variables in this project include:
 
 - `process.env.MONGODB_URI` The MongoDB Connection String (with credentials)
 - `process.env.CLOUDINARY_URL` Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
+- `process.env.DB_NAME` The name of the MongoDB database to be used.
 
 I include my own MongoDB and Cloudinary environment variable in [now.json](now.json) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. In production, if you deploy with [Now](https://zeit.co/), consider using [Secret](https://zeit.co/docs/v2/environment-variables-and-secrets).
 
 ## Development
 
 `nextjs-mongodb-app` is a long-term developing project. There is no constraint on numbers of features. I continuously accepts feature proposals and am actively developing and expanding functionalities.
+
+Start the development server by running `yarn dev` or `npm run dev`.
 
 ### Features
 
