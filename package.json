@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "axios": "^0.19.0",
     "axioswal": "^1.0.1",
     "bcryptjs": "^2.4.3",

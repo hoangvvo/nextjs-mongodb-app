@@ -5,7 +5,11 @@
     "env": {
       "MONGODB_URI": "@mongodb_uri",
       "CLOUDINARY_URL": "@cloudinary_url",
-      "DB_NAME": "@db_name"
+      "DB_NAME": "nextjs mongodbapp",
+      "SENDGRID_API_KEY": "@sendgrid_api_key",
+      "SENDGRID_TEMPLATEID_EMAILVERIFY": "d-6b3fcea040dd4708a3bd4a9b63becfdd",
+      "EMAIL_FROM": "averyniceguy@example.com",
+      "WEB_URI": "https://nextjs-mongodb-app.hoangvvo.now.sh"
     }
   }
 }

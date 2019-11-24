@@ -44,6 +44,7 @@ This project uses the following dependencies:
 - `validator` - optional but recommended.
 - `formidable` - may be replaced by other file parser.
 - `cloudinary` - optional, only if you are using [Cloudinary](https://cloudinary.com) for image upload.
+- `@sendgrid/mail` - optional, only if you are using [SendGrid](https://sendgrid.com/) to send emails.
 
 #### Environmental variables
 
@@ -52,10 +53,14 @@ The environment variables [will be inlined during build time](https://nextjs.org
 Required environmental variables in this project include:
 
 - `process.env.MONGODB_URI` The MongoDB Connection String (with credentials)
-- `process.env.CLOUDINARY_URL` Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
+- `process.env.CLOUDINARY_URL` (optional, Cloudinary only) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
 - `process.env.DB_NAME` The name of the MongoDB database to be used.
+- `process.env.WEB_URI` The *URL* of your web.
+- `process.env.SENDGRID_API_KEY` (optional, SendGrid only) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
+- `process.env.SENDGRID_TEMPLATEID_EMAILVERIFY` (optional, Sendgrid only) SendGrid Email Template to use.
+- `process.env.EMAIL_FROM` The email address to send your emails from.
 
-I include my own MongoDB and Cloudinary environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can use them in development by renaming it into `.env`.
+I include my own MongoDB, Cloudinary, SendGrid environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
 
 In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers.
 
@@ -92,7 +97,7 @@ There are three states in feature development:
 
 #### Account management `developing`
 
-- Email verification
+- Email verification (done)
 - Password change
 - Password reset
 
