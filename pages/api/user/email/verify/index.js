@@ -21,7 +21,7 @@ handler.post(async (req, res) => {
     });
   const msg = {
     to: req.user.email,
-    from: process.env.SENDGRID_EMAIL_FROM,
+    from: process.env.EMAIL_FROM,
     templateId: process.env.SENDGRID_TEMPLATEID_EMAILVERIFY,
     dynamic_template_data: {
       subject: '[nextjs-mongodb-app] Please verify your email address.',
