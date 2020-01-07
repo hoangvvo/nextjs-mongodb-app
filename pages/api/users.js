@@ -7,7 +7,7 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.post((req, res) => {
+handler.post(async (req, res) => {
   const { email, name, password } = req.body;
   if (!isEmail(email)) {
     return res.send({
@@ -15,6 +15,7 @@ handler.post((req, res) => {
       message: 'The email you entered is invalid.',
     });
   }
+
   return req.db
     .collection('users')
     .countDocuments({ email })
@@ -22,7 +23,7 @@ handler.post((req, res) => {
       if (count) {
         return Promise.reject(Error('The email has already been used.'));
       }
-      return bcrypt.hashSync(password);
+      return bcrypt.hash(password, 10);
     })
     .then(hashedPassword => req.db.collection('users').insertOne({
       email,

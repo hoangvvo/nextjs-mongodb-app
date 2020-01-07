@@ -29,7 +29,7 @@ handler.put(async (req, res) => {
     });
   }
 
-  const password = await bcrypt.hash(req.body.password);
+  const password = await bcrypt.hash(req.body.password, 10);
 
   await req.db
     .collection('users')
