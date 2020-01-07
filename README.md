@@ -68,10 +68,6 @@ Start the development server by running `yarn dev` or `npm run dev`. The project
 
 There are three states in feature development:
 
-- `developed`: The feature has been fully developed and is functional.
-- `developing`: The feature is being developed or being improved.
-- `proposed`: The feature is proposed and may or may not be developed in the future.
-
 #### Authentication
 
 - Session management
@@ -83,17 +79,17 @@ There are three states in feature development:
 - User profile page
 - Edit user profile
 
+#### Account management
+
+- Email verification
+- Password change
+- Password reset
+
 #### Social `delayed`
 
 - Find other users with search functionality
 - View other users' profile page
 - Add/Remove friends
-
-#### Account management `developing`
-
-- Email verification (done)
-- Password change
-- Password reset (done)
 
 Have any features in mind, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
 
