@@ -1,9 +1,9 @@
 import nextConnect from 'next-connect';
 import bcrypt from 'bcryptjs';
-import middleware from '../../../../../middlewares/middleware';
+import database from '../../../../middlewares/database';
 
 const handler = nextConnect();
-handler.use(middleware);
+handler.use(database);
 
 handler.put(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
