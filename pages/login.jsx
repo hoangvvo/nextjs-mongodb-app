@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import Link from 'next/link';
 import axioswal from 'axioswal';
 import { UserContext } from '../components/UserContext';
 import Layout from '../components/layout';
@@ -46,6 +47,7 @@ const LoginPage = () => {
               onChange={e => setPassword(e.target.value)}
             />
           </div>
+          <Link href="/forgetpassword"><a>Forget password</a></Link>
           <button type="submit">
             Log in
           </button>
