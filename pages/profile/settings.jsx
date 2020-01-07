@@ -6,6 +6,8 @@ import Layout from '../../components/layout';
 const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch }) => {
   const [name, setName] = useState(initialName);
   const [bio, setBio] = useState(initialBio);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,6 +35,17 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
       .then(() => {
         setIsUploading(false);
         dispatch({ type: 'fetch' });
+      });
+  };
+
+  const handleSubmitPasswordChange = (event) => {
+    event.preventDefault();
+    axioswal.put('/api/user/password', { oldPassword, newPassword })
+      .then((data) => {
+        if (!data.error) {
+          setNewPassword('');
+          setOldPassword('');
+        }
       });
   };
 
@@ -73,7 +86,7 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
             Save
           </button>
         </form>
-        <form action="/api/user/profilepicture" onSubmit={handleSubmitProfilePicture}>
+        <form onSubmit={handleSubmitProfilePicture}>
           <label htmlFor="avatar">
             Profile picture
             <input
@@ -87,6 +100,31 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
           </label>
           <button type="submit" disabled={isUploading}>
             Upload
+          </button>
+        </form>
+        <form onSubmit={handleSubmitPasswordChange}>
+          <label htmlFor="oldpassword">
+            Old Password
+            <input
+              type="password"
+              id="oldpassword"
+              value={oldPassword}
+              onChange={e => setOldPassword(e.target.value)}
+              required
+            />
+          </label>
+          <label htmlFor="newpassword">
+            New Password
+            <input
+              type="password"
+              id="newpassword"
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              required
+            />
+          </label>
+          <button type="submit">
+            Change Password
           </button>
         </form>
       </section>
