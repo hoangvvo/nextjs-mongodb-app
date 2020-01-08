@@ -34,7 +34,7 @@ handler.get((req, res) => {
 });
 
 handler.delete((req, res) => {
-  delete req.session.userId;
+  req.logOut();
   return res.status(200).send({
     status: 'ok',
     message: 'You have been logged out.',
