@@ -16,6 +16,9 @@ Check out the [demo](https://nextjs-mongodb-app.hoangvvo.now.sh/).
 
 ### Authentication
 
+*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504)
+*with passportjs*: `master`
+
 - Session
 - Sign up/Sign in/Sign out
 
