@@ -6,7 +6,8 @@ const MongoStore = connectMongo(session);
 export default function (req, res, next) {
   return session({
     store: new MongoStore({
-      client: req.dbClient, stringify: false,
+      client: req.dbClient,
+      stringify: false,
     }),
   })(req, res, next);
 }

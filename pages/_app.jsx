@@ -8,7 +8,9 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <UserContextProvider>
-        <Head><title>Next.js + MongoDB App</title></Head>
+        <Head>
+          <title>Next.js + MongoDB App</title>
+        </Head>
         <Component {...pageProps} />
       </UserContextProvider>
     );

@@ -8,7 +8,8 @@ import Layout from '../../components/layout';
 const ProfilePage = () => {
   const {
     state: {
-      isLoggedIn, user: {
+      isLoggedIn,
+      user: {
         name, email, bio, profilePicture, emailVerified,
       },
     },
@@ -18,7 +19,13 @@ const ProfilePage = () => {
     axioswal.post('/api/user/email/verify');
   }
 
-  if (!isLoggedIn) return (<Layout><p>Please sign in</p></Layout>);
+  if (!isLoggedIn) {
+    return (
+      <Layout>
+        <p>Please sign in</p>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <style jsx>
@@ -52,32 +59,39 @@ const ProfilePage = () => {
           }
         `}
       </style>
-      <Head><title>{ name }</title></Head>
+      <Head>
+        <title>{name}</title>
+      </Head>
       <div>
-        {profilePicture ? <img src={profilePicture} width="256" height="256" alt={name} /> : null}
+        {profilePicture ? (
+          <img src={profilePicture} width="256" height="256" alt={name} />
+        ) : null}
         <section>
           <div>
-            <h2>{ name }</h2>
-            <Link href="/profile/settings"><button type="button">Edit</button></Link>
+            <h2>{name}</h2>
+            <Link href="/profile/settings">
+              <button type="button">Edit</button>
+            </Link>
           </div>
-        Bio
-          <p>{ bio }</p>
-        Email
+          Bio
+          <p>{bio}</p>
+          Email
           <p>
-            { email }
+            {email}
             {!emailVerified ? (
               <>
                 {' '}
-            unverified
+                unverified
                 {' '}
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a href="#" onClick={sendVerificationEmail}>Send verification email</a>
+                {/* eslint-disable-next-line */}
+                <a role="button" onClick={sendVerificationEmail}>
+                  Send verification email
+                </a>
               </>
             ) : null}
           </p>
         </section>
       </div>
-
     </Layout>
   );
 };

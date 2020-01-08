@@ -58,9 +58,7 @@ const SignupPage = () => {
               onChange={e => setPassword(e.target.value)}
             />
           </label>
-          <button type="submit">
-            Sign up
-          </button>
+          <button type="submit">Sign up</button>
         </form>
       </div>
     </Layout>

@@ -17,7 +17,8 @@ handler.post(async (req, res) => {
   if (!user) {
     return res.status(200).json({
       status: 'error',
-      message: 'This email is not associated with any account or has not been verified.',
+      message:
+        'This email is not associated with any account or has not been verified.',
     });
   }
 
@@ -27,9 +28,7 @@ handler.post(async (req, res) => {
     token,
     userId: user._id,
     type: 'passwordReset',
-    expireAt: new Date(
-      Date.now() + 1000 * 60 * 20,
-    ),
+    expireAt: new Date(Date.now() + 1000 * 60 * 20),
   });
 
   const msg = {

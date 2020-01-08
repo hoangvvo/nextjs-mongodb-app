@@ -29,7 +29,9 @@ const LoginPage = () => {
 
   return (
     <Layout>
-      <Head><title>Sign in</title></Head>
+      <Head>
+        <title>Sign in</title>
+      </Head>
       <h2>Sign in</h2>
       <form onSubmit={handleSubmit} autoComplete="off">
         <label htmlFor="email">
@@ -50,10 +52,10 @@ const LoginPage = () => {
             onChange={e => setPassword(e.target.value)}
           />
         </label>
-        <button type="submit">
-            Sign in
-        </button>
-        <Link href="/forgetpassword"><a>Forget password</a></Link>
+        <button type="submit">Sign in</button>
+        <Link href="/forgetpassword">
+          <a>Forget password</a>
+        </Link>
       </form>
     </Layout>
   );

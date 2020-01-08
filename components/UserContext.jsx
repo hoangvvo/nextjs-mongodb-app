@@ -18,11 +18,15 @@ const reducer = (state, action) => {
 };
 
 const UserContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, { isLoggedIn: false, user: {} });
+  const [state, dispatch] = useReducer(reducer, {
+    isLoggedIn: false,
+    user: {},
+  });
   const dispatchProxy = (action) => {
     switch (action.type) {
       case 'fetch':
-        return axios.get('/api/session')
+        return axios
+          .get('/api/session')
           .then(res => ({
             isLoggedIn: res.data.data.isLoggedIn,
             user: res.data.data.user,
@@ -42,7 +46,7 @@ const UserContextProvider = ({ children }) => {
   }, []);
   return (
     <UserContext.Provider value={{ state, dispatch: dispatchProxy }}>
-      { children }
+      {children}
     </UserContext.Provider>
   );
 };

@@ -18,7 +18,9 @@ const ForgetPasswordPage = () => {
 
   return (
     <Layout>
-      <Head><title>Forget password</title></Head>
+      <Head>
+        <title>Forget password</title>
+      </Head>
       <h2>Forget password</h2>
       <form onSubmit={handleSubmit}>
         <p>Do not worry. Simply enter your email address below.</p>
@@ -31,11 +33,7 @@ const ForgetPasswordPage = () => {
             onChange={e => setEmail(e.target.value)}
           />
         </label>
-        <button
-          type="submit"
-        >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </Layout>
   );

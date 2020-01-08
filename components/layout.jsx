@@ -5,16 +5,17 @@ import axioswal from 'axioswal';
 import { UserContext } from './UserContext';
 
 export default ({ children }) => {
-  const { state: { isLoggedIn }, dispatch } = useContext(UserContext);
+  const {
+    state: { isLoggedIn },
+    dispatch,
+  } = useContext(UserContext);
   const handleLogout = (event) => {
     event.preventDefault();
-    axioswal
-      .delete('/api/session')
-      .then((data) => {
-        if (data.status === 'ok') {
-          dispatch({ type: 'clear' });
-        }
-      });
+    axioswal.delete('/api/session').then((data) => {
+      if (data.status === 'ok') {
+        dispatch({ type: 'clear' });
+      }
+    });
   };
   return (
     <>
@@ -22,6 +23,7 @@ export default ({ children }) => {
         {`
           a {
             text-decoration: none !important;
+            cursor: pointer;
             color: #0070f3;
           }
           a:hover {
@@ -31,9 +33,9 @@ export default ({ children }) => {
             margin: 0;
             padding: 0;
             color: #111;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-              "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-              "Helvetica Neue", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+              'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+              'Helvetica Neue', sans-serif;
             background-color: #fff;
           }
           h2 {
@@ -53,7 +55,8 @@ export default ({ children }) => {
             justify-content: center;
             align-items: center;
           }
-          input, textarea {
+          input,
+          textarea {
             font-family: monospace;
             flex: 1 1 0%;
             margin-left: 0.5rem;
@@ -76,11 +79,12 @@ export default ({ children }) => {
             cursor: pointer;
             transition: all 0.2s ease 0s;
             padding: 10px 25px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
           }
-          button:hover, button:active {
+          button:hover,
+          button:active {
             transform: translate3d(0px, -1px, 0px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
           }
           header {
             border-bottom: 1px solid #d8d8d8;
@@ -99,13 +103,13 @@ export default ({ children }) => {
           }
           nav h1 {
             font-size: 1rem;
-            color: #444 ;
+            color: #444;
             margin: 0;
             font-weight: 700;
             float: left;
           }
           nav:after {
-            content: "";
+            content: '';
             clear: both;
             display: table;
           }
@@ -130,54 +134,75 @@ export default ({ children }) => {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <meta name="description" content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps." />
+        <meta
+          name="description"
+          content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
+        />
         <meta property="og:title" content="Next.js + MongoDB App" />
-        <meta property="og:description" content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps." />
-        <meta property="og:image" content="https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd" />
+        <meta
+          property="og:description"
+          content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
+        />
+        <meta
+          property="og:image"
+          content="https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd"
+        />
       </Head>
       <header>
         <nav>
           <Link href="/">
-            <a><h1>Next.js + MongoDB App</h1></a>
+            <a>
+              <h1>Next.js + MongoDB App</h1>
+            </a>
           </Link>
           <div>
-            {(!isLoggedIn ? (
+            {!isLoggedIn ? (
               <>
-                <Link href="/login"><a>Sign in</a></Link>
-                <Link href="/signup"><a>Sign up</a></Link>
+                <Link href="/login">
+                  <a>Sign in</a>
+                </Link>
+                <Link href="/signup">
+                  <a>Sign up</a>
+                </Link>
               </>
             ) : (
               <>
-                <Link href="/profile"><a>Profile</a></Link>
+                <Link href="/profile">
+                  <a>Profile</a>
+                </Link>
                 {/* eslint-disable-next-line */}
-            <a href="/" role="button" onClick={handleLogout}>Logout</a>
+                <a href="/" role="button" onClick={handleLogout}>
+                  Logout
+                </a>
               </>
-            ))}
+            )}
           </div>
         </nav>
       </header>
 
-      <main>
-        { children }
-      </main>
+      <main>{children}</main>
       <footer>
         <p>
-        Made with
+          Made with
           {' '}
-          <span role="img" aria-label="Love">❤️</span>
-        ,
+          <span role="img" aria-label="Love">
+            ❤️
+          </span>
+          ,
           {' '}
-          <span role="img" aria-label="Fire">🔥</span>
-        , and a keyboard by
+          <span role="img" aria-label="Fire">
+            🔥
+          </span>
+          , and a keyboard by
           {' '}
           <a href="https://www.hoangvvo.com/">Hoang Vo</a>
-        .
+.
         </p>
         <p>
-        Source code is on
+          Source code is on
           {' '}
           <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
-        .
+.
         </p>
       </footer>
     </>

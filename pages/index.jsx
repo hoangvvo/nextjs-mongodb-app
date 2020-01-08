@@ -3,7 +3,12 @@ import { UserContext } from '../components/UserContext';
 import Layout from '../components/layout';
 
 const IndexPage = () => {
-  const { state: { isLoggedIn, user: { name } } } = useContext(UserContext);
+  const {
+    state: {
+      isLoggedIn,
+      user: { name },
+    },
+  } = useContext(UserContext);
   return (
     <Layout>
       <style jsx>
@@ -17,8 +22,7 @@ const IndexPage = () => {
       <div>
         <h2>
           Hello,
-          {' '}
-          {(isLoggedIn ? name : 'stranger')}
+          {isLoggedIn ? name : 'stranger'}
           !
         </h2>
         <p>Have a wonderful day.</p>
