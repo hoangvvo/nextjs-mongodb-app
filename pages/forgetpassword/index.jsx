@@ -20,16 +20,17 @@ const ForgetPasswordPage = () => {
     <Layout>
       <Head><title>Forget password</title></Head>
       <h2>Forget password</h2>
-      <p>Do not worry. Simply enter your email address below.</p>
       <form onSubmit={handleSubmit}>
-        <div>
+        <p>Do not worry. Simply enter your email address below.</p>
+        <label htmlFor="email">
           <input
+            id="email"
             type="email"
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-        </div>
+        </label>
         <button
           type="submit"
         >
