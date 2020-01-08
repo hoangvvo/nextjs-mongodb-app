@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import Head from 'next/head';
 import axioswal from 'axioswal';
 import { UserContext } from '../../components/UserContext';
 import Layout from '../../components/layout';
@@ -51,6 +52,7 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
 
   return (
     <>
+      <Head><title>Settings</title></Head>
       <section>
         <h2>Edit Profile</h2>
         <form onSubmit={handleSubmit}>
@@ -128,7 +130,7 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
 const SettingPage = () => {
   const { state: { isLoggedIn, user }, dispatch } = useContext(UserContext);
 
-  if (!isLoggedIn) return (<Layout><p>Please log in</p></Layout>);
+  if (!isLoggedIn) return (<Layout><p>Please sign in</p></Layout>);
   return (
     <Layout>
       <h1>Settings</h1>

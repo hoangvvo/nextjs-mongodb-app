@@ -143,7 +143,7 @@ export default ({ children }) => {
           <div>
             {(!isLoggedIn ? (
               <>
-                <Link href="/login"><a>Login</a></Link>
+                <Link href="/login"><a>Sign in</a></Link>
                 <Link href="/signup"><a>Sign up</a></Link>
               </>
             ) : (

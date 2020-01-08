@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
 import axioswal from 'axioswal';
 import { UserContext } from '../../components/UserContext';
@@ -17,7 +18,7 @@ const ProfilePage = () => {
     axioswal.post('/api/user/email/verify');
   }
 
-  if (!isLoggedIn) return (<Layout><p>Please log in</p></Layout>);
+  if (!isLoggedIn) return (<Layout><p>Please sign in</p></Layout>);
   return (
     <Layout>
       <style jsx>
@@ -51,6 +52,7 @@ const ProfilePage = () => {
           }
         `}
       </style>
+      <Head><title>{ name }</title></Head>
       <div>
         {profilePicture ? <img src={profilePicture} width="256" height="256" alt={name} /> : null}
         <section>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import axioswal from 'axioswal';
 import Layout from '../../components/layout';
 import redirectTo from '../../lib/redirectTo';
@@ -16,6 +17,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 
   return (
     <Layout>
+      <Head><title>Forget password</title></Head>
       <h2>Forget password</h2>
       {valid ? (
         <>
