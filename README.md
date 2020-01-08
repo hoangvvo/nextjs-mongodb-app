@@ -54,46 +54,35 @@ Required environmental variables in this project include:
 - `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
 - `process.env.SENDGRID_TEMPLATEID_EMAILVERIFY` (optional, Sendgrid **only**) SendGrid Email Template to use.
 
+### Development
+
+Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
+
 I include my own MongoDB, Cloudinary, SendGrid environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
 
 In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
 
-## Development
+## Features
 
-`nextjs-mongodb-app` is a long-term developing project. There is no constraint on numbers of features. I continuously accepts feature proposals and am actively developing and expanding functionalities.
+### Authentication
 
-Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
+- Session
+- Sign up/Sign in/Sign out
 
-### Features
+### Profile
 
-There are three states in feature development:
+- Profile picture, name, bio, email
+- Edit profile
 
-#### Authentication
-
-- Session management
-- Allow users to sign up and log in/log out.
-
-#### User profile
-
-- Avatar, name, email, location, etc.
-- User profile page
-- Edit user profile
-
-#### Account management
+### Account
 
 - Email verification
 - Password change
 - Password reset
 
-#### Social `delayed`
+Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
 
-- Find other users with search functionality
-- View other users' profile page
-- Add/Remove friends
-
-Have any features in mind, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
-
-### Styles
+### Styles (CSS)
 
 This project does not contain any stylesheets, and no component has classes. To remove the style, simply remove all `<style jsx>` and `<style jsx global>` tags.
 
