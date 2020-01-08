@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import axioswal from 'axioswal';
 import Layout from '../../components/layout';
 import redirectTo from '../../lib/redirectTo';
@@ -17,22 +18,22 @@ const ForgetPasswordPage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Forget password</title>
+      </Head>
       <h2>Forget password</h2>
-      <p>Do not worry. Simply enter your email address below.</p>
       <form onSubmit={handleSubmit}>
-        <div>
+        <p>Do not worry. Simply enter your email address below.</p>
+        <label htmlFor="email">
           <input
+            id="email"
             type="email"
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-        </div>
-        <button
-          type="submit"
-        >
-          Submit
-        </button>
+        </label>
+        <button type="submit">Submit</button>
       </form>
     </Layout>
   );

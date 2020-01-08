@@ -30,34 +30,35 @@ const SignupPage = () => {
     <Layout>
       <div>
         <h2>Sign up</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <label htmlFor="name">
             <input
+              id="name"
               type="text"
               placeholder="Your name"
               value={name}
               onChange={e => setName(e.target.value)}
             />
-          </div>
-          <div>
+          </label>
+          <label htmlFor="email">
             <input
+              id="email"
               type="email"
               placeholder="Email address"
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
-          </div>
-          <div>
+          </label>
+          <label htmlFor="password">
             <input
+              id="password"
               type="password"
               placeholder="Create a password"
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-          </div>
-          <button type="submit">
-            Sign up
-          </button>
+          </label>
+          <button type="submit">Sign up</button>
         </form>
       </div>
     </Layout>

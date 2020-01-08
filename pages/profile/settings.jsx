@@ -1,9 +1,13 @@
 import React, { useContext, useState } from 'react';
+import Head from 'next/head';
 import axioswal from 'axioswal';
 import { UserContext } from '../../components/UserContext';
 import Layout from '../../components/layout';
 
-const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch }) => {
+const ProfileSection = ({
+  user: { name: initialName, bio: initialBio },
+  dispatch,
+}) => {
   const [name, setName] = useState(initialName);
   const [bio, setBio] = useState(initialBio);
   const [oldPassword, setOldPassword] = useState('');
@@ -11,14 +15,9 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axioswal
-      .patch(
-        '/api/user',
-        { name, bio },
-      )
-      .then(() => {
-        dispatch({ type: 'fetch' });
-      });
+    axioswal.patch('/api/user', { name, bio }).then(() => {
+      dispatch({ type: 'fetch' });
+    });
   };
 
   const profilePictureRef = React.createRef();
@@ -30,17 +29,16 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
     setIsUploading(true);
     const formData = new FormData();
     formData.append('profilePicture', profilePictureRef.current.files[0]);
-    axioswal
-      .put('/api/user/profilepicture', formData)
-      .then(() => {
-        setIsUploading(false);
-        dispatch({ type: 'fetch' });
-      });
+    axioswal.put('/api/user/profilepicture', formData).then(() => {
+      setIsUploading(false);
+      dispatch({ type: 'fetch' });
+    });
   };
 
   const handleSubmitPasswordChange = (event) => {
     event.preventDefault();
-    axioswal.put('/api/user/password', { oldPassword, newPassword })
+    axioswal
+      .put('/api/user/password', { oldPassword, newPassword })
       .then((data) => {
         if (!data.error) {
           setNewPassword('');
@@ -51,13 +49,9 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
 
   return (
     <>
-      <style jsx>
-        {`
-        label {
-          display: block
-        }
-      `}
-      </style>
+      <Head>
+        <title>Settings</title>
+      </Head>
       <section>
         <h2>Edit Profile</h2>
         <form onSubmit={handleSubmit}>
@@ -82,9 +76,7 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
               onChange={e => setBio(e.target.value)}
             />
           </label>
-          <button type="submit">
-            Save
-          </button>
+          <button type="submit">Save</button>
         </form>
         <form onSubmit={handleSubmitProfilePicture}>
           <label htmlFor="avatar">
@@ -123,9 +115,7 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
               required
             />
           </label>
-          <button type="submit">
-            Change Password
-          </button>
+          <button type="submit">Change Password</button>
         </form>
       </section>
     </>
@@ -133,9 +123,18 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
 };
 
 const SettingPage = () => {
-  const { state: { isLoggedIn, user }, dispatch } = useContext(UserContext);
+  const {
+    state: { isLoggedIn, user },
+    dispatch,
+  } = useContext(UserContext);
 
-  if (!isLoggedIn) return (<Layout><p>Please log in</p></Layout>);
+  if (!isLoggedIn) {
+    return (
+      <Layout>
+        <p>Please sign in</p>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <h1>Settings</h1>

@@ -15,7 +15,11 @@ handler.get((req, res) => {
       data: {
         isLoggedIn: true,
         user: {
-          name, email, bio, profilePicture, emailVerified,
+          name,
+          email,
+          bio,
+          profilePicture,
+          emailVerified,
         },
       },
     });

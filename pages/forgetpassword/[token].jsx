@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import axioswal from 'axioswal';
 import Layout from '../../components/layout';
 import redirectTo from '../../lib/redirectTo';
@@ -7,15 +8,20 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
   const [password, setPassword] = useState('');
   function handleSubmit(event) {
     event.preventDefault();
-    axioswal.post(`/api/user/password/reset/${token}`, { password }).then((resp) => {
-      if (!resp.error) {
-        redirectTo('/');
-      }
-    });
+    axioswal
+      .post(`/api/user/password/reset/${token}`, { password })
+      .then((resp) => {
+        if (!resp.error) {
+          redirectTo('/');
+        }
+      });
   }
 
   return (
     <Layout>
+      <Head>
+        <title>Forget password</title>
+      </Head>
       <h2>Forget password</h2>
       {valid ? (
         <>
@@ -29,23 +35,23 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
                 onChange={e => setPassword(e.target.value)}
               />
             </div>
-            <button
-              type="submit"
-            >
-              Set new password
-            </button>
+            <button type="submit">Set new password</button>
           </form>
-
         </>
-      ) : <p>This link may have been expired</p>}
-
+      ) : (
+        <p>This link may have been expired</p>
+      )}
     </Layout>
   );
 };
 
 ResetPasswordTokenPage.getInitialProps = async (ctx) => {
   const { token } = ctx.query;
-  const valid = await axioswal.post(`${process.env.WEB_URI}/api/user/password/reset/${token}`, {}, null, { noSwal: true }).then(res => Boolean(res));
+  const valid = await axioswal
+    .post(`${process.env.WEB_URI}/api/user/password/reset/${token}`, {}, null, {
+      noSwal: true,
+    })
+    .then(res => Boolean(res));
   return { token, valid };
 };
 

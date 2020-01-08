@@ -6,11 +6,31 @@ A full-fledged app made with Next.JS and MongoDB.
 
 ## About this project
 
-`nextjs-mongodb-app` is a continously developed app built with Next.JS and MongoDB. The project is designed to as simple as possible for the purpose of learning.
+`nextjs-mongodb-app` is a continously developed app built with Next.JS and MongoDB.
 
 Give this project a big ol' 🌟 star motivates me to work on new features.
 
 Check out the [demo](https://nextjs-mongodb-app.hoangvvo.now.sh/).
+
+## Features
+
+### Authentication
+
+- Session
+- Sign up/Sign in/Sign out
+
+### Profile
+
+- Profile picture, name, bio, email
+- Edit profile
+
+### Account
+
+- Email verification
+- Password change
+- Password reset
+
+Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
 
 ## Using this project
 
@@ -22,6 +42,8 @@ This project accompanies the following posts:
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/
 
 *Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) for middleware and method routing and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
+
+The project is designed to as simple as possible for the purpose of learning. Due to its simplicity, aspects such as security must be reconsidered before being pushed to production.
 
 ### Dependencies
 
@@ -54,48 +76,17 @@ Required environmental variables in this project include:
 - `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
 - `process.env.SENDGRID_TEMPLATEID_EMAILVERIFY` (optional, Sendgrid **only**) SendGrid Email Template to use.
 
-I include my own MongoDB, Cloudinary, SendGrid environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
-
-In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
-
-## Development
-
-`nextjs-mongodb-app` is a long-term developing project. There is no constraint on numbers of features. I continuously accepts feature proposals and am actively developing and expanding functionalities.
+### Development
 
 Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
 
-### Features
+**Styles (CSS):** This project does not contain any stylesheets, and no component has classes. To remove the style, simply remove all `<style jsx>` and `<style jsx global>` tags.
 
-There are three states in feature development:
+#### `.env`
 
-#### Authentication
+I include my own MongoDB, Cloudinary, SendGrid environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
 
-- Session management
-- Allow users to sign up and log in/log out.
-
-#### User profile
-
-- Avatar, name, email, location, etc.
-- User profile page
-- Edit user profile
-
-#### Account management
-
-- Email verification
-- Password change
-- Password reset
-
-#### Social `delayed`
-
-- Find other users with search functionality
-- View other users' profile page
-- Add/Remove friends
-
-Have any features in mind, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
-
-### Styles
-
-This project does not contain any stylesheets, and no component has classes. To remove the style, simply remove all `<style jsx>` and `<style jsx global>` tags.
+In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
 
 ## Contributing
 
