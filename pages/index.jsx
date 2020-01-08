@@ -9,8 +9,8 @@ const IndexPage = () => {
       <style jsx>
         {`
           p {
+            text-align: center;
             color: #888;
-            font-size: 0.8rem;
           }
         `}
       </style>

@@ -51,13 +51,6 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
 
   return (
     <>
-      <style jsx>
-        {`
-        label {
-          display: block
-        }
-      `}
-      </style>
       <section>
         <h2>Edit Profile</h2>
         <form onSubmit={handleSubmit}>

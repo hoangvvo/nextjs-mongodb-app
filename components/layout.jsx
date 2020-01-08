@@ -21,11 +21,11 @@ export default ({ children }) => {
       <style jsx global>
         {`
           a {
-            text-decoration: none!important;
-            color: #00ad9f;
+            text-decoration: none !important;
+            color: #0070f3;
           }
-          html {
-            font-size: 1.25rem;
+          a:hover {
+            color: #0366d6;
           }
           body {
             margin: 0;
@@ -34,33 +34,56 @@ export default ({ children }) => {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
               "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
               "Helvetica Neue", sans-serif;
-            background-color: #f3f5f7;
+            background-color: #fff;
+          }
+          h2 {
+            color: #333;
             text-align: center;
           }
-          button, input, textarea {
-            display: block;
-            padding: .8rem 2.5rem;
-            font-size: 1rem;
-            margin: 1rem auto;
-            background-color: #fff;
-            color: #00ad9f;
-            border: none;
-            border-radius: 4px;
-            box-shadow: rgba(0, 0, 0, 0.1) 0 10px 20px 1px;
+          label {
+            display: flex;
+            margin-bottom: 0.5rem;
+            align-items: center;
+            width: 100%;
+          }
+          form {
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          input, textarea {
+            font-family: monospace;
+            flex: 1 1 0%;
+            margin-left: 0.5rem;
+            box-shadow: none;
+            width: 100%;
+            color: #000;
+            background-color: transparent;
+            border: 1px solid #d8d8d8;
+            border-radius: 5px;
+            outline: 0px;
+            padding: 10px 25px;
           }
           button {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            background-color: #000;
             cursor: pointer;
+            transition: all 0.2s ease 0s;
+            padding: 10px 25px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.12);
           }
           button:hover, button:active {
-            background-color: #f3f4f4;
+            transform: translate3d(0px, -1px, 0px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
           }
-        `}
-      </style>
-      <style jsx>
-        {`
           header {
-            background-color: #ffffff;
-            box-shadow: rgba(0, 0, 0, 0.05) 0 10px 20px 1px;
+            border-bottom: 1px solid #d8d8d8;
           }
           nav {
             max-width: 1040px;
@@ -92,6 +115,7 @@ export default ({ children }) => {
             margin: 0 auto;
           }
           footer {
+            text-align: center;
             font-size: 0.8rem;
             margin-top: 1rem;
             padding: 3rem;
@@ -126,7 +150,7 @@ export default ({ children }) => {
               <>
                 <Link href="/profile"><a>Profile</a></Link>
                 {/* eslint-disable-next-line */}
-            <a role="button" onClick={handleLogout}>Logout</a>
+            <a href="/" role="button" onClick={handleLogout}>Logout</a>
               </>
             ))}
           </div>
