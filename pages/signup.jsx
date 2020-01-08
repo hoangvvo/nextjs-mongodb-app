@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import Head from 'next/head';
 import axioswal from 'axioswal';
 import { UserContext } from '../components/UserContext';
 import Layout from '../components/layout';
@@ -28,6 +29,9 @@ const SignupPage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Sign up</title>
+      </Head>
       <div>
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit} autoComplete="off">
