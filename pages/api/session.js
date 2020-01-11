@@ -35,7 +35,7 @@ handler.get((req, res) => {
 
 handler.delete((req, res) => {
   req.logOut();
-  return res.status(200).json({
+  res.json({
     ok: true,
     message: 'You have been logged out.',
   });
