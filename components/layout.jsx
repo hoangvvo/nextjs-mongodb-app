@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import axioswal from 'axioswal';
+import fetchSwal from '../lib/fetchSwal';
 import { UserContext } from './UserContext';
 
 export default ({ children }) => {
@@ -11,11 +11,7 @@ export default ({ children }) => {
   } = useContext(UserContext);
   const handleLogout = (event) => {
     event.preventDefault();
-    axioswal.delete('/api/session').then((data) => {
-      if (data.status === 'ok') {
-        dispatch({ type: 'clear' });
-      }
-    });
+    fetchSwal.delete('/api/session').then(data => data.ok !== false && dispatch({ type: 'clear' }));
   };
   return (
     <>

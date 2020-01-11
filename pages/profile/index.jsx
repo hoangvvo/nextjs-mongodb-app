@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import axioswal from 'axioswal';
+import fetchSwal from '../../lib/fetchSwal';
 import { UserContext } from '../../components/UserContext';
 import Layout from '../../components/layout';
 
@@ -16,7 +16,7 @@ const ProfilePage = () => {
   } = useContext(UserContext);
 
   function sendVerificationEmail() {
-    axioswal.post('/api/user/email/verify');
+    fetchSwal.post('/api/user/email/verify');
   }
 
   if (!isLoggedIn) {
