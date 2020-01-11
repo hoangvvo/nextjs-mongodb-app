@@ -56,8 +56,8 @@ This project uses the following dependencies:
 - `react` - v16.8 or above required for **react hooks**.
 - `react-dom` - v16.8 or above.
 - `mongodb` - may be replaced by `mongoose`.
-- `next-connect` - recommended if you want to use Express/Connect middleware.
-- `axios`, `axioswal` - optional, may be replaced with any request library.
+- `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
+- `isomorphic-unfetch` - optional, may be replaced with any request library.
 - `next-session`, `connect-mongo` - may be replaced with any session management solution.
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.
