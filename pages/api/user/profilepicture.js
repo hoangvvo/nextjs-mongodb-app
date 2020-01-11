@@ -22,12 +22,12 @@ handler.put((req, res) => {
         { _id: req.user._id },
         { $set: { profilePicture: image.secure_url } },
       ))
-    .then(() => res.send({
+    .then(() => res.json({
       status: 'success',
-      message: 'Profile picture updated successfully',
+      message: '',
     }))
-    .catch(error => res.send({
-      status: 'error',
+    .catch(error => res.json({
+      ok: false,
       message: error.toString(),
     })));
 });

@@ -10,7 +10,7 @@ handler.put(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
   if (!(await bcrypt.compare(oldPassword, req.user.password))) {
     return res.status(401).json({
-      status: 'error',
+      ok: false,
       message: 'The password you has entered is incorrect',
     });
   }

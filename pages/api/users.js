@@ -21,13 +21,13 @@ handler.post(async (req, res) => {
     req.logIn(user, (err) => {
       if (err) throw err;
       res.status(201).json({
-        status: 'ok',
+        ok: true,
         message: 'User signed up successfully',
       });
     });
   } catch (err) {
     res.json({
-      status: 'error',
+      ok: false,
       message: err.toString(),
     });
   }

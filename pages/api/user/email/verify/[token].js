@@ -11,15 +11,21 @@ handler.get(async (req, res) => {
     .collection('tokens')
     .findOneAndDelete({ token, type: 'emailVerify' });
 
-  if (!tokenDoc) return res.status(401).send('This link may have been expired.');
+  if (!tokenDoc) {
+    return res.status(401).json({
+      ok: false,
+      message: 'This link may have been expired.',
+    });
+  }
 
   await req.db
     .collection('users')
     .updateOne({ _id: tokenDoc.userId }, { $set: { emailVerified: true } });
 
-  return res.send(
-    'Success! Thank you for verifying your email address. You may close this page.',
-  );
+  return res.json({
+    ok: true,
+    message: 'Success! Thank you for verifying your email address. You may close this page.',
+  });
 });
 
 export default handler;

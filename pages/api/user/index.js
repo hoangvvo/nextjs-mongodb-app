@@ -12,11 +12,12 @@ handler.patch((req, res) => {
     .collection('users')
     .updateOne({ _id: req.user._id }, { $set: { name, bio } })
     .then(() => res.json({
+      ok: true,
       message: 'Profile updated successfully',
       data: { name, bio },
     }))
-    .catch(error => res.send({
-      status: 'error',
+    .catch(error => res.json({
+      ok: false,
       message: error.toString(),
     }));
 });

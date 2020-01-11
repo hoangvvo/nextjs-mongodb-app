@@ -10,7 +10,7 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.post(async (req, res) => {
-  if (!req.user) return res.status(401).send('You need to be logged in.');
+  if (!req.user) return res.status(401).json('You need to be logged in.');
   const token = crypto.randomBytes(32).toString('hex');
   await req.db.collection('tokens').insertOne({
     token,

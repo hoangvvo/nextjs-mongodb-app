@@ -16,7 +16,7 @@ handler.post(async (req, res) => {
 
   if (!user) {
     return res.status(200).json({
-      status: 'error',
+      ok: false,
       message:
         'This email is not associated with any account or has not been verified.',
     });

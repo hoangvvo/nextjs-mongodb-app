@@ -24,7 +24,7 @@ handler.put(async (req, res) => {
 
   if (!tokenDoc) {
     return res.status(200).json({
-      status: 'error',
+      ok: false,
       message: 'This link may have been expired.',
     });
   }
