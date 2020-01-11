@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import axios from 'axios';
+import fetch from 'isomorphic-unfetch';
 
 const UserContext = createContext();
 
@@ -25,18 +25,12 @@ const UserContextProvider = ({ children }) => {
   const dispatchProxy = (action) => {
     switch (action.type) {
       case 'fetch':
-        return axios
-          .get('/api/session')
-          .then(res => ({
-            isLoggedIn: res.data.data.isLoggedIn,
-            user: res.data.data.user,
-          }))
-          .then(({ isLoggedIn, user }) => {
-            dispatch({
-              type: 'set',
-              data: { isLoggedIn, user },
-            });
-          });
+        return fetch('/api/session')
+          .then(res => res.json())
+          .then(({ data: { isLoggedIn, user } }) => dispatch({
+            type: 'set',
+            data: { isLoggedIn, user },
+          }));
       default:
         return dispatch(action);
     }

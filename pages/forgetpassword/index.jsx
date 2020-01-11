@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import axioswal from 'axioswal';
+import fetchSwal from '../../lib/fetchSwal';
 import Layout from '../../components/layout';
 import redirectTo from '../../lib/redirectTo';
 
@@ -9,11 +9,7 @@ const ForgetPasswordPage = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    axioswal.post('/api/user/password/reset', { email }).then((resp) => {
-      if (!resp.error) {
-        redirectTo('/');
-      }
-    });
+    fetchSwal.post('/api/user/password/reset', { email }).then(resp => resp.ok !== 'false' && redirectTo('/'));
   }
 
   return (

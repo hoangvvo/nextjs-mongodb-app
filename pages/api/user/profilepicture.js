@@ -7,29 +7,32 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.put((req, res) => {
-  if (!req.user) return res.status(401).send('You need to be logged in.');
-  const form = new formidable.IncomingForm();
-  return form.parse(req, (err, fields, files) => cloudinary.uploader
-    .upload(files.profilePicture.path, {
-      width: 512,
-      height: 512,
-      crop: 'fill',
-    })
-    .then(image => req.db
-      .collection('users')
-      .updateOne(
-        { _id: req.user._id },
-        { $set: { profilePicture: image.secure_url } },
-      ))
-    .then(() => res.send({
-      status: 'success',
-      message: 'Profile picture updated successfully',
-    }))
-    .catch(error => res.send({
-      status: 'error',
+handler.put(async (req, res) => {
+  try {
+    if (!req.user) throw new Error('You need to be logged in.');
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files) => cloudinary.uploader
+      .upload(files.profilePicture.path, {
+        width: 512,
+        height: 512,
+        crop: 'fill',
+      })
+      .then(image => req.db
+        .collection('users')
+        .updateOne(
+          { _id: req.user._id },
+          { $set: { profilePicture: image.secure_url } },
+        ))
+      .then(() => res.json({
+        ok: true,
+        message: '',
+      })).catch((e) => { throw e; }));
+  } catch (error) {
+    res.json({
+      ok: false,
       message: error.toString(),
-    })));
+    });
+  }
 });
 
 export const config = {

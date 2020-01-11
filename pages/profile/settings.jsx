@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Head from 'next/head';
-import axioswal from 'axioswal';
+import fetchSwal from '../../lib/fetchSwal';
 import { UserContext } from '../../components/UserContext';
 import Layout from '../../components/layout';
 
@@ -15,7 +15,7 @@ const ProfileSection = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axioswal.patch('/api/user', { name, bio }).then(() => {
+    fetchSwal.patch('/api/user', { name, bio }).then(() => {
       dispatch({ type: 'fetch' });
     });
   };
@@ -29,7 +29,7 @@ const ProfileSection = ({
     setIsUploading(true);
     const formData = new FormData();
     formData.append('profilePicture', profilePictureRef.current.files[0]);
-    axioswal.put('/api/user/profilepicture', formData).then(() => {
+    fetchSwal.put('/api/user/profilepicture', formData, null, true).then(() => {
       setIsUploading(false);
       dispatch({ type: 'fetch' });
     });
@@ -37,7 +37,7 @@ const ProfileSection = ({
 
   const handleSubmitPasswordChange = (event) => {
     event.preventDefault();
-    axioswal
+    fetchSwal
       .put('/api/user/password', { oldPassword, newPassword })
       .then((data) => {
         if (!data.error) {

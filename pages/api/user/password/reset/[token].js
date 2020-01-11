@@ -17,25 +17,23 @@ handler.post(async (req, res) => {
 
 handler.put(async (req, res) => {
   // password reset
-  if (!req.body.password) return res.status(400).end();
-  const { value: tokenDoc } = await req.db
-    .collection('tokens')
-    .findOneAndDelete({ _id: req.query.token, type: 'passwordReset' });
-
-  if (!tokenDoc) {
-    return res.status(200).json({
-      status: 'error',
-      message: 'This link may have been expired.',
+  try {
+    if (!req.body.password) throw new Error('No password provided.');
+    const { value: tokenDoc } = await req.db
+      .collection('tokens')
+      .findOneAndDelete({ _id: req.query.token, type: 'passwordReset' });
+    if (!tokenDoc) throw new Error('This link may have been expired.');
+    const password = await bcrypt.hash(req.body.password, 10);
+    await req.db
+      .collection('users')
+      .updateOne({ _id: tokenDoc.userId }, { $set: { password } });
+    res.json({ message: 'Your password has been updated.' });
+  } catch (error) {
+    res.json({
+      ok: false,
+      message: error.toString(),
     });
   }
-
-  const password = await bcrypt.hash(req.body.password, 10);
-
-  await req.db
-    .collection('users')
-    .updateOne({ _id: tokenDoc.userId }, { $set: { password } });
-
-  return res.json({ message: 'Your password has been updated.' });
 });
 
 export default handler;

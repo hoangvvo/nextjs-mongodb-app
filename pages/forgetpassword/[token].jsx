@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import axioswal from 'axioswal';
+import fetch from 'isomorphic-unfetch';
+import fetchSwal from '../../lib/fetchSwal';
 import Layout from '../../components/layout';
 import redirectTo from '../../lib/redirectTo';
 
@@ -8,13 +9,9 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
   const [password, setPassword] = useState('');
   function handleSubmit(event) {
     event.preventDefault();
-    axioswal
+    fetchSwal
       .post(`/api/user/password/reset/${token}`, { password })
-      .then((resp) => {
-        if (!resp.error) {
-          redirectTo('/');
-        }
-      });
+      .then(resp => resp.ok !== false && redirectTo('/'));
   }
 
   return (
@@ -47,11 +44,9 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 
 ResetPasswordTokenPage.getInitialProps = async (ctx) => {
   const { token } = ctx.query;
-  const valid = await axioswal
-    .post(`${process.env.WEB_URI}/api/user/password/reset/${token}`, {}, null, {
-      noSwal: true,
-    })
-    .then(res => Boolean(res));
+  const valid = await fetch(`${process.env.WEB_URI}/api/user/password/reset/${token}`, { method: 'POST' })
+    .then(res => res.text())
+    .then(bol => bol === 'true');
   return { token, valid };
 };
 

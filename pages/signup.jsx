@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Head from 'next/head';
-import axioswal from 'axioswal';
+import fetchSwal from '../lib/fetchSwal';
 import { UserContext } from '../components/UserContext';
 import Layout from '../components/layout';
 import redirectTo from '../lib/redirectTo';
@@ -13,14 +13,14 @@ const SignupPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axioswal
+    fetchSwal
       .post('/api/users', {
         name,
         email,
         password,
       })
       .then((data) => {
-        if (data.status === 'ok') {
+        if (data.ok !== false) {
           dispatch({ type: 'fetch' });
           redirectTo('/');
         }
