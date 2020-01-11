@@ -29,7 +29,7 @@ const ProfileSection = ({
     setIsUploading(true);
     const formData = new FormData();
     formData.append('profilePicture', profilePictureRef.current.files[0]);
-    fetchSwal.put('/api/user/profilepicture', formData).then(() => {
+    fetchSwal.put('/api/user/profilepicture', formData, null, true).then(() => {
       setIsUploading(false);
       dispatch({ type: 'fetch' });
     });

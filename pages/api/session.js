@@ -10,8 +10,7 @@ handler.get((req, res) => {
     const {
       name, email, bio, profilePicture, emailVerified,
     } = req.user;
-    return res.status(200).json({
-      ok: true,
+    return res.json({
       data: {
         isLoggedIn: true,
         user: {
@@ -24,8 +23,7 @@ handler.get((req, res) => {
       },
     });
   }
-  return res.status(200).json({
-    ok: true,
+  return res.json({
     data: {
       isLoggedIn: false,
       user: {},
