@@ -21,27 +21,27 @@
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.15.0",
-    "connect-mongo": "^3.0.0",
+    "cloudinary": "^1.18.1",
+    "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
     "formidable": "^1.2.1",
     "isomorphic-unfetch": "^3.0.0",
-    "mongodb": "^3.3.0-beta2",
+    "mongodb": "^3.4.1",
     "next": "^9.1.7",
-    "next-connect": "^0.5.1",
-    "next-session": "^2.1.1",
+    "next-connect": "^0.5.2",
+    "next-session": "^2.2.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "sweetalert2": "^9.5.4",
-    "validator": "^12.0.0"
+    "validator": "^12.1.0"
   },
   "devDependencies": {
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.18.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2"
+    "eslint-plugin-react": "^7.17.0"
   }
 }
