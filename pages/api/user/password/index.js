@@ -12,7 +12,7 @@ handler.put(async (req, res) => {
     if (!(await bcrypt.compare(oldPassword, req.user.password))) {
       throw new Error('The password you has entered is incorrect.');
     }
-    const password = await bcrypt.hash(newPassword);
+    const password = await bcrypt.hash(newPassword, 10);
     await req.db
       .collection('users')
       .updateOne({ _id: req.user._id }, { $set: { password } });
