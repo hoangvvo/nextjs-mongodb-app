@@ -28,7 +28,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "mongodb": "^3.4.1",
     "next": "^9.1.7",
-    "next-connect": "^0.5.2",
+    "next-connect": "^0.6.0",
     "next-session": "^2.2.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

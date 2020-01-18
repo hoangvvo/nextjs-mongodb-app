@@ -6,7 +6,9 @@ export default function (req, res, next) {
       status = 302;
       location = code;
     }
-    res.writeHead(status, { Location: location }).end();
+    res.statusCode = status;
+    res.setHeader('Location', location);
+    res.end();
   };
   next();
 }
