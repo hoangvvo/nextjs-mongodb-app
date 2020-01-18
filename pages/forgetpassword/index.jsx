@@ -9,7 +9,7 @@ const ForgetPasswordPage = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetchSwal.post('/api/user/password/reset', { email }).then(resp => resp.ok !== 'false' && redirectTo('/'));
+    fetchSwal.post('/api/user/password/reset', { email }).then(resp => resp.ok !== false && redirectTo('/'));
   }
 
   return (
