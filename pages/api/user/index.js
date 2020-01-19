@@ -6,6 +6,19 @@ import middleware from '../../../middlewares/middleware';
 const upload = multer({ dest: '/tmp' });
 const handler = nextConnect();
 
+/* eslint-disable camelcase */
+const {
+  hostname: cloud_name,
+  username: api_key,
+  password: api_secret,
+} = new URL(process.env.CLOUDINARY_URL);
+
+cloudinary.config({
+  cloud_name,
+  api_key,
+  api_secret,
+});
+
 handler.use(middleware);
 
 handler.patch(upload.single('profilePicture'), async (req, res) => {
@@ -23,18 +36,16 @@ handler.patch(upload.single('profilePicture'), async (req, res) => {
     }
 
     const { name, bio } = req.body;
-    await req.db
-      .collection('users')
-      .updateOne(
-        { _id: req.user._id },
-        {
-          $set: {
-            ...(name && { name }),
-            bio: bio || '',
-            ...(profilePicture && { profilePicture }),
-          },
+    await req.db.collection('users').updateOne(
+      { _id: req.user._id },
+      {
+        $set: {
+          ...(name && { name }),
+          bio: bio || '',
+          ...(profilePicture && { profilePicture }),
         },
-      );
+      },
+    );
     res.json({
       ok: true,
       message: 'Profile updated successfully',
