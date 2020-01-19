@@ -4,7 +4,7 @@
 
 <div align="center">
   
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/zeit/now/tree/master/examples/gatsby)
+[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/hoangvvo/nextjs-mongodb-app)
 
 A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/)
 
@@ -20,7 +20,7 @@ A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and
 
 <div align="center">
 
-<sup align="center">*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) *with passportjs*: `master`</sup>
+<sup>*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) *with passportjs*: `master`</sup>
 
 - [x] Session
 - [x] Sign up/Sign in/Sign out
@@ -52,7 +52,7 @@ A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and
   
 </div>
 
-## Using this project
+<h2 align="center">Guide</h2>
 
 Before getting started, I welcome you to read this [issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues/13) on production readiness. The goal is not to use this project as it, but to implement your own version.
 
@@ -66,7 +66,7 @@ This project accompanies the following posts:
 
 The project is designed to as simple as possible for the purpose of learning. Due to its simplicity, aspects such as security must be reconsidered before being pushed to production.
 
-### Dependencies
+<h3 align="center">Dependencies</h3>
 
 This project uses the following dependencies:
 
@@ -84,7 +84,7 @@ This project uses the following dependencies:
 - `cloudinary` - optional, **only if** you are using [Cloudinary](https://cloudinary.com) for image upload.
 - `@sendgrid/mail` - optional, **only if** you are using [SendGrid](https://sendgrid.com/) to send emails.
 
-### Environmental variables
+<h3 align="center">Environmental variables</h3>
 
 The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) and thus should not be used in front-end codebase.
 
@@ -97,7 +97,7 @@ Required environmental variables in this project include:
 - `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
 - `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
 
-### Development
+<h3 align="center">Development</h3>
 
 Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
 
@@ -109,10 +109,20 @@ I include my own MongoDB, Cloudinary, SendGrid environment variables in [.env.ex
 
 In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
 
-## Contributing
+<h2 align="center">Contributing</h2>
 
-Please see my [contributing.md](CONTRIBUTING.md).
+<p align="center">
+  
+  Please see my [contributing.md](CONTRIBUTING.md).
 
-## License
+</p>
 
-[MIT](LICENSE)
+<h2 align="center">
+  License
+</h2>
+
+<p align="center">
+  
+  [MIT](LICENSE)
+  
+</p>
