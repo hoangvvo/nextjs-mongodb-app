@@ -2,64 +2,51 @@
 
 <h1 align="center">Next.js ❤️ MongoDB</h1>
 
-<p align="center">
+<div align="center">
 
 A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/)
 
-:rocket:  [Check out the demo](https://nextjs-mongodb-app.hoangvvo.now.sh/) :rocket:
+:rocket: [Check out the demo](https://nextjs-mongodb-app.hoangvvo.now.sh/)
 
-</p>
+</div>
 
 <h2 align="center">Features</h2>
 
-<p align="center">
-
-:heavy_check_mark: No Express.js
-
-:heavy_check_mark: Serverless ready
-
-</p>
-
+<p align="center">:heavy_check_mark: No Express.js :heavy_check_mark: Serverless ready :heavy_check_mark: API Routes :heavy_check_mark: Middleware</p>
 
 <h3 align="center">:lock: Authentication</h3>
 
-<p align="center">
+<div align="center">
 
-*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504)
-*with passportjs*: `master`
+<sup align="center">*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) *with passportjs*: `master`</sup>
 
-- Session
-- Sign up/Sign in/Sign out
+Session
 
-</p>
+Sign up/Sign in/Sign out
+
+</div>
 
 <h3 align="center">:woman::man: Profile</h3>
 
-<p align="center">
+<div align="center">
 
-- Profile picture, name, bio, email
-- Edit profile
+Profile picture, name, bio, email
 
-</p>
+Edit profile
+
+</div>
 
 <h3 align="center">:wrench: Account</h3>
 
-<p align="center">
+<div align="center">
 
-- Email verification
-- Password change
-- Password reset
+Email verification
+Password change
+Password reset
 
-</p>
+</div>
 
-<p align="center">
-<small>
-  
-Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
-
-</small>
-</p>
-
+<sup align="center">Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup> 
 
 ## Using this project
 
