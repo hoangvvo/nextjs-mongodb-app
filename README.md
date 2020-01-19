@@ -113,18 +113,18 @@ In production, it is recommended to set the environment variables using the opti
 
 <h2 align="center">Contributing</h2>
 
-<p align="center">
+<div align="center">
   
-  Please see my [contributing.md](CONTRIBUTING.md).
+Please see my [contributing.md](CONTRIBUTING.md).
 
-</p>
+</div>
 
 <h2 align="center">
   License
 </h2>
 
-<p align="center">
+<div align="center">
   
   [MIT](LICENSE)
   
-</p>
+</div>
