@@ -78,7 +78,6 @@ const ProfileSection = ({
               name="avatar"
               accept="image/png, image/jpeg"
               ref={profilePictureRef}
-              required
             />
           </label>
           <button disabled={isUpdating} type="submit">Save</button>
