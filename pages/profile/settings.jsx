@@ -34,7 +34,7 @@ const ProfileSection = ({
     fetchSwal
       .put('/api/user/password', { oldPassword, newPassword })
       .then((data) => {
-        if (!data.error) {
+        if (data.ok !== false) {
           setNewPassword('');
           setOldPassword('');
         }
