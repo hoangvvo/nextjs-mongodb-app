@@ -58,13 +58,15 @@ Before getting started, I welcome you to read this [issue](https://github.com/ho
 
 This project accompanies the following posts:
 
-- https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/
-- https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/
-- https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-3/
+- [How I build a full-fledged app with Next.js and MongoDB Part 1: User authentication](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/)
+- [How I build a full-fledged app with Next.js and MongoDB Part 2: User profile and Profile Picture](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/)
+- [How I build a full-fledged app with Next.js and MongoDB Part 3: Email Verification, Password Reset/Change](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-3/)
 
-*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) for middleware and method routing and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
+Also check them out on [dev.to](https://dev.to/hoangvvo).
 
-The project is designed to as simple as possible for the purpose of learning. Due to its simplicity, aspects such as security must be reconsidered before being pushed to production.
+*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
+
+The project is designed to **as simple as possible** for the learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **pushed to production**.
 
 <h3 align="center">Dependencies</h3>
 
