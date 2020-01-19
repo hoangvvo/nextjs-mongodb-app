@@ -62,7 +62,7 @@ This project uses the following dependencies:
 - `next-session`, `connect-mongo` - required, may be replaced with any compatible session library (ex. express-session).
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.
-- `formidable` - may be replaced by other file parser.
+- `multer` - may be replaced with any middleware that handles `multipart/form-data`
 - `cloudinary` - optional, **only if** you are using [Cloudinary](https://cloudinary.com) for image upload.
 - `@sendgrid/mail` - optional, **only if** you are using [SendGrid](https://sendgrid.com/) to send emails.
 
