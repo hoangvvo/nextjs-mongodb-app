@@ -3,6 +3,8 @@
 <h1 align="center">Next.js ❤️ MongoDB</h1>
 
 <div align="center">
+  
+[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/zeit/now/tree/master/examples/gatsby)
 
 A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/)
 
@@ -20,9 +22,8 @@ A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and
 
 <sup align="center">*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) *with passportjs*: `master`</sup>
 
-Session
-
-Sign up/Sign in/Sign out
+- [x] Session
+- [x] Sign up/Sign in/Sign out
 
 </div>
 
@@ -30,9 +31,8 @@ Sign up/Sign in/Sign out
 
 <div align="center">
 
-Profile picture, name, bio, email
-
-Edit profile
+- [x] Profile picture, name, bio, email
+- [x] Edit profile
 
 </div>
 
@@ -40,13 +40,17 @@ Edit profile
 
 <div align="center">
 
-Email verification
-Password change
-Password reset
+- [x] Email verification
+- [x] Password change
+- [x] Password reset
 
 </div>
 
-<sup align="center">Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup> 
+<div align="center">
+  
+<sup>Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup>
+  
+</div>
 
 ## Using this project
 
@@ -56,6 +60,7 @@ This project accompanies the following posts:
 
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/
 - https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/
+- https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-3/
 
 *Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) for middleware and method routing and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
 
@@ -89,7 +94,7 @@ Required environmental variables in this project include:
 - `process.env.EMAIL_FROM` The email address to send your emails from.
 - `process.env.DB_NAME` The name of the MongoDB database to be used.
 - `process.env.WEB_URI` The *URL* of your web.
-- `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
+- `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
 - `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
 
 ### Development
@@ -106,7 +111,7 @@ In production, it is recommended to set the environment variables using the opti
 
 ## Contributing
 
-Please see my [contributing.md](contributing.md).
+Please see my [contributing.md](CONTRIBUTING.md).
 
 ## License
 
