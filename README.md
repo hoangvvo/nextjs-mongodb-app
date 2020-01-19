@@ -78,7 +78,6 @@ Required environmental variables in this project include:
 - `process.env.WEB_URI` The *URL* of your web.
 - `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
 - `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
-- `process.env.SENDGRID_TEMPLATEID_EMAILVERIFY` (optional, Sendgrid **only**) SendGrid Email Template to use.
 
 ### Development
 

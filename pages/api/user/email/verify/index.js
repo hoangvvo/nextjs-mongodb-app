@@ -22,12 +22,12 @@ handler.post(async (req, res) => {
     const msg = {
       to: req.user.email,
       from: process.env.EMAIL_FROM,
-      templateId: process.env.SENDGRID_TEMPLATEID_EMAILVERIFY,
-      dynamic_template_data: {
-        subject: '[nextjs-mongodb-app] Please verify your email address.',
-        name: req.user.name,
-        url: `${process.env.WEB_URI}/api/user/email/verify/${token}`,
-      },
+      html: `
+      <div>
+        <p>Hello, ${req.user.name}</p>
+        <p>Please follow <a href="${process.env.WEB_URI}/api/user/email/verify/${token}">this link</a> to confirm your email.</p>
+      </div>
+      `,
     };
     await sgMail.send(msg);
     res.json({ message: 'An email has been sent to your inbox.' });

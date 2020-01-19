@@ -7,8 +7,6 @@
       "CLOUDINARY_URL": "@cloudinary_url",
       "DB_NAME": "nextjsmongodbapp",
       "SENDGRID_API_KEY": "@sendgrid_api_key",
-      "SENDGRID_TEMPLATEID_EMAILVERIFY": "d-9c772b043f264c458c6615dc1a8f77ec",
-      "SENDGRID_TEMPLATEID_PASSWORDRESET": "d-5a9fce6b940c498ab70ed90b3390753c",
       "EMAIL_FROM": "averyniceguy@nextjs-mongodb-app.hoangvvo.now.sh",
       "WEB_URI": "https://nextjs-mongodb-app.hoangvvo.now.sh"
     }
