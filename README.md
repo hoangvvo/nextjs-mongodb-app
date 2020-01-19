@@ -1,20 +1,29 @@
-![nextjs-mongodb-app](https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd)
+[![Next.js](https://assets.zeit.co/image/upload/v1538361091/repositories/next-js/next-js.png)](https://nextjs.org)
 
-# Next.js + MongoDB App
+<h1 align="center">Next.js ❤️ MongoDB</h1>
 
-A full-fledged app made with Next.JS and MongoDB.
+<p align="center">
 
-## About this project
+A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/)
 
-`nextjs-mongodb-app` is a continously developed app built with Next.JS and MongoDB.
+:rocket:  [Check out the demo](https://nextjs-mongodb-app.hoangvvo.now.sh/) :rocket:
 
-Give this project a big ol' 🌟 star motivates me to work on new features.
+</p>
 
-Check out the [demo](https://nextjs-mongodb-app.hoangvvo.now.sh/).
+<h2 align="center">Features</h2>
 
-## Features
+<p align="center">
 
-### Authentication
+:heavy_check_mark: No Express.js
+
+:heavy_check_mark: Serverless ready
+
+</p>
+
+
+<h3 align="center">:lock: Authentication</h3>
+
+<p align="center">
 
 *without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504)
 *with passportjs*: `master`
@@ -22,18 +31,35 @@ Check out the [demo](https://nextjs-mongodb-app.hoangvvo.now.sh/).
 - Session
 - Sign up/Sign in/Sign out
 
-### Profile
+</p>
+
+<h3 align="center">:woman::man: Profile</h3>
+
+<p align="center">
 
 - Profile picture, name, bio, email
 - Edit profile
 
-### Account
+</p>
+
+<h3 align="center">:wrench: Account</h3>
+
+<p align="center">
 
 - Email verification
 - Password change
 - Password reset
 
+</p>
+
+<p align="center">
+<small>
+  
 Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
+
+</small>
+</p>
+
 
 ## Using this project
 
