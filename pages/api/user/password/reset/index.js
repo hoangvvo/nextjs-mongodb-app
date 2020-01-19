@@ -25,12 +25,13 @@ handler.post(async (req, res) => {
     const msg = {
       to: user.email,
       from: process.env.EMAIL_FROM,
-      templateId: process.env.SENDGRID_TEMPLATEID_PASSWORDRESET,
-      dynamic_template_data: {
-        subject: '[nextjs-mongodb-app] Reset your password.',
-        name: user.name,
-        url: `${process.env.WEB_URI}/forgetpassword/${token}`,
-      },
+      subject: '[nextjs-mongodb-app] Reset your password.',
+      html: `
+      <div>
+        <p>Hello, ${user.name}</p>
+        <p>Please follow <a href="${process.env.WEB_URI}/forgetpassword/${token}">this link</a> to reset your password.</p>
+      </div>
+      `,
     };
     await sgMail.send(msg);
     res.json({ message: 'An email has been sent to your inbox.' });

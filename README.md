@@ -1,54 +1,74 @@
-![nextjs-mongodb-app](https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd)
+[![Next.js](https://assets.zeit.co/image/upload/v1538361091/repositories/next-js/next-js.png)](https://nextjs.org)
 
-# Next.js + MongoDB App
+<h1 align="center">Next.js ❤️ MongoDB</h1>
 
-A full-fledged app made with Next.JS and MongoDB.
+<div align="center">
+  
+[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/hoangvvo/nextjs-mongodb-app)
 
-## About this project
+A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/)
 
-`nextjs-mongodb-app` is a continously developed app built with Next.JS and MongoDB.
+:rocket: [Check out the demo](https://nextjs-mongodb-app.hoangvvo.now.sh/)
 
-Give this project a big ol' 🌟 star motivates me to work on new features.
+</div>
 
-Check out the [demo](https://nextjs-mongodb-app.hoangvvo.now.sh/).
+<h2 align="center">Features</h2>
 
-## Features
+<p align="center">:heavy_check_mark: No Express.js :heavy_check_mark: Serverless ready :heavy_check_mark: API Routes :heavy_check_mark: Middleware</p>
 
-### Authentication
+<h3 align="center">:lock: Authentication</h3>
 
-*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504)
-*with passportjs*: `master`
+<div align="center">
 
-- Session
-- Sign up/Sign in/Sign out
+<sup>*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) *with passportjs*: `master`</sup>
 
-### Profile
+- [x] Session
+- [x] Sign up/Sign in/Sign out
 
-- Profile picture, name, bio, email
-- Edit profile
+</div>
 
-### Account
+<h3 align="center">:woman::man: Profile</h3>
 
-- Email verification
-- Password change
-- Password reset
+<div align="center">
 
-Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).
+- [x] Profile picture, name, bio, email
+- [x] Edit profile
 
-## Using this project
+</div>
+
+<h3 align="center">:wrench: Account</h3>
+
+<div align="center">
+
+- [x] Email verification
+- [x] Password change
+- [x] Password reset
+
+</div>
+
+<div align="center">
+  
+<sup>Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup>
+  
+</div>
+
+<h2 align="center">Guide</h2>
 
 Before getting started, I welcome you to read this [issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues/13) on production readiness. The goal is not to use this project as it, but to implement your own version.
 
 This project accompanies the following posts:
 
-- https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/
-- https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/
+- [How I build a full-fledged app with Next.js and MongoDB Part 1: User authentication](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/)
+- [How I build a full-fledged app with Next.js and MongoDB Part 2: User profile and Profile Picture](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/)
+- [How I build a full-fledged app with Next.js and MongoDB Part 3: Email Verification, Password Reset/Change](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-3/)
 
-*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) for middleware and method routing and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
+Also check them out on [dev.to](https://dev.to/hoangvvo).
 
-The project is designed to as simple as possible for the purpose of learning. Due to its simplicity, aspects such as security must be reconsidered before being pushed to production.
+*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
 
-### Dependencies
+The project is designed to **as simple as possible** for the learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **pushed to production**.
+
+<h3 align="center">Dependencies</h3>
 
 This project uses the following dependencies:
 
@@ -66,7 +86,7 @@ This project uses the following dependencies:
 - `cloudinary` - optional, **only if** you are using [Cloudinary](https://cloudinary.com) for image upload.
 - `@sendgrid/mail` - optional, **only if** you are using [SendGrid](https://sendgrid.com/) to send emails.
 
-### Environmental variables
+<h3 align="center">Environmental variables</h3>
 
 The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) and thus should not be used in front-end codebase.
 
@@ -76,11 +96,10 @@ Required environmental variables in this project include:
 - `process.env.EMAIL_FROM` The email address to send your emails from.
 - `process.env.DB_NAME` The name of the MongoDB database to be used.
 - `process.env.WEB_URI` The *URL* of your web.
-- `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration "Cloudinary Configuration").
+- `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
 - `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
-- `process.env.SENDGRID_TEMPLATEID_EMAILVERIFY` (optional, Sendgrid **only**) SendGrid Email Template to use.
 
-### Development
+<h3 align="center">Development</h3>
 
 Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
 
@@ -92,10 +111,20 @@ I include my own MongoDB, Cloudinary, SendGrid environment variables in [.env.ex
 
 In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
 
-## Contributing
+<h2 align="center">Contributing</h2>
 
-Please see my [contributing.md](contributing.md).
+<div align="center">
+  
+Please see my [contributing.md](CONTRIBUTING.md).
 
-## License
+</div>
 
-[MIT](LICENSE)
+<h2 align="center">
+  License
+</h2>
+
+<div align="center">
+  
+  [MIT](LICENSE)
+  
+</div>
