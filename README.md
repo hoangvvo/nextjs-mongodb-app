@@ -8,7 +8,7 @@
 
 A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/)
 
-:rocket: [Check out the demo](https://nextjs-mongodb-app.hoangvvo.now.sh/)
+:rocket: [Check out the demo](https://nextjs-mongodb.now.sh/)
 
 </div>
 
