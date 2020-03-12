@@ -9,7 +9,7 @@
       "SENDGRID_API_KEY": "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",
       "EMAIL_FROM": "averyniceguy@nextjs-mongodb-app.hoangvvo.now.sh",
       "WEB_URI": "https://nextjs-mongodb.now.sh",
-      "_": "Consider using Zeit Now Secrets instead."
+      "USING_SECRETS": "Consider using Zeit Now Secrets instead."
     }
   }
 }
