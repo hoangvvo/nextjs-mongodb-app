@@ -30,7 +30,7 @@
     "multer": "^1.4.2",
     "next": "^9.1.7",
     "next-connect": "^0.6.0",
-    "next-session": "^2.2.0",
+    "next-session": "^3.0.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^16.12.0",
