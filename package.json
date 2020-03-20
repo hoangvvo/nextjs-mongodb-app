@@ -36,7 +36,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "sweetalert2": "^9.5.4",
-    "validator": "^12.1.0"
+    "validator": "^13.0.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
