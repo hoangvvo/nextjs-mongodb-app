@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import sgMail from '@sendgrid/mail';
 import nextConnect from 'next-connect';
-import middleware from '../../../../../middlewares/middleware';
+import middleware from '../../../../middlewares/middleware';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
