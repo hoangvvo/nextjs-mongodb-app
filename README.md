@@ -58,9 +58,9 @@ Before getting started, I welcome you to read this [issue](https://github.com/ho
 
 This project accompanies the following posts:
 
-- [How I build a full-fledged app with Next.js and MongoDB Part 1: User authentication](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/)
-- [How I build a full-fledged app with Next.js and MongoDB Part 2: User profile and Profile Picture](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/)
-- [How I build a full-fledged app with Next.js and MongoDB Part 3: Email Verification, Password Reset/Change](https://www.hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-3/)
+- [How I build a full-fledged app with Next.js and MongoDB Part 1: User authentication](https://hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/)
+- [How I build a full-fledged app with Next.js and MongoDB Part 2: User profile and Profile Picture](https://hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/)
+- [How I build a full-fledged app with Next.js and MongoDB Part 3: Email Verification, Password Reset/Change](https://hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-3/)
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 

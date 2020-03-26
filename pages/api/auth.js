@@ -8,7 +8,7 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.post(passport.authenticate('local'), (req, res) => {
-  res.json({ user: extractUser(req.user) });
+  res.json({ user: extractUser(req) });
 });
 
 handler.delete((req, res) => {
