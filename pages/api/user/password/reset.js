@@ -32,7 +32,7 @@ handler.post(async (req, res) => {
     html: `
       <div>
         <p>Hello, ${user.name}</p>
-        <p>Please follow <a href="${process.env.WEB_URI}/forgetpassword/${token}">this link</a> to reset your password.</p>
+        <p>Please follow <a href="${process.env.WEB_URI}/forget-password/${token}">this link</a> to reset your password.</p>
       </div>
       `,
   };
