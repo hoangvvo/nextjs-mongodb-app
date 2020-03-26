@@ -72,13 +72,12 @@ The project is designed to **as simple as possible** for the learning purpose. D
 
 This project uses the following dependencies:
 
-- `next.js` - v9 or above required for **API Routes**.
+- `next.js` - v9.3 or above required for **API Routes** and new [**new data fetching method**](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering).
 - `react` - v16.8 or above required for **react hooks**.
 - `react-dom` - v16.8 or above.
 - `mongodb` - may be replaced by `mongoose`.
 - `passport`, `passport-local` - required after [#39](https://github.com/hoangvvo/nextjs-mongodb-app/pull/39) for authentication
 - `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
-- `isomorphic-unfetch` - optional, may be replaced with any request library.
 - `next-session`, `connect-mongo` - required, may be replaced with any compatible session library (ex. express-session).
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.
