@@ -28,7 +28,7 @@ const LoginPage = () => {
       const userObj = await res.json();
       mutate(userObj);
     } else {
-      setErrorMsg('Incorrect username or password. Try better!');
+      setErrorMsg('Incorrect username or password. Try again!');
     }
   }
 

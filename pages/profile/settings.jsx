@@ -8,7 +8,7 @@ const ProfileSection = () => {
   const [name, setName] = useState(user.name);
   const [bio, setBio] = useState(user.bio);
   const profilePictureRef = React.createRef();
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState({ message: '', isError: false });
 
   useEffect(() => {
     setName(user.name);
@@ -35,9 +35,9 @@ const ProfileSection = () => {
           ...userData.user,
         },
       });
-      setMsg('Profile updated');
+      setMsg({ message: 'Profile updated' });
     } else {
-      setMsg(await res.text());
+      setMsg({ message: await res.text(), isError: true });
     }
   };
 
@@ -57,9 +57,9 @@ const ProfileSection = () => {
     });
 
     if (res.status === 200) {
-      setMsg('Password updated');
+      setMsg({ message: 'Password updated' });
     } else {
-      setMsg(await res.text());
+      setMsg({ message: await res.text(), isError: true });
     }
   };
 
@@ -70,7 +70,7 @@ const ProfileSection = () => {
       </Head>
       <section>
         <h2>Edit Profile</h2>
-        {msg ? <p>{msg}</p> : null}
+        {msg.message ? <p style={{ color: msg.isError ? 'red' : '#0070f3', textAlign: 'center' }}>{msg.message}</p> : null}
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">
             Name
