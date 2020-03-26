@@ -73,6 +73,7 @@ This project uses the following dependencies:
 - `next.js` - v9.3 or above required for **API Routes** and new [**new data fetching method**](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering).
 - `react` - v16.8 or above required for **react hooks**.
 - `react-dom` - v16.8 or above.
+- `swr` - required for state management
 - `mongodb` - may be replaced by `mongoose`.
 - `passport`, `passport-local` - required after [#39](https://github.com/hoangvvo/nextjs-mongodb-app/pull/39) for authentication
 - `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
