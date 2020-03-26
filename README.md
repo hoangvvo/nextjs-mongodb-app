@@ -64,8 +64,6 @@ This project accompanies the following posts:
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
-*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
-
 The project is designed to **as simple as possible** for the learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **pushed to production**.
 
 <h3 align="center">Dependencies</h3>
