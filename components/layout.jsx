@@ -1,17 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import fetchSwal from '../lib/fetchSwal';
-import { UserContext } from './UserContext';
+import { useUser } from '../lib/hooks';
 
 export default ({ children }) => {
-  const {
-    state: { isLoggedIn },
-    dispatch,
-  } = useContext(UserContext);
-  const handleLogout = (event) => {
-    event.preventDefault();
-    fetchSwal.delete('/api/session').then(data => data.ok !== false && dispatch({ type: 'clear' }));
+  const [user, { mutate }] = useUser();
+  const handleLogout = async () => {
+    await fetch('/api/auth', {
+      method: 'DELETE',
+    });
+    mutate(null);
   };
   return (
     <>
@@ -152,7 +150,7 @@ export default ({ children }) => {
             </a>
           </Link>
           <div>
-            {!isLoggedIn ? (
+            {!user ? (
               <>
                 <Link href="/login">
                   <a>Sign in</a>
@@ -166,8 +164,8 @@ export default ({ children }) => {
                 <Link href="/profile">
                   <a>Profile</a>
                 </Link>
-                {/* eslint-disable-next-line */}
-                <a href="/" role="button" onClick={handleLogout}>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a tabIndex={0} role="button" onClick={handleLogout}>
                   Logout
                 </a>
               </>

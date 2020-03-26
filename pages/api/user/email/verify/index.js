@@ -10,33 +10,26 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.post(async (req, res) => {
-  try {
-    if (!req.user) throw new Error('You need to be logged in.');
-    const token = crypto.randomBytes(32).toString('hex');
-    await req.db.collection('tokens').insertOne({
-      token,
-      userId: req.user._id,
-      type: 'emailVerify',
-      expireAt: new Date(Date.now() + 1000 * 60 * 60 * 24),
-    });
-    const msg = {
-      to: req.user.email,
-      from: process.env.EMAIL_FROM,
-      html: `
+  if (!req.user) { res.json(401).send('you need to be authenticated'); return; }
+  const token = crypto.randomBytes(32).toString('hex');
+  await req.db.collection('tokens').insertOne({
+    token,
+    userId: req.user._id,
+    type: 'emailVerify',
+    expireAt: new Date(Date.now() + 1000 * 60 * 60 * 24),
+  });
+  const msg = {
+    to: req.user.email,
+    from: process.env.EMAIL_FROM,
+    html: `
       <div>
         <p>Hello, ${req.user.name}</p>
         <p>Please follow <a href="${process.env.WEB_URI}/api/user/email/verify/${token}">this link</a> to confirm your email.</p>
       </div>
       `,
-    };
-    await sgMail.send(msg);
-    res.json({ message: 'An email has been sent to your inbox.' });
-  } catch (error) {
-    res.json({
-      ok: false,
-      message: error.toString(),
-    });
-  }
+  };
+  await sgMail.send(msg);
+  res.end('ok');
 });
 
 export default handler;

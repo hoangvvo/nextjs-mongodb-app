@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import fetch from 'isomorphic-unfetch';
-import fetchSwal from '../../lib/fetchSwal';
-import Layout from '../../components/layout';
+import nextConnect from 'next-connect';
 import redirectTo from '../../lib/redirectTo';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
-  const [password, setPassword] = useState('');
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    fetchSwal
-      .post(`/api/user/password/reset/${token}`, { password })
-      .then(resp => resp.ok !== false && redirectTo('/'));
+    const body = {
+      password: event.currentTarget.password.value,
+      token,
+    };
+
+    const res = await fetch('/api/user/password/reset', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 200) redirectTo('/');
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Forget password</title>
       </Head>
@@ -26,10 +32,9 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
           <form onSubmit={handleSubmit}>
             <div>
               <input
+                name="password"
                 type="password"
                 placeholder="New password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
               />
             </div>
             <button type="submit">Set new password</button>
@@ -38,16 +43,23 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       ) : (
         <p>This link may have been expired</p>
       )}
-    </Layout>
+    </>
   );
 };
 
-ResetPasswordTokenPage.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
+  // eslint-disable-next-line global-require
+  const database = require('../../middlewares/database');
+  const handler = nextConnect();
+  handler.use(database);
   const { token } = ctx.query;
-  const valid = await fetch(`${process.env.WEB_URI}/api/user/password/reset/${token}`, { method: 'POST' })
-    .then(res => res.text())
-    .then(bol => bol === 'true');
-  return { token, valid };
-};
+
+  const tokenDoc = await ctx.req.db.collection('tokens').findOne({
+    token: ctx.req.query.token,
+    type: 'passwordReset',
+  });
+
+  return { props: { token, valid: !!tokenDoc } };
+}
 
 export default ResetPasswordTokenPage;

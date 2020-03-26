@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import fetchSwal from '../../lib/fetchSwal';
-import Layout from '../../components/layout';
 import redirectTo from '../../lib/redirectTo';
 
 const ForgetPasswordPage = () => {
-  const [email, setEmail] = useState();
+  async function handleSubmit(e) {
+    e.preventDefault(e);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    fetchSwal.post('/api/user/password/reset', { email }).then(resp => resp.ok !== false && redirectTo('/'));
+    const body = {
+      email: e.currentTarget.email.value,
+    };
+
+    const res = await fetch('/api/user/password/reset', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 200) redirectTo('/');
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Forget password</title>
       </Head>
@@ -25,13 +32,11 @@ const ForgetPasswordPage = () => {
             id="email"
             type="email"
             placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
           />
         </label>
         <button type="submit">Submit</button>
       </form>
-    </Layout>
+    </>
   );
 };
 
