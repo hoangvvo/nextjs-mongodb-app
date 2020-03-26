@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import redirectTo from '../lib/redirectTo';
+import Router from 'next/router';
 import { useUser } from '../lib/hooks';
 
 const SignupPage = () => {
@@ -8,7 +8,7 @@ const SignupPage = () => {
   const [errorMsg, setErrorMsg] = useState('');
   useEffect(() => {
     // redirect to home if user is authenticated
-    if (user) redirectTo('/');
+    if (user) Router.replace('/');
   }, [user]);
 
   const handleSubmit = async (e) => {

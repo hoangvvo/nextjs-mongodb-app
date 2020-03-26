@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import nextConnect from 'next-connect';
-import redirectTo from '../../lib/redirectTo';
+import Router from 'next/router';
 import database from '../../middlewares/database';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
@@ -18,7 +18,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       body: JSON.stringify(body),
     });
 
-    if (res.status === 200) redirectTo('/');
+    if (res.status === 200) Router.replace('/');
   }
 
   return (

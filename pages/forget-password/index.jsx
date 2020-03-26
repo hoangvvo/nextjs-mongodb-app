@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import redirectTo from '../../lib/redirectTo';
+import Router from 'next/router';
 
 const ForgetPasswordPage = () => {
   async function handleSubmit(e) {
@@ -16,7 +16,7 @@ const ForgetPasswordPage = () => {
       body: JSON.stringify(body),
     });
 
-    if (res.status === 200) redirectTo('/');
+    if (res.status === 200) Router.replace('/');
   }
 
   return (
