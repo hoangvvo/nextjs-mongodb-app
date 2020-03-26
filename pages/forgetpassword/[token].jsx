@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import nextConnect from 'next-connect';
 import redirectTo from '../../lib/redirectTo';
+import database from '../../middlewares/database';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
   async function handleSubmit(event) {
@@ -48,14 +49,13 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 };
 
 export async function getServerSideProps(ctx) {
-  // eslint-disable-next-line global-require
-  const database = require('../../middlewares/database');
   const handler = nextConnect();
   handler.use(database);
+  await handler.apply(ctx.req, ctx.res);
   const { token } = ctx.query;
 
   const tokenDoc = await ctx.req.db.collection('tokens').findOne({
-    token: ctx.req.query.token,
+    token: ctx.query.token,
     type: 'passwordReset',
   });
 
