@@ -26,6 +26,13 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       <Head>
         <title>Forget password</title>
       </Head>
+      <style jsx>
+        {`
+        p {
+          text-align: center;
+        }
+      `}
+      </style>
       <h2>Forget password</h2>
       {valid ? (
         <>

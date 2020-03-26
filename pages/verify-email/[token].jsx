@@ -9,6 +9,13 @@ export default function EmailVerifyPage({ success }) {
       <Head>
         <title>Sign up</title>
       </Head>
+      <style jsx>
+        {`
+        p {
+          text-align: center;
+        }
+      `}
+      </style>
       <p>{success ? 'Thank you for verifying your email address. You may close this page.' : 'This link may have been expired.'}</p>
     </>
   );
