@@ -64,21 +64,19 @@ This project accompanies the following posts:
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
-*Note*: **Part 1** and **Part 2** are written without [next-connect](https://www.npmjs.com/package/next-connect) and only apply to commits before [db910c2](https://github.com/hoangvvo/nextjs-mongodb-app/tree/db910c259adb96494156b467834c65075ca90714).
-
 The project is designed to **as simple as possible** for the learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **pushed to production**.
 
 <h3 align="center">Dependencies</h3>
 
 This project uses the following dependencies:
 
-- `next.js` - v9 or above required for **API Routes**.
+- `next.js` - v9.3 or above required for **API Routes** and new [**new data fetching method**](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering).
 - `react` - v16.8 or above required for **react hooks**.
 - `react-dom` - v16.8 or above.
+- `swr` - required for state management
 - `mongodb` - may be replaced by `mongoose`.
 - `passport`, `passport-local` - required after [#39](https://github.com/hoangvvo/nextjs-mongodb-app/pull/39) for authentication
 - `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
-- `isomorphic-unfetch` - optional, may be replaced with any request library.
 - `next-session`, `connect-mongo` - required, may be replaced with any compatible session library (ex. express-session).
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.

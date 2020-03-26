@@ -1,20 +1,14 @@
 import React from 'react';
 import Head from 'next/head';
-import App from 'next/app';
-import { UserContextProvider } from '../components/UserContext';
+import Layout from '../components/layout';
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
-      <UserContextProvider>
-        <Head>
-          <title>Next.js + MongoDB App</title>
-        </Head>
-        <Component {...pageProps} />
-      </UserContextProvider>
-    );
-  }
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <Layout>
+      <Head>
+        <title>Next.js + MongoDB App</title>
+      </Head>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
-
-export default MyApp;

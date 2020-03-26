@@ -1,29 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Layout from '../components/layout';
+import { useUser } from '../lib/hooks';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const router = useRouter();
+  const [errorMsg, setErrorMsg] = useState('');
+  const [user, { mutate }] = useUser();
+  useEffect(() => {
+    // redirect to home if user is authenticated
+    if (user) router.push('/');
+  }, [user]);
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    const body = {
+      username: e.currentTarget.email.value,
+      password: e.currentTarget.password.value,
+    };
+    const res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (res.status === 200) {
+      const userObj = await res.json();
+      mutate(userObj);
+    } else {
+      setErrorMsg('Incorrect username or password. Try again!');
+    }
+  }
+
   return (
-    <Layout>
+    <>
       <Head>
         <title>Sign in</title>
       </Head>
       <h2>Sign in</h2>
-      <form action="/api/authenticate" method="post">
-        {router && router.query && router.query.fail ? <p style={{ color: 'red' }}>Incorrect email or password</p> : null}
+      <form onSubmit={onSubmit}>
+        {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
         <label htmlFor="email">
           <input
             id="email"
             type="email"
             name="email"
             placeholder="Email address"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
           />
         </label>
         <label htmlFor="password">
@@ -32,8 +54,6 @@ const LoginPage = () => {
             type="password"
             name="password"
             placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
           />
         </label>
         <button type="submit">Sign in</button>
@@ -41,7 +61,7 @@ const LoginPage = () => {
           <a>Forget password</a>
         </Link>
       </form>
-    </Layout>
+    </>
   );
 };
 

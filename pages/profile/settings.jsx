@@ -1,21 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import fetchSwal from '../../lib/fetchSwal';
-import { UserContext } from '../../components/UserContext';
-import Layout from '../../components/layout';
+import { useUser } from '../../lib/hooks';
 
-const ProfileSection = ({
-  user: { name: initialName, bio: initialBio },
-  dispatch,
-}) => {
+const ProfileSection = () => {
+  const [user, { mutate }] = useUser();
   const [isUpdating, setIsUpdating] = useState(false);
-  const [name, setName] = useState(initialName);
-  const [bio, setBio] = useState(initialBio);
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [name, setName] = useState(user.name);
+  const [bio, setBio] = useState(user.bio);
   const profilePictureRef = React.createRef();
+  const [msg, setMsg] = useState({ message: '', isError: false });
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    setName(user.name);
+    setBio(user.bio);
+  }, [user]);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (isUpdating) return;
     setIsUpdating(true);
@@ -23,22 +23,44 @@ const ProfileSection = ({
     if (profilePictureRef.current.files[0]) { formData.append('profilePicture', profilePictureRef.current.files[0]); }
     formData.append('name', name);
     formData.append('bio', bio);
-    fetchSwal.patch('/api/user', formData, null, true).then(() => {
-      dispatch({ type: 'fetch' });
-      setIsUpdating(false);
+    const res = await fetch('/api/user', {
+      method: 'PATCH',
+      body: formData,
     });
+    if (res.status === 200) {
+      const userData = await res.json();
+      mutate({
+        user: {
+          ...user,
+          ...userData.user,
+        },
+      });
+      setMsg({ message: 'Profile updated' });
+    } else {
+      setMsg({ message: await res.text(), isError: true });
+    }
   };
 
-  const handleSubmitPasswordChange = (event) => {
-    event.preventDefault();
-    fetchSwal
-      .put('/api/user/password', { oldPassword, newPassword })
-      .then((data) => {
-        if (data.ok !== false) {
-          setNewPassword('');
-          setOldPassword('');
-        }
-      });
+  const handleSubmitPasswordChange = async (e) => {
+    e.preventDefault();
+    const body = {
+      oldPassword: e.currentTarget.oldPassword.value,
+      newPassword: e.currentTarget.newPassword.value,
+    };
+    e.currentTarget.oldPassword.value = '';
+    e.currentTarget.newPassword.value = '';
+
+    const res = await fetch('/api/user/password', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 200) {
+      setMsg({ message: 'Password updated' });
+    } else {
+      setMsg({ message: await res.text(), isError: true });
+    }
   };
 
   return (
@@ -48,12 +70,14 @@ const ProfileSection = ({
       </Head>
       <section>
         <h2>Edit Profile</h2>
+        {msg.message ? <p style={{ color: msg.isError ? 'red' : '#0070f3', textAlign: 'center' }}>{msg.message}</p> : null}
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">
             Name
             <input
               required
               id="name"
+              name="name"
               type="text"
               placeholder="Your name"
               value={name}
@@ -64,6 +88,7 @@ const ProfileSection = ({
             Bio
             <textarea
               id="bio"
+              name="bio"
               type="text"
               placeholder="Bio"
               value={bio}
@@ -87,9 +112,8 @@ const ProfileSection = ({
             Old Password
             <input
               type="password"
+              name="oldPassword"
               id="oldpassword"
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
               required
             />
           </label>
@@ -97,9 +121,8 @@ const ProfileSection = ({
             New Password
             <input
               type="password"
+              name="newPassword"
               id="newpassword"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
               required
             />
           </label>
@@ -111,23 +134,20 @@ const ProfileSection = ({
 };
 
 const SettingPage = () => {
-  const {
-    state: { isLoggedIn, user },
-    dispatch,
-  } = useContext(UserContext);
+  const [user] = useUser();
 
-  if (!isLoggedIn) {
+  if (!user) {
     return (
-      <Layout>
+      <>
         <p>Please sign in</p>
-      </Layout>
+      </>
     );
   }
   return (
-    <Layout>
+    <>
       <h1>Settings</h1>
-      <ProfileSection user={user} dispatch={dispatch} />
-    </Layout>
+      <ProfileSection user={user} />
+    </>
   );
 };
 

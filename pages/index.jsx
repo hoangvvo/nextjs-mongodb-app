@@ -1,16 +1,11 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../components/UserContext';
-import Layout from '../components/layout';
+import React from 'react';
+import { useUser } from '../lib/hooks';
 
 const IndexPage = () => {
-  const {
-    state: {
-      isLoggedIn,
-      user: { name },
-    },
-  } = useContext(UserContext);
+  const [user] = useUser();
+
   return (
-    <Layout>
+    <>
       <style jsx>
         {`
           p {
@@ -22,12 +17,13 @@ const IndexPage = () => {
       <div>
         <h2>
           Hello,
-          {isLoggedIn ? name : 'stranger'}
+          {' '}
+          {user ? user.name : 'stranger'}
           !
         </h2>
         <p>Have a wonderful day.</p>
       </div>
-    </Layout>
+    </>
   );
 };
 

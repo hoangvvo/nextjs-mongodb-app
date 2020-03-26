@@ -1,33 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import fetchSwal from '../../lib/fetchSwal';
-import { UserContext } from '../../components/UserContext';
-import Layout from '../../components/layout';
+import { useUser } from '../../lib/hooks';
 
 const ProfilePage = () => {
+  const [user] = useUser();
   const {
-    state: {
-      isLoggedIn,
-      user: {
-        name, email, bio, profilePicture, emailVerified,
-      },
-    },
-  } = useContext(UserContext);
+    name, email, bio, profilePicture, emailVerified,
+  } = user || {};
 
-  function sendVerificationEmail() {
-    fetchSwal.post('/api/user/email/verify');
+  async function sendVerificationEmail() {
+    await fetch('/api/user/email/verify', {
+      method: 'POST',
+    });
   }
 
-  if (!isLoggedIn) {
+  if (!user) {
     return (
-      <Layout>
-        <p>Please sign in</p>
-      </Layout>
+      <p>Please sign in</p>
     );
   }
   return (
-    <Layout>
+    <>
       <style jsx>
         {`
           h2 {
@@ -92,7 +86,7 @@ const ProfilePage = () => {
           </p>
         </section>
       </div>
-    </Layout>
+    </>
   );
 };
 
