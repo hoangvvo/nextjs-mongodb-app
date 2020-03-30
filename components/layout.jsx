@@ -189,14 +189,14 @@ export default ({ children }) => {
           </span>
           , and a keyboard by
           {' '}
-          <a href="https://www.hoangvvo.com/">Hoang Vo</a>
-.
+          <a href="https://hoangvvo.com/">Hoang Vo</a>
+          .
         </p>
         <p>
           Source code is on
           {' '}
           <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
-.
+          .
         </p>
       </footer>
     </>

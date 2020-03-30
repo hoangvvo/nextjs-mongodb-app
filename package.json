@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/hoangvvo/nextjs-mongodb-app.git"
   },
-  "author": "Hoang Vo (https://www.hoangvvo.com)",
+  "author": "Hoang Vo (https://hoangvvo.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hoangvvo/nextjs-mongodb-app/issues"

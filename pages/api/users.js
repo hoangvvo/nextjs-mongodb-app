@@ -32,7 +32,7 @@ handler.post(async (req, res) => {
   req.logIn(user, (err) => {
     if (err) throw err;
     res.status(201).json({
-      user: extractUser(req.user),
+      user: extractUser(req),
     });
   });
 });
