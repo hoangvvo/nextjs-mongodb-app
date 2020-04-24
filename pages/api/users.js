@@ -22,6 +22,7 @@ handler.post(async (req, res) => {
   }
   if ((await req.db.collection('users').countDocuments({ email })) > 0) {
     res.status(403).send('The email has already been used.');
+    return;
   }
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await req.db
