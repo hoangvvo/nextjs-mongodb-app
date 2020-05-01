@@ -57,7 +57,7 @@ const LoginPage = () => {
           />
         </label>
         <button type="submit">Sign in</button>
-        <Link href="/forgetpassword">
+        <Link href="/forget-password">
           <a>Forget password</a>
         </Link>
       </form>
