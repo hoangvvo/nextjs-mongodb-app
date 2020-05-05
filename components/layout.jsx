@@ -161,7 +161,7 @@ export default ({ children }) => {
               </>
             ) : (
               <>
-                <Link href="/profile">
+                <Link href="/user/[userId]" as={`/user/${user._id}`}>
                   <a>Profile</a>
                 </Link>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
