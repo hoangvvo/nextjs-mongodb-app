@@ -46,6 +46,16 @@ A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and
 
 </div>
 
+<h3 align="center">:eyes: Users and social</h3>
+
+<div align="center">
+
+- [x] Other user profile
+- [ ] Posting
+- [ ] PM?
+
+</div>
+
 <div align="center">
   
 <sup>Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup>
