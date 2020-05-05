@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Error from 'next/error';
 import middleware from '../../../middlewares/middleware';
+import { useCurrentUser } from '../../../lib/hooks';
 import { getUser } from '../../../lib/db';
 
 export default function UserPage({ user }) {
@@ -10,6 +11,8 @@ export default function UserPage({ user }) {
   const {
     name, email, bio, profilePicture,
   } = user || {};
+  const [currentUser] = useCurrentUser();
+  const isCurrentUser = currentUser?._id === user._id;
   return (
     <>
       <style jsx>
@@ -51,9 +54,11 @@ export default function UserPage({ user }) {
         <section>
           <div>
             <h2>{name}</h2>
-            <Link href="/profile/settings">
+            {isCurrentUser && (
+            <Link href="/settings">
               <button type="button">Edit</button>
             </Link>
+            )}
           </div>
           Bio
           <p>{bio}</p>
