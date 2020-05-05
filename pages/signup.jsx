@@ -66,6 +66,10 @@ const SignupPage = () => {
           </label>
           <button type="submit">Sign up</button>
         </form>
+        <p style={{ color: '#777', textAlign: 'center' }}>
+          Note: The database is public. For your privacy,
+          please avoid using your personal, work email.
+        </p>
       </div>
     </>
   );
