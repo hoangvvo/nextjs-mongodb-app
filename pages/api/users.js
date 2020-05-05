@@ -27,12 +27,14 @@ handler.post(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await req.db
     .collection('users')
-    .insertOne({ email, password: hashedPassword, name })
+    .insertOne({
+      email, password: hashedPassword, name, emailVerified: false, bio: '', profilePicture: null,
+    })
     .then(({ ops }) => ops[0]);
   req.logIn(user, (err) => {
     if (err) throw err;
     res.status(201).json({
-      user: extractUser(req.user),
+      user: extractUser(req),
     });
   });
 });

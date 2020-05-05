@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useUser } from '../lib/hooks';
+import { useCurrentUser } from '../lib/hooks';
 
 const SignupPage = () => {
-  const [user, { mutate }] = useUser();
+  const [user, { mutate }] = useCurrentUser();
   const [errorMsg, setErrorMsg] = useState('');
   useEffect(() => {
     // redirect to home if user is authenticated
@@ -66,6 +66,10 @@ const SignupPage = () => {
           </label>
           <button type="submit">Sign up</button>
         </form>
+        <p style={{ color: '#777', textAlign: 'center' }}>
+          Note: The database is public. For your privacy,
+          please avoid using your personal, work email.
+        </p>
       </div>
     </>
   );

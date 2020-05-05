@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '../lib/hooks';
+import { useCurrentUser } from '../lib/hooks';
 
 export default ({ children }) => {
-  const [user, { mutate }] = useUser();
+  const [user, { mutate }] = useCurrentUser();
   const handleLogout = async () => {
     await fetch('/api/auth', {
       method: 'DELETE',
@@ -161,7 +161,7 @@ export default ({ children }) => {
               </>
             ) : (
               <>
-                <Link href="/profile">
+                <Link href="/user/[userId]" as={`/user/${user._id}`}>
                   <a>Profile</a>
                 </Link>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -189,14 +189,14 @@ export default ({ children }) => {
           </span>
           , and a keyboard by
           {' '}
-          <a href="https://www.hoangvvo.com/">Hoang Vo</a>
-.
+          <a href="https://hoangvvo.com/">Hoang Vo</a>
+          .
         </p>
         <p>
           Source code is on
           {' '}
           <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
-.
+          .
         </p>
       </footer>
     </>

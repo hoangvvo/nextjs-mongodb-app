@@ -46,6 +46,16 @@ A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and
 
 </div>
 
+<h3 align="center">:eyes: Users and social</h3>
+
+<div align="center">
+
+- [x] Other user profile
+- [ ] Posting
+- [ ] PM?
+
+</div>
+
 <div align="center">
   
 <sup>Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup>
@@ -100,8 +110,6 @@ Required environmental variables in this project include:
 <h3 align="center">Development</h3>
 
 Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
-
-**Styles (CSS):** This project does not contain any stylesheets, and no component has classes. To remove the style, simply remove all `<style jsx>` and `<style jsx global>` tags.
 
 #### `.env`
 

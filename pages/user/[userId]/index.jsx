@@ -1,25 +1,18 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '../../lib/hooks';
+import Error from 'next/error';
+import middleware from '../../../middlewares/middleware';
+import { useCurrentUser } from '../../../lib/hooks';
+import { getUser } from '../../../lib/db';
 
-const ProfilePage = () => {
-  const [user] = useUser();
+export default function UserPage({ user }) {
+  if (!user) return <Error statusCode={404} />;
   const {
-    name, email, bio, profilePicture, emailVerified,
+    name, email, bio, profilePicture,
   } = user || {};
-
-  async function sendVerificationEmail() {
-    await fetch('/api/user/email/verify', {
-      method: 'POST',
-    });
-  }
-
-  if (!user) {
-    return (
-      <p>Please sign in</p>
-    );
-  }
+  const [currentUser] = useCurrentUser();
+  const isCurrentUser = currentUser?._id === user._id;
   return (
     <>
       <style jsx>
@@ -57,37 +50,35 @@ const ProfilePage = () => {
         <title>{name}</title>
       </Head>
       <div>
-        {profilePicture ? (
-          <img src={profilePicture} width="256" height="256" alt={name} />
-        ) : null}
+        <img src={profilePicture} width="256" height="256" alt={name} />
         <section>
           <div>
             <h2>{name}</h2>
-            <Link href="/profile/settings">
+            {isCurrentUser && (
+            <Link href="/settings">
               <button type="button">Edit</button>
             </Link>
+            )}
           </div>
           Bio
           <p>{bio}</p>
           Email
           <p>
             {email}
-            {!emailVerified ? (
-              <>
-                {' '}
-                unverified
-                {' '}
-                {/* eslint-disable-next-line */}
-                <a role="button" onClick={sendVerificationEmail}>
-                  Send verification email
-                </a>
-              </>
-            ) : null}
           </p>
         </section>
       </div>
     </>
   );
-};
+}
 
-export default ProfilePage;
+export async function getServerSideProps(context) {
+  await middleware.apply(context.req, context.res);
+  const user = await getUser(context.req, context.params.userId);
+  if (!user) context.res.statusCode = 404;
+  return {
+    props: {
+      user,
+    }, // will be passed to the page component as props
+  };
+}
