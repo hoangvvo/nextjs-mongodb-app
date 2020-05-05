@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '../lib/hooks';
+import { useCurrentUser } from '../lib/hooks';
 
 export default ({ children }) => {
-  const [user, { mutate }] = useUser();
+  const [user, { mutate }] = useCurrentUser();
   const handleLogout = async () => {
     await fetch('/api/auth', {
       method: 'DELETE',

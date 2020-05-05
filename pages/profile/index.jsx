@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '../../lib/hooks';
+import { useCurrentUser } from '../../lib/hooks';
 
 const ProfilePage = () => {
-  const [user] = useUser();
+  const [user] = useCurrentUser();
   const {
     name, email, bio, profilePicture, emailVerified,
   } = user || {};

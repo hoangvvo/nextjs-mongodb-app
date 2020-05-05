@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
-import { useUser } from '../../lib/hooks';
+import { useCurrentUser } from '../../lib/hooks';
 
 const ProfileSection = () => {
-  const [user, { mutate }] = useUser();
+  const [user, { mutate }] = useCurrentUser();
   const [isUpdating, setIsUpdating] = useState(false);
   const nameRef = useRef();
   const bioRef = useRef();
@@ -132,7 +132,7 @@ const ProfileSection = () => {
 };
 
 const SettingPage = () => {
-  const [user] = useUser();
+  const [user] = useCurrentUser();
 
   if (!user) {
     return (
