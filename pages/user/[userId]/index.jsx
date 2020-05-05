@@ -47,9 +47,7 @@ export default function UserPage({ user }) {
         <title>{name}</title>
       </Head>
       <div>
-        {profilePicture ? (
-          <img src={profilePicture} width="256" height="256" alt={name} />
-        ) : null}
+        <img src={profilePicture} width="256" height="256" alt={name} />
         <section>
           <div>
             <h2>{name}</h2>
