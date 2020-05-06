@@ -2,6 +2,7 @@ import nextConnect from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 import bcrypt from 'bcryptjs';
+import { nanoid } from 'nanoid';
 import middleware from '../../middlewares/middleware';
 import { extractUser } from '../../lib/api-helpers';
 
@@ -28,7 +29,13 @@ handler.post(async (req, res) => {
   const user = await req.db
     .collection('users')
     .insertOne({
-      email, password: hashedPassword, name, emailVerified: false, bio: '', profilePicture: null,
+      _id: nanoid(12),
+      email,
+      password: hashedPassword,
+      name,
+      emailVerified: false,
+      bio: '',
+      profilePicture: null,
     })
     .then(({ ops }) => ops[0]);
   req.logIn(user, (err) => {
