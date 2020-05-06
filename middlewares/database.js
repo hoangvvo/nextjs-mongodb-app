@@ -8,7 +8,7 @@ const client = new MongoClient(process.env.MONGODB_URI, {
 export async function setUpDb(db) {
   db
     .collection('tokens')
-    .createIndex('expireAt', { expireAfterSeconds: 0 });
+    .createIndex({ expireAt: -1 }, { expireAfterSeconds: 0 });
   db.collection('posts').createIndex({ createdAt: -1 });
   db.collection('users').createIndex({ email: 1 }, { unique: true });
 }
