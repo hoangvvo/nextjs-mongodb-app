@@ -1,8 +1,11 @@
 import React from 'react';
 import useSWR, { useSWRPages } from 'swr';
+import Link from 'next/link';
+import { useUser } from '../../lib/hooks';
 import fetcher from '../../lib/fetch';
 
 function Post({ post }) {
+  const user = useUser(post.creatorId);
   return (
     <>
       <style jsx>
@@ -22,6 +25,14 @@ function Post({ post }) {
         `}
       </style>
       <div>
+        {user && (
+          <Link href="/user/[userId]" as={`/user/${user._id}`}>
+            <a style={{ display: 'flex', alignItems: 'center' }}>
+              <img width="27" height="27" style={{ borderRadius: '50%', objectFit: 'cover', marginRight: '0.3rem' }} src={user.profilePicture} alt={user.name} />
+              <b>{user.name}</b>
+            </a>
+          </Link>
+        )}
         <p>
           {post.content}
         </p>
@@ -31,14 +42,14 @@ function Post({ post }) {
   );
 }
 
-export const usePostPages = () => {
-  const pageKey = 'post-pages';
+export const usePostPages = ({ creatorId } = {}) => {
+  const pageKey = `post-pages-${creatorId || 'all'}`;
   const limit = 10;
 
   const hookProps = useSWRPages(
     pageKey,
     ({ offset, withSWR }) => {
-      const { data: { posts } = {} } = withSWR(useSWR(`/api/posts?from=${offset || ''}&limit=${limit}`, fetcher));
+      const { data: { posts } = {} } = withSWR(useSWR(`/api/posts?from=${offset || ''}&limit=${limit}by=${creatorId || ''}`, fetcher));
       if (!posts) return <p>loading</p>;
       return posts.map((post) => <Post key={post._id} post={post} />);
     },
@@ -58,10 +69,10 @@ export const usePostPages = () => {
   return { ...hookProps, revalidate };
 };
 
-export default function Posts() {
+export default function Posts({ creatorId }) {
   const {
     pages, isLoadingMore, isReachingEnd, loadMore,
-  } = usePostPages(10);
+  } = usePostPages({ creatorId });
 
   return (
     <div>
