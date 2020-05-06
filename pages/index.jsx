@@ -14,6 +14,9 @@ const IndexPage = () => {
             text-align: center;
             color: #888;
           }
+          h3 {
+            color: #555;
+          }
         `}
       </style>
       <div style={{ marginBottom: '2rem' }}>
@@ -26,6 +29,11 @@ const IndexPage = () => {
         <p>Have a wonderful day.</p>
       </div>
       <div>
+        <h3>
+          All posts from Web
+          {' '}
+          <span role="img" aria-label="Earth">🌎</span>
+        </h3>
         <PostEditor />
         <Posts />
       </div>

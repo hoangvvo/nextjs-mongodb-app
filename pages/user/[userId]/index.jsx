@@ -30,6 +30,7 @@ export default function UserPage({ user }) {
             border-radius: 50%;
             box-shadow: rgba(0, 0, 0, 0.05) 0 10px 20px 1px;
             margin-right: 1.5rem;
+            background-color: #f3f3f3;
           }
           div {
             color: #777;
