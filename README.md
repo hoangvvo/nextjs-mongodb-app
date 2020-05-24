@@ -51,7 +51,7 @@ A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and
 <div align="center">
 
 - [x] Other user profile
-- [ ] Posting
+- [x] Posting
 - [ ] PM?
 
 </div>
