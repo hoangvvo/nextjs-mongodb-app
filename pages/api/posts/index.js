@@ -9,12 +9,14 @@ handler.use(middleware);
 handler.get(async (req, res) => {
   // Pagination: Fetch posts from before the input date or fetch from newest
   const from = req.query.from ? new Date(req.query.from) : new Date();
+  const creatorId = req.query.by;
   const posts = await req.db
     .collection('posts')
     .find({
       createdAt: {
         $lte: from,
       },
+      ...(creatorId && { creatorId }),
     })
     .sort({ createdAt: -1 })
     .limit(parseInt(req.query.limit, 10) || 10)

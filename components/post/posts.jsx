@@ -49,7 +49,7 @@ export const usePostPages = ({ creatorId } = {}) => {
   const hookProps = useSWRPages(
     pageKey,
     ({ offset, withSWR }) => {
-      const { data: { posts } = {} } = withSWR(useSWR(`/api/posts?from=${offset || ''}&limit=${limit}by=${creatorId || ''}`, fetcher));
+      const { data: { posts } = {} } = withSWR(useSWR(`/api/posts?from=${offset || ''}&limit=${limit}&by=${creatorId || ''}`, fetcher));
       if (!posts) return <p>loading</p>;
       return posts.map((post) => <Post key={post._id} post={post} />);
     },

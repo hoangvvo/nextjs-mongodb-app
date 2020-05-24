@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Error from 'next/error';
 import middleware from '../../../middlewares/middleware';
 import { useCurrentUser } from '../../../lib/hooks';
+import Posts from '../../../components/post/posts';
 import { getUser } from '../../../lib/db';
 
 export default function UserPage({ user }) {
@@ -34,8 +35,6 @@ export default function UserPage({ user }) {
           }
           div {
             color: #777;
-            display: flex;
-            align-items: center;
           }
           p {
             font-family: monospace;
@@ -50,7 +49,7 @@ export default function UserPage({ user }) {
       <Head>
         <title>{name}</title>
       </Head>
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <img src={profilePicture} width="256" height="256" alt={name} />
         <section>
           <div>
@@ -68,6 +67,10 @@ export default function UserPage({ user }) {
             {email}
           </p>
         </section>
+      </div>
+      <div>
+        <h3>My posts</h3>
+        <Posts creatorId={user._id} />
       </div>
     </>
   );
