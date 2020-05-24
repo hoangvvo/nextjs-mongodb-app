@@ -30,7 +30,7 @@ const IndexPage = () => {
       </div>
       <div>
         <h3>
-          All posts from Web
+          All posts from the Web
           {' '}
           <span role="img" aria-label="Earth">🌎</span>
         </h3>

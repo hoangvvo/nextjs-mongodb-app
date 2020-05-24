@@ -31,15 +31,17 @@ export default function PostEditor() {
   }
 
   return (
-    <form onSubmit={hanldeSubmit} style={{ flexDirection: 'row' }} autoComplete="off">
-      <label htmlFor="name">
-        <input
-          name="content"
-          type="text"
-          placeholder="Write something..."
-        />
-      </label>
-      <button type="submit" style={{ marginLeft: '0.5rem' }}>Post</button>
-    </form>
+    <>
+      <form onSubmit={hanldeSubmit} style={{ flexDirection: 'row' }} autoComplete="off">
+        <label htmlFor="name">
+          <input
+            name="content"
+            type="text"
+            placeholder="Write something..."
+          />
+        </label>
+        <button type="submit" style={{ marginLeft: '0.5rem' }}>Post</button>
+      </form>
+    </>
   );
 }
