@@ -28,6 +28,7 @@ export default function PostEditor() {
     });
     // revalidate the `post-pages` key in usePostPages
     revalidate();
+    // Perhaps show a dialog box informing the post has been posted
   }
 
   return (
