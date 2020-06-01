@@ -43,14 +43,14 @@ handler.post(async (req, res) => {
 handler.put(async (req, res) => {
   // password reset
   if (!req.body.password) {
-    req.status(400).send('Password not provided');
+    res.status(400).send('Password not provided');
     return;
   }
   const { value: tokenDoc } = await req.db
     .collection('tokens')
-    .findOneAndDelete({ _id: req.body.token, type: 'passwordReset' });
+    .findOneAndDelete({ token: req.body.token, type: 'passwordReset' });
   if (!tokenDoc) {
-    req.status(403).send('This link may have been expired.');
+    res.status(403).send('This link may have been expired.');
     return;
   }
   const password = await bcrypt.hash(req.body.password, 10);
