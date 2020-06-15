@@ -61,6 +61,8 @@ const LoginPage = () => {
           <a>Forget password</a>
         </Link>
       </form>
+      <a href= '/api/user/facebook'>login with Facebook</a>
+
     </>
   );
 };
