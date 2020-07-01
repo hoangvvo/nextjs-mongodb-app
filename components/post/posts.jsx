@@ -1,5 +1,5 @@
 import React from 'react';
-import useSWR, { useSWRPages } from 'swr';
+import { useSWRInfinite } from 'swr';
 import Link from 'next/link';
 import { useUser } from '../../lib/hooks';
 import fetcher from '../../lib/fetch';
@@ -42,41 +42,35 @@ function Post({ post }) {
   );
 }
 
-export const usePostPages = ({ creatorId } = {}) => {
-  const pageKey = `post-pages-${creatorId || 'all'}`;
-  const limit = 10;
+const PAGE_SIZE = 10;
 
-  const hookProps = useSWRPages(
-    pageKey,
-    ({ offset, withSWR }) => {
-      const { data: { posts } = {} } = withSWR(useSWR(`/api/posts?from=${offset || ''}&limit=${limit}&by=${creatorId || ''}`, fetcher));
-      if (!posts) return <p>loading</p>;
-      return posts.map((post) => <Post key={post._id} post={post} />);
-    },
-    ({ data }) => (data.posts && data.posts.length >= 10
-      ? data.posts[data.posts.length - 1].createdAt // offset by date
-      : null),
-    [],
-  );
+export function usePostPages({ creatorId } = {}) {
+  return useSWRInfinite((index, previousPageData) => {
+    // reached the end
+    if (previousPageData && previousPageData.posts.length === 0) return null;
 
-  function revalidate() {
-    // We do not have any way to revalidate all pages right now
-    // Tracking at https://github.com/zeit/swr/issues/189
+    // first page, previousPageData is null
+    if (index === 0) return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ''}`;
 
-    // TODO: How do we do this?
-  }
-
-  return { ...hookProps, revalidate };
-};
+    // using oldest posts createdAt date as cursor
+    return `/api/posts?from=${previousPageData.posts[previousPageData.posts.length - 1].createdAt}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ''}`;
+  }, fetcher);
+}
 
 export default function Posts({ creatorId }) {
   const {
-    pages, isLoadingMore, isReachingEnd, loadMore,
+    data, error, size, setSize,
   } = usePostPages({ creatorId });
+
+  const posts = data ? data.reduce((acc, val) => [...acc, ...val.posts], []) : [];
+  const isLoadingInitialData = !data && !error;
+  const isLoadingMore = isLoadingInitialData || (data && typeof data[size - 1] === 'undefined');
+  const isEmpty = data?.[0].posts?.length === 0;
+  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.posts.length < PAGE_SIZE);
 
   return (
     <div>
-      {pages}
+      {posts.map((post) => <Post key={post._id} post={post} />)}
       {!isReachingEnd && (
       <button
         type="button"
@@ -84,7 +78,7 @@ export default function Posts({ creatorId }) {
           background: 'transparent',
           color: '#000',
         }}
-        onClick={loadMore}
+        onClick={() => setSize(size + 1)}
         disabled={isReachingEnd || isLoadingMore}
       >
         {isLoadingMore ? '. . .' : 'load more'}

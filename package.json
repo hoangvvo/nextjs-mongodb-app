@@ -35,7 +35,7 @@
     "passport-local": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "swr": "^0.2.0",
+    "swr": "^0.3.0-beta.9",
     "validator": "^13.0.0"
   },
   "devDependencies": {

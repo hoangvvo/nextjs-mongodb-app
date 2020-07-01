@@ -4,7 +4,7 @@ import { usePostPages } from './posts';
 
 export default function PostEditor() {
   const [user] = useCurrentUser();
-  const { revalidate } = usePostPages();
+  const { mutate } = usePostPages();
 
   if (!user) {
     return (
@@ -26,9 +26,8 @@ export default function PostEditor() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    // revalidate the `post-pages` key in usePostPages
-    revalidate();
-    // Perhaps show a dialog box informing the post has been posted
+    // revalidate
+    mutate();
   }
 
   return (
