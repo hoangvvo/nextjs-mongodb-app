@@ -58,12 +58,13 @@ export function usePostPages({ creatorId } = {}) {
 
     // using oldest posts createdAt date as cursor
     // We want to fetch posts which has a datethat is
-    // later (hence the + 1) than the last post's createdAt
+    // before (hence the .getTime() - 1) the last post's createdAt
     const from = new Date(
       new Date(
         previousPageData.posts[previousPageData.posts.length - 1].createdAt,
-      ).getTime + 1,
+      ).getTime() - 1,
     ).toJSON();
+
     return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
       creatorId ? `&by=${creatorId}` : ''
     }`;
