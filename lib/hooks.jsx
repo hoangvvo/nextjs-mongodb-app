@@ -8,6 +8,6 @@ export function useCurrentUser() {
 }
 
 export function useUser(id) {
-  const { data } = useSWR(`/api/users/${id}`, fetcher);
+  const { data } = useSWR(`/api/users/${id}`, fetcher, { revalidateOnFocus: false });
   return data?.user;
 }
