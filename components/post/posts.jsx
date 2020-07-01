@@ -46,6 +46,7 @@ const PAGE_SIZE = 10;
 
 export function usePostPages({ creatorId } = {}) {
   return useSWRInfinite((index, previousPageData) => {
+    console.log(index, previousPageData);
     // reached the end
     if (previousPageData && previousPageData.posts.length === 0) return null;
 
@@ -53,7 +54,8 @@ export function usePostPages({ creatorId } = {}) {
     if (index === 0) return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ''}`;
 
     // using oldest posts createdAt date as cursor
-    return `/api/posts?from=${previousPageData.posts[previousPageData.posts.length - 1].createdAt}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ''}`;
+    const from = previousPageData.posts[previousPageData.posts.length - 1]?.createdAt || '';
+    return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ''}`;
   }, fetcher);
 }
 
