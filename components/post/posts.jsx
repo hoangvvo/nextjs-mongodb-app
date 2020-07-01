@@ -68,7 +68,9 @@ export function usePostPages({ creatorId } = {}) {
     return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
       creatorId ? `&by=${creatorId}` : ''
     }`;
-  }, fetcher);
+  }, fetcher, {
+    refreshInterval: 10000, // Refresh every 10 seconds
+  });
 }
 
 export default function Posts({ creatorId }) {
