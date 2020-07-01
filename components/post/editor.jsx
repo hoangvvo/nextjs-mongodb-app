@@ -1,10 +1,8 @@
 import React from 'react';
 import { useCurrentUser } from '../../lib/hooks';
-import { usePostPages } from './posts';
 
 export default function PostEditor() {
   const [user] = useCurrentUser();
-  const { mutate } = usePostPages();
 
   if (!user) {
     return (
@@ -26,8 +24,6 @@ export default function PostEditor() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    // revalidate
-    mutate();
   }
 
   return (

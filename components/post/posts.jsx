@@ -46,16 +46,27 @@ const PAGE_SIZE = 10;
 
 export function usePostPages({ creatorId } = {}) {
   return useSWRInfinite((index, previousPageData) => {
-    console.log(index, previousPageData);
     // reached the end
     if (previousPageData && previousPageData.posts.length === 0) return null;
 
     // first page, previousPageData is null
-    if (index === 0) return `/api/posts?limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ''}`;
+    if (index === 0) {
+      return `/api/posts?limit=${PAGE_SIZE}${
+        creatorId ? `&by=${creatorId}` : ''
+      }`;
+    }
 
     // using oldest posts createdAt date as cursor
-    const from = previousPageData.posts[previousPageData.posts.length - 1]?.createdAt || '';
-    return `/api/posts?from=${from}&limit=${PAGE_SIZE}${creatorId ? `&by=${creatorId}` : ''}`;
+    // We want to fetch posts which has a datethat is
+    // later (hence the + 1) than the last post's createdAt
+    const from = new Date(
+      new Date(
+        previousPageData.posts[previousPageData.posts.length - 1].createdAt,
+      ).getTime + 1,
+    ).toJSON();
+    return `/api/posts?from=${from}&limit=${PAGE_SIZE}${
+      creatorId ? `&by=${creatorId}` : ''
+    }`;
   }, fetcher);
 }
 
