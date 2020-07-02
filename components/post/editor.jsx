@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCurrentUser } from '../../lib/hooks';
-import { usePostPages } from './posts';
 
 export default function PostEditor() {
   const [user] = useCurrentUser();
-  const { revalidate } = usePostPages();
+
+  const [msg, setMsg] = useState(null);
 
   if (!user) {
     return (
@@ -21,24 +21,28 @@ export default function PostEditor() {
     };
     if (!e.currentTarget.content.value) return;
     e.currentTarget.content.value = '';
-    await fetch('/api/posts', {
+    const res = await fetch('/api/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    // revalidate the `post-pages` key in usePostPages
-    revalidate();
-    // Perhaps show a dialog box informing the post has been posted
+    if (res.ok) {
+      setMsg('Posted!');
+      setTimeout(() => setMsg(null), 5000);
+    }
   }
 
   return (
     <>
+      <p style={{ color: '#0070f3', textAlign: 'center' }}>
+        {msg}
+      </p>
       <form onSubmit={hanldeSubmit} style={{ flexDirection: 'row' }} autoComplete="off">
         <label htmlFor="name">
           <input
             name="content"
             type="text"
-            placeholder="Write something..."
+            placeholder="Say something, I'm giving up on you..."
           />
         </label>
         <button type="submit" style={{ marginLeft: '0.5rem' }}>Post</button>
