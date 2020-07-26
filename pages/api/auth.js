@@ -1,7 +1,7 @@
 import nextConnect from 'next-connect';
-import middleware from '../../middlewares/middleware';
-import passport from '../../lib/passport';
-import { extractUser } from '../../lib/api-helpers';
+import middleware from 'middlewares/middleware';
+import passport from 'lib/passport';
+import { extractUser } from 'lib/api-helpers';
 
 const handler = nextConnect();
 

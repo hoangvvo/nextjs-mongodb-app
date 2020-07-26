@@ -1,8 +1,8 @@
 import nextConnect from 'next-connect';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
-import middleware from '../../../middlewares/middleware';
-import { extractUser } from '../../../lib/api-helpers';
+import middleware from 'middlewares/middleware';
+import { extractUser } from 'lib/api-helpers';
 
 const upload = multer({ dest: '/tmp' });
 const handler = nextConnect();

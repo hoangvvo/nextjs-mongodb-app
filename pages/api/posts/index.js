@@ -1,6 +1,6 @@
 import nextConnect from 'next-connect';
 import { nanoid } from 'nanoid';
-import middleware from '../../../middlewares/middleware';
+import middleware from 'middlewares/middleware';
 
 const handler = nextConnect();
 

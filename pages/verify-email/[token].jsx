@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import nextConnect from 'next-connect';
-import database from '../../middlewares/database';
+import database from 'middlewares/database';
 
 export default function EmailVerifyPage({ success }) {
   return (

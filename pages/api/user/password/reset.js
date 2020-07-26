@@ -2,7 +2,7 @@ import sgMail from '@sendgrid/mail';
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import nextConnect from 'next-connect';
-import database from '../../../../middlewares/database';
+import database from 'middlewares/database';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 

@@ -1,6 +1,6 @@
 import nextConnect from 'next-connect';
 import bcrypt from 'bcryptjs';
-import middleware from '../../../../middlewares/middleware';
+import middleware from 'middlewares/middleware';
 
 const handler = nextConnect();
 handler.use(middleware);

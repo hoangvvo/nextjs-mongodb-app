@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
-import { useCurrentUser } from '../lib/hooks';
+import { useCurrentUser } from 'lib/hooks';
 
 const ProfileSection = () => {
   const [user, { mutate }] = useCurrentUser();

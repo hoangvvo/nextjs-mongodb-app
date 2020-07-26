@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import nextConnect from 'next-connect';
 import Router from 'next/router';
-import database from '../../middlewares/database';
+import database from 'middlewares/database';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
   async function handleSubmit(event) {

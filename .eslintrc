@@ -5,6 +5,19 @@
     "browser": true,
     "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "."
+        ],
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    }
+  },
   "rules": {
     "no-underscore-dangle": [
       "error",
