@@ -87,7 +87,7 @@ This project uses the following dependencies:
 - `mongodb` - may be replaced by `mongoose`.
 - `passport`, `passport-local` - required after [#39](https://github.com/hoangvvo/nextjs-mongodb-app/pull/39) for authentication
 - `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
-- `next-session`, `connect-mongo` - required, may be replaced with any compatible session library (ex. express-session).
+- `express-session`, `connect-mongo` - required for session, may be replaced with other session libraries such as `cookie-session` or `next-iron-session`.
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.
 - `multer` - may be replaced with any middleware that handles `multipart/form-data`
@@ -104,6 +104,7 @@ Required environmental variables in this project include:
 - `process.env.EMAIL_FROM` The email address to send your emails from.
 - `process.env.DB_NAME` The name of the MongoDB database to be used.
 - `process.env.WEB_URI` The *URL* of your web.
+- `process.env.SESSION_SECRET` (only if you use `express-session`) The secret to be used in `express-session`.
 - `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
 - `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
 
