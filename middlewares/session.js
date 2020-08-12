@@ -1,14 +1,15 @@
-import { session, promisifyStore, expressSession } from 'next-session';
+import session from 'express-session';
 import connectMongo from 'connect-mongo';
 
-const MongoStore = connectMongo(expressSession);
+const MongoStore = connectMongo(session);
 
-export default function (req, res, next) {
+export default function sessionMiddleware(req, res, next) {
   const mongoStore = new MongoStore({
     client: req.dbClient,
     stringify: false,
   });
   return session({
-    store: promisifyStore(mongoStore),
+    secret: process.env.SESSION_SECRET,
+    store: mongoStore,
   })(req, res, next);
 }
