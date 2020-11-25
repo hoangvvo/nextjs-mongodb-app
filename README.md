@@ -6,24 +6,38 @@
   
 [![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/hoangvvo/nextjs-mongodb-app)
 
-An app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/), designed with simplicity for learning and real-world applications in mind.
+An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application, designed with simplicity for learning and real-world applicability in mind.
 
-:rocket: [Check out the demo](https://nextjs-mongodb.now.sh/)
+:rocket: [Check out the demo](https://nextjs-mongodb.now.sh/) :rocket:
 
 </div>
 
 <h2 align="center">Features</h2>
 
-<p align="center">:heavy_check_mark: No Express.js :heavy_check_mark: Serverless ready :heavy_check_mark: API Routes :heavy_check_mark: Middleware</p>
+<div align="center">
 
-<h3 align="center">:lock: Authentication</h3>
+  - 🐇 [Fast](https://github.com/fastify/benchmarks#benchmarks) and light without [bulky](https://bundlephobia.com/result?p=express@4.17.1) Express.js.
+  - ✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and 👻 Serverless ready
+  - 🤠 Good ol' Middleware pattern
+  - 💋 [KISS](https://en.wikipedia.org/wiki/KISS_principle): No fancy stuff like GraphQL, SASS, Redux, etc.
+  - ✍️ Come with explanatory blog posts
+  - ✌️ Can be adapted to any databases besides MongoDB
+
+</div>
+
+<h3 align="center">:lock: Authentication and Account</h3>
 
 <div align="center">
 
 <sup>*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) *with passportjs*: `master`</sup>
 
-- [x] Session
-- [x] Sign up/Sign in/Sign out
+- [x] Session-based authentication
+- [x] Sign up/Sign in/Sign out API
+- [x] Authentication via email/password
+- [ ] Authentication via OAuth (Google, Facebook, etc.)
+- [x] Email verification
+- [x] Password change
+- [x] Password reset via email
 
 </div>
 
@@ -32,27 +46,16 @@ An app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB*
 <div align="center">
 
 - [x] Profile picture, name, bio, email
-- [x] Edit profile
+- [x] Update user profile
 
 </div>
 
-<h3 align="center">:wrench: Account</h3>
+<h3 align="center">:eyes: Social</h3>
 
 <div align="center">
 
-- [x] Email verification
-- [x] Password change
-- [x] Password reset
-
-</div>
-
-<h3 align="center">:eyes: Users and social</h3>
-
-<div align="center">
-
-- [x] Other user profile
-- [x] Posting
-- [ ] PM?
+- [x] View others' profiles and posts
+- [x] Public postings like Twitter and Facebook
 
 </div>
 
@@ -72,7 +75,7 @@ This project accompanies the following posts:
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
-The project is designed to **as simple as possible** for learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **pushed to production**.
+The project is designed to **as simple as possible** for learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **used in production**.
 
 <h3 align="center">Dependencies</h3>
 
@@ -94,17 +97,17 @@ This project uses the following dependencies:
 
 <h3 align="center">Environmental variables</h3>
 
-The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) and thus should not be used in front-end codebase.
+The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration)
 
-Required environmental variables in this project include:
+Environmental variables in this project include:
 
-- `process.env.MONGODB_URI` The MongoDB Connection String (with credentials)
-- `process.env.EMAIL_FROM` The email address to send your emails from.
-- `process.env.DB_NAME` The name of the MongoDB database to be used.
-- `process.env.WEB_URI` The *URL* of your web.
-- `process.env.SESSION_SECRET` (only if you use `express-session`) The secret to be used in `express-session`.
-- `process.env.CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
-- `process.env.SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
+- `MONGODB_URI` The MongoDB Connection String (with credentials)
+- `EMAIL_FROM` The email address to send your emails from.
+- `DB_NAME` The name of the MongoDB database to be used.
+- `WEB_URI` The *URL* of your web.
+- `SESSION_SECRET` (only if you use `express-session`) The secret to be used in `express-session`.
+- `CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
+- `SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
 
 <h3 align="center">Development</h3>
 
@@ -115,6 +118,14 @@ Start the development server by running `yarn dev` or `npm run dev`. The project
 I include my own environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
 
 In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
+
+<h2 align="center">Deployment</h2>
+
+This project can be deployed [anywhere Next.js can be deployed](https://nextjs.org/docs/deployment). Make sure to set the environment variables using the options provided by your cloud/hosting providers.
+
+After building using `npm run build`, simply start the server using `npm run start`.
+
+You can also deploy this with serverless providers given the correct setup.
 
 <h2 align="center">Contributing</h2>
 
