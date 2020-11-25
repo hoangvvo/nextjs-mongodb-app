@@ -6,7 +6,7 @@
   
 [![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/hoangvvo/nextjs-mongodb-app)
 
-A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/)
+An app made with [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/), designed with simplicity for learning and real-world applications in mind.
 
 :rocket: [Check out the demo](https://nextjs-mongodb.now.sh/)
 
@@ -64,17 +64,15 @@ A full-fledged app made with [**Next.js**](https://github.com/zeit/next.js/) and
 
 <h2 align="center">Guide</h2>
 
-Before getting started, I welcome you to read this [issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues/13) on production readiness. The goal is not to use this project as it, but to implement your own version.
-
 This project accompanies the following posts:
 
-- [How I build a full-fledged app with Next.js and MongoDB Part 1: User authentication](https://hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-1/)
-- [How I build a full-fledged app with Next.js and MongoDB Part 2: User profile and Profile Picture](https://hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-2/)
-- [How I build a full-fledged app with Next.js and MongoDB Part 3: Email Verification, Password Reset/Change](https://hoangvvo.com/blog/full-fledged-app-with-next-js-and-mongodb-part-3/)
+- [User authentication (using Passport.js)](https://hoangvvo.com/blog/next-js-and-mongodb-app-1)
+- [User profile and Profile Picture](https://hoangvvo.com/blog/next-js-and-mongodb-app-2)
+- [Email Verification, Password Reset/Changee](https://hoangvvo.com/blog/next-js-and-mongodb-app-3)
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
-The project is designed to **as simple as possible** for the learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **pushed to production**.
+The project is designed to **as simple as possible** for learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **pushed to production**.
 
 <h3 align="center">Dependencies</h3>
 
@@ -114,7 +112,7 @@ Start the development server by running `yarn dev` or `npm run dev`. The project
 
 #### `.env`
 
-I include my own MongoDB, Cloudinary, SendGrid environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
+I include my own environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
 
 In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
 
