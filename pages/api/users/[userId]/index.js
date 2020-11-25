@@ -6,8 +6,11 @@ const handler = nc();
 
 handler.use(all);
 
+const maxAge = 4 * 60 * 60; // 4 hours
+
 handler.get(async (req, res) => {
   const user = await getUser(req, req.query.userId);
+  res.setHeader('cache-control', `public, max-age=${maxAge}`);
   res.send({ user });
 });
 
