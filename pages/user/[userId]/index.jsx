@@ -5,12 +5,14 @@ import Error from 'next/error';
 import { all } from '@/middlewares/index';
 import { useCurrentUser } from '@/hooks/index';
 import Posts from '@/components/post/posts';
-import { getUser } from '@/lib/db';
+import { extractUser } from '@/lib/api-helpers';
+import { findUserById } from '@/db/index';
+import { defaultProfilePicture } from '@/lib/default';
 
 export default function UserPage({ user }) {
   if (!user) return <Error statusCode={404} />;
   const {
-    name, email, bio, profilePicture,
+    name, email, bio, profilePicture, _id
   } = user || {};
   const [currentUser] = useCurrentUser();
   const isCurrentUser = currentUser?._id === user._id;
@@ -50,7 +52,7 @@ export default function UserPage({ user }) {
         <title>{name}</title>
       </Head>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={profilePicture} width="256" height="256" alt={name} />
+        <img src={profilePicture || defaultProfilePicture(_id)} width="256" height="256" alt={name} />
         <section>
           <div>
             <h2>{name}</h2>
@@ -78,11 +80,7 @@ export default function UserPage({ user }) {
 
 export async function getServerSideProps(context) {
   await all.run(context.req, context.res);
-  const user = await getUser(context.req, context.params.userId);
+  const user = extractUser(await findUserById(context.req.db, context.params.userId));
   if (!user) context.res.statusCode = 404;
-  return {
-    props: {
-      user,
-    }, // will be passed to the page component as props
-  };
+  return { props: { user } };
 }

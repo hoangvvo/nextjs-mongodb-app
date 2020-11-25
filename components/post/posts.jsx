@@ -3,6 +3,7 @@ import { useSWRInfinite } from 'swr';
 import Link from 'next/link';
 import { useUser } from '@/hooks/index';
 import fetcher from '@/lib/fetch';
+import { defaultProfilePicture } from '@/lib/default';
 
 function Post({ post }) {
   const user = useUser(post.creatorId);
@@ -26,9 +27,9 @@ function Post({ post }) {
       </style>
       <div>
         {user && (
-          <Link href="/user/[userId]" as={`/user/${user._id}`}>
+          <Link href={`/user/${user._id}`}>
             <a style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <img width="27" height="27" style={{ borderRadius: '50%', objectFit: 'cover', marginRight: '0.3rem' }} src={user.profilePicture} alt={user.name} />
+              <img width="27" height="27" style={{ borderRadius: '50%', objectFit: 'cover', marginRight: '0.3rem' }} src={user.profilePicture || defaultProfilePicture(user._id)} alt={user.name} />
               <b>{user.name}</b>
             </a>
           </Link>

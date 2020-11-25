@@ -1,26 +1,18 @@
 import nc from 'next-connect';
-import { nanoid } from 'nanoid';
 import { all } from '@/middlewares/index';
+import { getPosts, insertPost } from '@/db/index';
 
 const handler = nc();
 
 handler.use(all);
 
 handler.get(async (req, res) => {
-  // Pagination: Fetch posts from before the input date or fetch from newest
-  const from = req.query.from ? new Date(req.query.from) : new Date();
-  const creatorId = req.query.by;
-  const posts = await req.db
-    .collection('posts')
-    .find({
-      createdAt: {
-        $lte: from,
-      },
-      ...(creatorId && { creatorId }),
-    })
-    .sort({ createdAt: -1 })
-    .limit(parseInt(req.query.limit, 10) || 10)
-    .toArray();
+  const posts = await getPosts(
+    req.db,
+    req.query.from ? new Date(req.query.from) : undefined,
+    req.query.by,
+    req.query.limit ? parseInt(req.query.limit, 10) : undefined,
+  );
   res.send({ posts });
 });
 
@@ -29,19 +21,14 @@ handler.post(async (req, res) => {
     return res.status(401).send('unauthenticated');
   }
 
-  const { content } = req.body;
+  if (!req.body.content) return res.status(400).send('You must write something');
 
-  if (!content) return res.status(400).send('You must write something');
-
-  const post = {
-    _id: nanoid(),
-    content,
-    createdAt: new Date(),
+  const post = await insertPost(req.db, {
+    content: req.body.content,
     creatorId: req.user._id,
-  };
+  });
 
-  await req.db.collection('posts').insertOne(post);
-  return res.send(post);
+  return res.json({ post });
 });
 
 export default handler;

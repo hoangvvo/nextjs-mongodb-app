@@ -1,6 +1,7 @@
 import nc from 'next-connect';
 import bcrypt from 'bcryptjs';
 import { all } from '@/middlewares/index';
+import { updateUserById } from '@/db/index';
 
 const handler = nc();
 handler.use(all);
@@ -12,9 +13,9 @@ handler.put(async (req, res) => {
     res.status(401).send('The password you has entered is incorrect.');
   }
   const password = await bcrypt.hash(newPassword, 10);
-  await req.db
-    .collection('users')
-    .updateOne({ _id: req.user._id }, { $set: { password } });
+
+  await updateUserById(req.db, req.user._id, { password });
+
   res.end('ok');
 });
 

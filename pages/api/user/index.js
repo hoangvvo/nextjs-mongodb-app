@@ -2,6 +2,7 @@ import nc from 'next-connect';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
 import { all } from '@/middlewares/index';
+import { updateUserById } from '@/db/index';
 import { extractUser } from '@/lib/api-helpers';
 
 const upload = multer({ dest: '/tmp' });
@@ -22,7 +23,12 @@ cloudinary.config({
 
 handler.use(all);
 
-handler.get(async (req, res) => res.json({ user: extractUser(req) }));
+handler.get(async (req, res) => {
+  // Filter out password
+  if (!req.user) return res.json({ user: null });
+  const { password, ...u } = req.user;
+  res.json({ user: u });
+});
 
 handler.patch(upload.single('profilePicture'), async (req, res) => {
   if (!req.user) {
@@ -39,17 +45,14 @@ handler.patch(upload.single('profilePicture'), async (req, res) => {
     profilePicture = image.secure_url;
   }
   const { name, bio } = req.body;
-  await req.db.collection('users').updateOne(
-    { _id: req.user._id },
-    {
-      $set: {
-        ...(name && { name }),
-        bio: bio || '',
-        ...(profilePicture && { profilePicture }),
-      },
-    },
-  );
-  res.json({ user: { name, bio } });
+
+  const user = await updateUserById(req.db, req.user._id, {
+    ...(name && { name }),
+    ...(typeof bio === 'string' && { bio }),
+    ...(profilePicture && { profilePicture }),
+  });
+
+  res.json({ user: extractUser(user) });
 });
 
 export const config = {

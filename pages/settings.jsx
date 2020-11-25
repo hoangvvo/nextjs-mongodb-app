@@ -39,6 +39,7 @@ const ProfileSection = () => {
     } else {
       setMsg({ message: await res.text(), isError: true });
     }
+    setIsUpdating(false);
   };
 
   const handleSubmitPasswordChange = async (e) => {
@@ -64,9 +65,14 @@ const ProfileSection = () => {
   };
 
   async function sendVerificationEmail() {
-    await fetch('/api/user/email/verify', {
+    const res = await fetch('/api/user/email/verify', {
       method: 'POST',
     });
+    if (res.status === 200) {
+      setMsg({ message: 'An email has been sent to your mailbox' });
+    } else {
+      setMsg({ message: await res.text(), isError: true });
+    }
   }
 
   return (

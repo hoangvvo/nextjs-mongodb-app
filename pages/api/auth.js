@@ -8,7 +8,7 @@ const handler = nc();
 handler.use(all);
 
 handler.post(passport.authenticate('local'), (req, res) => {
-  res.json({ user: extractUser(req) });
+  res.json({ user: extractUser(req.user) });
 });
 
 handler.delete((req, res) => {

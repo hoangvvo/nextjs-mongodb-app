@@ -2,9 +2,9 @@ import nc from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 import bcrypt from 'bcryptjs';
-import { nanoid } from 'nanoid';
 import { all } from '@/middlewares/index';
 import { extractUser } from '@/lib/api-helpers';
+import { insertUser, findUserByEmail } from '@/db/index';
 
 const handler = nc();
 
@@ -21,27 +21,18 @@ handler.post(async (req, res) => {
     res.status(400).send('Missing field(s)');
     return;
   }
-  if ((await req.db.collection('users').countDocuments({ email })) > 0) {
+  if (await findUserByEmail(req.db, email)) {
     res.status(403).send('The email has already been used.');
     return;
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await req.db
-    .collection('users')
-    .insertOne({
-      _id: nanoid(12),
-      email,
-      password: hashedPassword,
-      name,
-      emailVerified: false,
-      bio: '',
-      profilePicture: null,
-    })
-    .then(({ ops }) => ops[0]);
+  const user = await insertUser(req.db, {
+    email, password: hashedPassword, bio: '', name,
+  });
   req.logIn(user, (err) => {
     if (err) throw err;
     res.status(201).json({
-      user: extractUser(req),
+      user: extractUser(req.user),
     });
   });
 });

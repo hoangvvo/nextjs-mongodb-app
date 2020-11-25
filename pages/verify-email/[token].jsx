@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import nc from 'next-connect';
 import { all } from '@/middlewares/index';
+import { updateUserById, findAndDeleteTokenByIdAndType } from '@/db/index';
 
 export default function EmailVerifyPage({ success }) {
   return (
@@ -27,17 +28,12 @@ export async function getServerSideProps(ctx) {
   await handler.run(ctx.req, ctx.res);
 
   const { token } = ctx.query;
-  const { value: tokenDoc } = await ctx.req.db
-    .collection('tokens')
-    .findOneAndDelete({ token, type: 'emailVerify' });
 
-  if (!tokenDoc) {
-    return { props: { success: false } };
-  }
+  const deletedToken = await findAndDeleteTokenByIdAndType(ctx.req.db, token, 'emailVerify');
 
-  await ctx.req.db
-    .collection('users')
-    .updateOne({ _id: tokenDoc.userId }, { $set: { emailVerified: true } });
+  if (!deletedToken) return { props: { success: false } };
+
+  await updateUserById(ctx.req.db, deletedToken.creatorId, { emailVerified: true });
 
   return { props: { success: true } };
 }

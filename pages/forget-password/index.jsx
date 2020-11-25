@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
-import Router from 'next/router';
 
 const ForgetPasswordPage = () => {
+  const [msg, setMsg] = useState({ message: '', isError: false });
+
   async function handleSubmit(e) {
     e.preventDefault(e);
 
@@ -16,7 +17,11 @@ const ForgetPasswordPage = () => {
       body: JSON.stringify(body),
     });
 
-    if (res.status === 200) Router.replace('/');
+    if (res.status === 200) {
+      setMsg({ message: 'An email has been sent to your mailbox' });
+    } else {
+      setMsg({ message: await res.text(), isError: true });
+    }
   }
 
   return (
@@ -25,6 +30,7 @@ const ForgetPasswordPage = () => {
         <title>Forget password</title>
       </Head>
       <h2>Forget password</h2>
+      {msg.message ? <p style={{ color: msg.isError ? 'red' : '#0070f3', textAlign: 'center' }}>{msg.message}</p> : null}
       <form onSubmit={handleSubmit}>
         <p>Do not worry. Simply enter your email address below.</p>
         <label htmlFor="email">
