@@ -1,10 +1,8 @@
-import sgMail from '@sendgrid/mail';
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import nextConnect from 'next-connect';
+import { sendMail } from '../../../../lib/mail';
 import database from '../../../../middlewares/database';
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const handler = nextConnect();
 
@@ -36,7 +34,7 @@ handler.post(async (req, res) => {
       </div>
       `,
   };
-  await sgMail.send(msg);
+  await sendMail(msg);
   res.end('ok');
 });
 
