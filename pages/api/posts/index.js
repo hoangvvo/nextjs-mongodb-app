@@ -6,6 +6,8 @@ const handler = nc();
 
 handler.use(all);
 
+const maxAge = 1 * 24 * 60 * 60;
+
 handler.get(async (req, res) => {
   const posts = await getPosts(
     req.db,
@@ -13,6 +15,13 @@ handler.get(async (req, res) => {
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined,
   );
+
+  if (req.query.from && posts.length > 0) {
+    // This is safe to cache because from defines
+    //  a concrete range of posts
+    res.setHeader('cache-control', `public, max-age=${maxAge}`);
+  }
+
   res.send({ posts });
 });
 
