@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useCurrentUser } from '../lib/hooks';
+import { useCurrentUser } from '@/hooks/index';
 
 export default function Layout({ children }) {
   const [user, { mutate }] = useCurrentUser();

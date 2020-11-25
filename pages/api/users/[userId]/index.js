@@ -1,11 +1,10 @@
+import nc from 'next-connect';
+import { all } from '@/middlewares/index';
+import { getUser } from '@/lib/db';
 
-import nextConnect from 'next-connect';
-import middleware from '../../../../middlewares/middleware';
-import { getUser } from '../../../../lib/db';
+const handler = nc();
 
-const handler = nextConnect();
-
-handler.use(middleware);
+handler.use(all);
 
 handler.get(async (req, res) => {
   const user = await getUser(req, req.query.userId);

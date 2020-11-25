@@ -2,10 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Error from 'next/error';
-import middleware from '../../../middlewares/middleware';
-import { useCurrentUser } from '../../../lib/hooks';
-import Posts from '../../../components/post/posts';
-import { getUser } from '../../../lib/db';
+import { all } from '@/middlewares/index';
+import { useCurrentUser } from '@/hooks/index';
+import Posts from '@/components/post/posts';
+import { getUser } from '@/lib/db';
 
 export default function UserPage({ user }) {
   if (!user) return <Error statusCode={404} />;
@@ -77,7 +77,7 @@ export default function UserPage({ user }) {
 }
 
 export async function getServerSideProps(context) {
-  await middleware.apply(context.req, context.res);
+  await all.run(context.req, context.res);
   const user = await getUser(context.req, context.params.userId);
   if (!user) context.res.statusCode = 404;
   return {

@@ -1,9 +1,9 @@
-import nextConnect from 'next-connect';
+import nc from 'next-connect';
 import bcrypt from 'bcryptjs';
-import middleware from '../../../../middlewares/middleware';
+import { all } from '@/middlewares/index';
 
-const handler = nextConnect();
-handler.use(middleware);
+const handler = nc();
+handler.use(all);
 
 handler.put(async (req, res) => {
   if (!req.user) { res.json(401).send('you need to be authenticated'); return; }

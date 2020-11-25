@@ -1,11 +1,11 @@
-import nextConnect from 'next-connect';
-import middleware from '../../middlewares/middleware';
-import passport from '../../lib/passport';
-import { extractUser } from '../../lib/api-helpers';
+import nc from 'next-connect';
+import { all } from '@/middlewares/index';
+import passport from 'middlewares/passport';
+import { extractUser } from '@/lib/api-helpers';
 
-const handler = nextConnect();
+const handler = nc();
 
-handler.use(middleware);
+handler.use(all);
 
 handler.post(passport.authenticate('local'), (req, res) => {
   res.json({ user: extractUser(req) });

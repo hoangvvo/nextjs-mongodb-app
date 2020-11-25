@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import nextConnect from 'next-connect';
+import nc from 'next-connect';
 import Router from 'next/router';
-import database from '../../middlewares/database';
+import { database } from '@/middlewares/index';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
   async function handleSubmit(event) {
@@ -56,9 +56,9 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 };
 
 export async function getServerSideProps(ctx) {
-  const handler = nextConnect();
+  const handler = nc();
   handler.use(database);
-  await handler.apply(ctx.req, ctx.res);
+  await handler.run(ctx.req, ctx.res);
   const { token } = ctx.query;
 
   const tokenDoc = await ctx.req.db.collection('tokens').findOne({

@@ -1,11 +1,11 @@
-import nextConnect from 'next-connect';
+import nc from 'next-connect';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
-import middleware from '../../../middlewares/middleware';
-import { extractUser } from '../../../lib/api-helpers';
+import { all } from '@/middlewares/index';
+import { extractUser } from '@/lib/api-helpers';
 
 const upload = multer({ dest: '/tmp' });
-const handler = nextConnect();
+const handler = nc();
 
 /* eslint-disable camelcase */
 const {
@@ -20,7 +20,7 @@ cloudinary.config({
   api_secret,
 });
 
-handler.use(middleware);
+handler.use(all);
 
 handler.get(async (req, res) => res.json({ user: extractUser(req) }));
 

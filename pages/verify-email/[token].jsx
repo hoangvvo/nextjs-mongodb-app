@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import nextConnect from 'next-connect';
-import database from '../../middlewares/database';
+import nc from 'next-connect';
+import { all } from '@/middlewares/index';
 
 export default function EmailVerifyPage({ success }) {
   return (
@@ -22,9 +22,9 @@ export default function EmailVerifyPage({ success }) {
 }
 
 export async function getServerSideProps(ctx) {
-  const handler = nextConnect();
-  handler.use(database);
-  await handler.apply(ctx.req, ctx.res);
+  const handler = nc();
+  handler.use(all);
+  await handler.run(ctx.req, ctx.res);
 
   const { token } = ctx.query;
   const { value: tokenDoc } = await ctx.req.db

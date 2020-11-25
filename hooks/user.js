@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import fetcher from './fetch';
+import fetcher from '@/lib/fetch';
 
 export function useCurrentUser() {
   const { data, mutate } = useSWR('/api/user', fetcher);

@@ -1,11 +1,11 @@
 import crypto from 'crypto';
-import nextConnect from 'next-connect';
-import { sendMail } from '../../../../lib/mail';
-import middleware from '../../../../middlewares/middleware';
+import nc from 'next-connect';
+import { sendMail } from '@/lib/mail';
+import { all } from '@/middlewares/index';
 
-const handler = nextConnect();
+const handler = nc();
 
-handler.use(middleware);
+handler.use(all);
 
 handler.post(async (req, res) => {
   if (!req.user) { res.json(401).send('you need to be authenticated'); return; }

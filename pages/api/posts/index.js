@@ -1,10 +1,10 @@
-import nextConnect from 'next-connect';
+import nc from 'next-connect';
 import { nanoid } from 'nanoid';
-import middleware from '../../../middlewares/middleware';
+import { all } from '@/middlewares/index';
 
-const handler = nextConnect();
+const handler = nc();
 
-handler.use(middleware);
+handler.use(all);
 
 handler.get(async (req, res) => {
   // Pagination: Fetch posts from before the input date or fetch from newest

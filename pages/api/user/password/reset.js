@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
-import nextConnect from 'next-connect';
-import { sendMail } from '../../../../lib/mail';
-import database from '../../../../middlewares/database';
+import nc from 'next-connect';
+import { sendMail } from '@/lib/mail';
+import { database } from '@/middlewares/index';
 
-const handler = nextConnect();
+const handler = nc();
 
 handler.use(database);
 
