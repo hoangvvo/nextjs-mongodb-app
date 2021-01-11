@@ -19,6 +19,7 @@ handler.post(async (req, res) => {
   const msg = {
     to: req.user.email,
     from: process.env.EMAIL_FROM,
+    subject: "Verification Email for ${process.env.WEB_URI}"
     html: `
       <div>
         <p>Hello, ${req.user.name}</p>
