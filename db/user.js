@@ -8,8 +8,9 @@ export async function findUserById(db, userId) {
 }
 
 export async function findUserByEmail(db, email) {
+  email = normalizeEmail(email);
   return db.collection('users').findOne({
-    normalizeEmail(email),
+    email,
   }).then((user) => user || null);
 }
 
