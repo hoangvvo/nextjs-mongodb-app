@@ -11,8 +11,8 @@ const ProfileSection = () => {
   const [msg, setMsg] = useState({ message: '', isError: false });
 
   useEffect(() => {
-    nameRef.current.value = user.name;
-    bioRef.current.value = user.bio;
+    nameRef.current.value = user?.name;
+    bioRef.current.value = user?.bio;
   }, [user]);
 
   const handleSubmit = async (event) => {
@@ -84,7 +84,7 @@ const ProfileSection = () => {
         <h2>Edit Profile</h2>
         {msg.message ? <p style={{ color: msg.isError ? 'red' : '#0070f3', textAlign: 'center' }}>{msg.message}</p> : null}
         <form onSubmit={handleSubmit}>
-          {!user.emailVerified ? (
+          {!user?.emailVerified ? (
             <p>
               Your email has not been verify.
               {' '}
