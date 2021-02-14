@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import normalizeEmail from 'validator/lib/normalizeEmail';
 
 export async function findUserById(db, userId) {
   return db.collection('users').findOne({
@@ -7,6 +8,7 @@ export async function findUserById(db, userId) {
 }
 
 export async function findUserByEmail(db, email) {
+  email = normalizeEmail(email);
   return db.collection('users').findOne({
     email,
   }).then((user) => user || null);
