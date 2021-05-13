@@ -86,7 +86,7 @@ const ProfileSection = () => {
         <form onSubmit={handleSubmit}>
           {!user.emailVerified ? (
             <p>
-              Your email has not been verify.
+              Your email has not been verified.
               {' '}
               {/* eslint-disable-next-line */}
                 <a role="button" onClick={sendVerificationEmail}>
