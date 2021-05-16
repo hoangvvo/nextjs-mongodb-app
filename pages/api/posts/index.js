@@ -1,6 +1,6 @@
-import nc from 'next-connect';
-import { all } from '@/middlewares/index';
-import { getPosts, insertPost } from '@/db/index';
+import nc from "next-connect";
+import { all } from "@/middlewares/index";
+import { editPost, getPosts, insertPost } from "@/db/index";
 
 const handler = nc();
 
@@ -13,24 +13,41 @@ handler.get(async (req, res) => {
     req.db,
     req.query.from ? new Date(req.query.from) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(req.query.limit, 10) : undefined,
+    req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
 
   if (req.query.from && posts.length > 0) {
     // This is safe to cache because from defines
     //  a concrete range of posts
-    res.setHeader('cache-control', `public, max-age=${maxAge}`);
+    res.setHeader("cache-control", `public, max-age=${maxAge}`);
   }
 
   res.send({ posts });
 });
 
-handler.post(async (req, res) => {
+handler.patch(async (req, res) => {
   if (!req.user) {
-    return res.status(401).send('unauthenticated');
+    return res.status(401).send("unauthenticated");
   }
 
-  if (!req.body.content) return res.status(400).send('You must write something');
+  if (!req.body.content)
+    return res.status(400).send("You must write something");
+
+  const post = await editPost(req.db, {
+    content: req.body.content,
+    postId: req.body.postId,
+  });
+
+  return res.json({ post });
+});
+
+handler.post(async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send("unauthenticated");
+  }
+
+  if (!req.body.content)
+    return res.status(400).send("You must write something");
 
   const post = await insertPost(req.db, {
     content: req.body.content,
