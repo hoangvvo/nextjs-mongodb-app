@@ -25,7 +25,6 @@ export async function editPost(db, { content, postId }) {
       {
         $set: {
           content: content,
-          createdAt: new Date(),
         },
       },
       { returnOriginal: false }

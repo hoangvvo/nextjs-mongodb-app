@@ -5,6 +5,7 @@ import { useUser } from "@/hooks/index";
 import fetcher from "@/lib/fetch";
 import { useCurrentUser } from "@/hooks/index";
 import { defaultProfilePicture } from "@/lib/default";
+import PostEditor from "./editor";
 
 function Post({ post }) {
   const [edit, setEdit] = useState(false);
@@ -12,27 +13,12 @@ function Post({ post }) {
   const [msg, setMsg] = useState("");
   const user = useUser(post.creatorId);
   const [currUser] = useCurrentUser();
-  async function hanldeSubmit(e) {
-    e.preventDefault();
-    const body = {
-      content: e.currentTarget.content.value,
-      postId: post._id,
-    };
-    if (!e.currentTarget.content.value) return;
-    const res = await fetch("/api/posts", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (res.ok) {
-      setMsg("Edited!");
-      setTimeout(() => setMsg(null), 1);
-      setContent(body.content);
-      setEdit(false);
-    } else {
-      setTimeout(async () => setMsg(await res.text()), 1);
-    }
-  }
+  const makeEdit = (msg, text) => {
+    setEdit(false);
+    setMsg(msg);
+    setTimeout(() => setMsg(null), 1500);
+    if (text) setContent(text);
+  };
   return (
     <>
       <style jsx>
@@ -51,8 +37,8 @@ function Post({ post }) {
           }
         `}
       </style>
-      <p style={{ color: "#0070f3", textAlign: "center" }}>{msg}</p>
       <div style={{ position: "relative" }}>
+        <p style={{ color: "#0070f3", textAlign: "center" }}>{msg}</p>
         {user && (
           <Link href={`/user/${user._id}`}>
             <a style={{ display: "inline-flex", alignItems: "center" }}>
@@ -72,40 +58,17 @@ function Post({ post }) {
           </Link>
         )}
         {edit === true ? (
-          <>
-            <form
-              onSubmit={hanldeSubmit}
-              onReset={() => {
-                setEdit(false);
-              }}
-              style={{ flexDirection: "row" }}
-              autoComplete="off"
-            >
-              <label htmlFor="name">
-                <input name="content" type="text" defaultValue={post.content} />
-              </label>
-              <button type="submit" style={{ marginLeft: "0.5rem" }}>
-                Update
-              </button>
-              <button
-                name="discard"
-                type="reset"
-                style={{
-                  marginLeft: "0.5rem",
-                  backgroundColor: "white",
-                  border: "1px solid black",
-                  color: "black",
-                }}
-              >
-                Discard
-              </button>
-            </form>
-          </>
+          <PostEditor
+            edit={edit}
+            makeEdit={makeEdit}
+            text={content}
+            Id={post._id}
+          />
         ) : (
           <p>{content}</p>
         )}
         <small>{new Date(post.createdAt).toLocaleString()}</small>
-        {user?._id === currUser?._id && edit === false && (
+        {user?._id === currUser?._id && (
           <button
             className="edit"
             style={{
@@ -116,7 +79,7 @@ function Post({ post }) {
               right: "7px",
             }}
             onClick={() => {
-              setEdit(true);
+              setEdit(!edit);
             }}
           >
             <svg
