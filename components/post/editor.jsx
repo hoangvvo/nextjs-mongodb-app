@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useCurrentUser } from "@/hooks/index";
+import React, { useState } from 'react';
+import { useCurrentUser } from '@/hooks/index';
 
 export default function PostEditor({ edit, makeEdit, text, Id }) {
   const [user] = useCurrentUser();
@@ -7,11 +7,7 @@ export default function PostEditor({ edit, makeEdit, text, Id }) {
   const [msg, setMsg] = useState(null);
 
   if (!user) {
-    return (
-      <div style={{ color: "#555", textAlign: "center" }}>
-        Please sign in to post
-      </div>
-    );
+    return <div style={{ color: '#555', textAlign: 'center' }}>Please sign in to post</div>;
   }
 
   const discard = () => {
@@ -26,13 +22,13 @@ export default function PostEditor({ edit, makeEdit, text, Id }) {
         postId: Id,
       };
       // if (!e.currentTarget.content.value) return;
-      const res = await fetch("/api/posts", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/posts', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
       if (res.ok) {
-        makeEdit("Edited!", body.content);
+        makeEdit('Edited!', body.content);
       } else {
         makeEdit(res.text(), text);
       }
@@ -41,14 +37,14 @@ export default function PostEditor({ edit, makeEdit, text, Id }) {
         content: e.currentTarget.content.value,
       };
       if (!e.currentTarget.content.value) return;
-      e.currentTarget.content.value = "";
-      const res = await fetch("/api/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      e.currentTarget.content.value = '';
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
       if (res.ok) {
-        setMsg("Posted!");
+        setMsg('Posted!');
         setTimeout(() => setMsg(null), 5000);
       }
     }
@@ -56,21 +52,15 @@ export default function PostEditor({ edit, makeEdit, text, Id }) {
 
   return (
     <>
-      <p style={{ color: "#0070f3", textAlign: "center" }}>{msg}</p>
+      <p style={{ color: '#0070f3', textAlign: 'center' }}>{msg}</p>
       <form
         onSubmit={hanldeSubmit}
         onReset={discard}
-        style={{ flexDirection: "row" }}
-        autoComplete="off"
-      >
+        style={{ flexDirection: 'row' }}
+        autoComplete="off">
         <label htmlFor="name">
           {edit === true ? (
-            <input
-              name="content"
-              type="text"
-              placeholder={text}
-              defaultValue={text}
-            />
+            <input name="content" type="text" placeholder={text} defaultValue={text} />
           ) : (
             <input
               name="content"
@@ -79,18 +69,17 @@ export default function PostEditor({ edit, makeEdit, text, Id }) {
             />
           )}
         </label>
-        <button type="submit" style={{ marginLeft: "0.5rem" }}>
-          {edit === true ? "Update" : "Post"}
+        <button type="submit" style={{ marginLeft: '0.5rem' }}>
+          {edit === true ? 'Update' : 'Post'}
         </button>
         {edit === true ? (
           <button
             type="reset"
             style={{
-              marginLeft: "0.5rem",
-              backgroundColor: "white",
-              color: "black",
-            }}
-          >
+              marginLeft: '0.5rem',
+              backgroundColor: 'white',
+              color: 'black',
+            }}>
             Discard
           </button>
         ) : null}
