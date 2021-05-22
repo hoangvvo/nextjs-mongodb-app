@@ -24,10 +24,10 @@ export async function editPost(db, { content, postId }) {
       { _id: postId },
       {
         $set: {
-          content: content,
+          content,
         },
       },
-      { returnOriginal: false }
+      { returnOriginal: false },
     )
     .then(({ value }) => value);
 }

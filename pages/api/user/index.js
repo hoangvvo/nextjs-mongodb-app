@@ -28,6 +28,7 @@ handler.get(async (req, res) => {
   if (!req.user) return res.json({ user: null });
   const { password, ...u } = req.user;
   res.json({ user: u });
+  return null;
 });
 
 handler.patch(upload.single('profilePicture'), async (req, res) => {

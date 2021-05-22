@@ -13,16 +13,18 @@ handler.get(async (req, res) => {
     req.db,
     req.query.from ? new Date(req.query.from) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(req.query.limit, 10) : undefined
+    req.query.limit ? parseInt(req.query.limit, 10) : undefined,
   );
 
   if (req.query.from && posts.length > 0) {
     // This is safe to cache because from defines
     //  a concrete range of posts
     res.setHeader('cache-control', `public, max-age=${maxAge}`);
+    return null;
   }
 
   res.send({ posts });
+  return posts;
 });
 
 handler.patch(async (req, res) => {
