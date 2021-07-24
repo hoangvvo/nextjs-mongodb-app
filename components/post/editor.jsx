@@ -14,7 +14,7 @@ export default function PostEditor() {
     );
   }
 
-  async function hanldeSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const body = {
       content: e.currentTarget.content.value,
@@ -37,7 +37,7 @@ export default function PostEditor() {
       <p style={{ color: '#0070f3', textAlign: 'center' }}>
         {msg}
       </p>
-      <form onSubmit={hanldeSubmit} style={{ flexDirection: 'row' }} autoComplete="off">
+      <form onSubmit={handleSubmit} style={{ flexDirection: 'row' }} autoComplete="off">
         <label htmlFor="name">
           <input
             name="content"
