@@ -97,7 +97,7 @@ This project uses the following dependencies:
 
 <h3 align="center">Environmental variables</h3>
 
-The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration)
+The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) so avoid exposing sensitive ones like `MONGODB_URI` and others (make sure they are only in API Routes or GetServerSideProps).
 
 Environmental variables in this project include:
 
