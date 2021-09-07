@@ -1,6 +1,6 @@
 import nc from 'next-connect';
 import { all } from '@/middlewares/index';
-import { getPosts, insertPost } from '@/db/index';
+import { editPost, getPosts, insertPost } from '@/db/index';
 
 const handler = nc();
 
@@ -20,9 +20,26 @@ handler.get(async (req, res) => {
     // This is safe to cache because from defines
     //  a concrete range of posts
     res.setHeader('cache-control', `public, max-age=${maxAge}`);
+    return null;
   }
 
   res.send({ posts });
+  return posts;
+});
+
+handler.patch(async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('unauthenticated');
+  }
+
+  if (!req.body.content) return res.status(400).send('You must write something');
+
+  const post = await editPost(req.db, {
+    content: req.body.content,
+    postId: req.body.postId,
+  });
+
+  return res.json({ post });
 });
 
 handler.post(async (req, res) => {
