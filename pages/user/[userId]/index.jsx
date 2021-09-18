@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Error from 'next/error';
@@ -12,7 +11,7 @@ import { defaultProfilePicture } from '@/lib/default';
 export default function UserPage({ user }) {
   if (!user) return <Error statusCode={404} />;
   const {
-    name, email, bio, profilePicture, _id
+    name, email, bio, profilePicture, _id,
   } = user || {};
   const [currentUser] = useCurrentUser();
   const isCurrentUser = currentUser?._id === user._id;

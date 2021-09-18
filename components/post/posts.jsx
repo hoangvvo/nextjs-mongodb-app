@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { useUser } from '@/hooks/index';
 import { defaultProfilePicture } from '@/lib/default';
