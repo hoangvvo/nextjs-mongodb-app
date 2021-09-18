@@ -26,8 +26,11 @@ export default async function database(req, res, next) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    await global.mongo.client.connect();
   }
+  // It is okay to call connect() even if it is connected
+  // using node-mongodb-native v4 (it will be no-op)
+  // See: https://github.com/mongodb/node-mongodb-native/blob/4.0/docs/CHANGES_4.0.0.md
+  await global.mongo.client.connect();
   req.dbClient = global.mongo.client;
   req.db = global.mongo.client.db(process.env.DB_NAME);
   if (!indexesCreated) await createIndexes(req.db);
