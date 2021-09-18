@@ -1,10 +1,13 @@
+import {
+  findAndDeleteTokenByIdAndType,
+  findUserByEmail,
+  insertToken,
+  updateUserById,
+} from '@/api-lib/db';
+import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
+import { database } from '@/api-lib/middlewares';
 import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
-import { sendMail } from '@/lib/mail';
-import { database } from '@/middlewares/index';
-import {
-  findUserByEmail, updateUserById, findAndDeleteTokenByIdAndType, insertToken,
-} from '@/db/index';
 
 const handler = nc();
 
@@ -25,7 +28,7 @@ handler.post(async (req, res) => {
 
   const msg = {
     to: user.email,
-    from: process.env.EMAIL_FROM,
+    from: MAIL_CONFIG.from,
     subject: '[nextjs-mongodb-app] Reset your password.',
     html: `
       <div>
@@ -45,7 +48,11 @@ handler.put(async (req, res) => {
     return;
   }
 
-  const deletedToken = await findAndDeleteTokenByIdAndType(req.db, req.body.token, 'passwordReset');
+  const deletedToken = await findAndDeleteTokenByIdAndType(
+    req.db,
+    req.body.token,
+    'passwordReset'
+  );
 
   if (!deletedToken) {
     res.status(403).send('This link may have been expired.');

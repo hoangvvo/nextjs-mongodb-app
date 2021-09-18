@@ -4,9 +4,7 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
-      "@/middlewares/*": ["middlewares/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/db/*": ["db/*"]
+      "@/api-lib/*": ["api-lib/*"],
     }
   }
 }

@@ -1,11 +1,11 @@
+import { findUserById } from '@/api-lib/db';
+import { database } from '@/api-lib/middlewares';
+import { extractUser } from '@/api-lib/user';
 import nc from 'next-connect';
-import { all } from '@/middlewares/index';
-import { findUserById } from '@/db/index';
-import { extractUser } from '@/lib/api-helpers';
 
 const handler = nc();
 
-handler.use(all);
+handler.use(database);
 
 const maxAge = 4 * 60 * 60; // 4 hours
 

@@ -1,8 +1,8 @@
-import Head from 'next/head';
+import { findTokenByIdAndType } from '@/api-lib/db';
+import { database } from '@/api-lib/middlewares';
 import nc from 'next-connect';
+import Head from 'next/head';
 import Router from 'next/router';
-import { database } from '@/middlewares/index';
-import { findTokenByIdAndType } from '@/db/index';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
   async function handleSubmit(event) {
@@ -28,10 +28,10 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       </Head>
       <style jsx>
         {`
-        p {
-          text-align: center;
-        }
-      `}
+          p {
+            text-align: center;
+          }
+        `}
       </style>
       <h2>Forget password</h2>
       {valid ? (
@@ -61,7 +61,11 @@ export async function getServerSideProps(ctx) {
   await handler.run(ctx.req, ctx.res);
   const { token } = ctx.query;
 
-  const tokenDoc = await findTokenByIdAndType(ctx.req.db, ctx.query.token, 'passwordReset');
+  const tokenDoc = await findTokenByIdAndType(
+    ctx.req.db,
+    ctx.query.token,
+    'passwordReset'
+  );
 
   return { props: { token, valid: !!tokenDoc } };
 }

@@ -18,10 +18,13 @@ export async function getPosts(db, from = new Date(), by, limit) {
 }
 
 export async function insertPost(db, { content, creatorId }) {
-  return db.collection('posts').insertOne({
-    _id: nanoid(12),
-    content,
-    creatorId,
-    createdAt: new Date(),
-  }).then(({ ops }) => ops[0]);
+  return db
+    .collection('posts')
+    .insertOne({
+      _id: nanoid(12),
+      content,
+      creatorId,
+      createdAt: new Date(),
+    })
+    .then(({ ops }) => ops[0]);
 }

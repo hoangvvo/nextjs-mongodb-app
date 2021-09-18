@@ -12,3 +12,8 @@ export async function sendMail(msg) {
     throw new Error(`Could not send email: ${e.message}`);
   }
 }
+
+export const CONFIG = {
+  // TODO: Replace with the email you want to use to send email
+  from: `noreply@${new URL(process.env.WEB_URI).host}`,
+};

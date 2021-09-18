@@ -1,6 +1,6 @@
+import { useCurrentUser } from '@/lib/user';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useCurrentUser } from '@/hooks/index';
 
 export default function Layout({ children }) {
   const [user, { mutate }] = useCurrentUser();
@@ -176,26 +176,19 @@ export default function Layout({ children }) {
       <main>{children}</main>
       <footer>
         <p>
-          Made with
-          {' '}
+          Made with{' '}
           <span role="img" aria-label="Love">
             ❤️
           </span>
-          ,
-          {' '}
+          ,{' '}
           <span role="img" aria-label="Fire">
             🔥
           </span>
-          , and a keyboard by
-          {' '}
-          <a href="https://hoangvvo.com/">Hoang Vo</a>
-          .
+          , and a keyboard by <a href="https://hoangvvo.com/">Hoang Vo</a>.
         </p>
         <p>
-          Source code is on
-          {' '}
-          <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
-          .
+          Source code is on{' '}
+          <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>.
         </p>
       </footer>
     </>

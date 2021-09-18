@@ -1,9 +1,9 @@
-import nc from 'next-connect';
-import multer from 'multer';
+import { updateUserById } from '@/api-lib/db';
+import { all } from '@/api-lib/middlewares';
+import { extractUser } from '@/api-lib/user';
 import { v2 as cloudinary } from 'cloudinary';
-import { all } from '@/middlewares/index';
-import { updateUserById } from '@/db/index';
-import { extractUser } from '@/lib/api-helpers';
+import multer from 'multer';
+import nc from 'next-connect';
 
 const upload = multer({ dest: '/tmp' });
 const handler = nc();

@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import Head from 'next/head';
+import { useState } from 'react';
 
 const ForgetPasswordPage = () => {
   const [msg, setMsg] = useState({ message: '', isError: false });
@@ -30,15 +30,20 @@ const ForgetPasswordPage = () => {
         <title>Forget password</title>
       </Head>
       <h2>Forget password</h2>
-      {msg.message ? <p style={{ color: msg.isError ? 'red' : '#0070f3', textAlign: 'center' }}>{msg.message}</p> : null}
+      {msg.message ? (
+        <p
+          style={{
+            color: msg.isError ? 'red' : '#0070f3',
+            textAlign: 'center',
+          }}
+        >
+          {msg.message}
+        </p>
+      ) : null}
       <form onSubmit={handleSubmit}>
         <p>Do not worry. Simply enter your email address below.</p>
         <label htmlFor="email">
-          <input
-            id="email"
-            type="email"
-            placeholder="Email"
-          />
+          <input id="email" type="email" placeholder="Email" />
         </label>
         <button type="submit">Submit</button>
       </form>

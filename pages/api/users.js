@@ -1,10 +1,10 @@
+import { findUserByEmail, insertUser } from '@/api-lib/db';
+import { all } from '@/api-lib/middlewares';
+import { extractUser } from '@/api-lib/user';
+import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
-import bcrypt from 'bcryptjs';
-import { all } from '@/middlewares/index';
-import { extractUser } from '@/lib/api-helpers';
-import { insertUser, findUserByEmail } from '@/db/index';
 
 const handler = nc();
 
@@ -27,7 +27,10 @@ handler.post(async (req, res) => {
   }
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await insertUser(req.db, {
-    email, password: hashedPassword, bio: '', name,
+    email,
+    password: hashedPassword,
+    bio: '',
+    name,
   });
   req.logIn(user, (err) => {
     if (err) throw err;

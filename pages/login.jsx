@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useCurrentUser } from '@/lib/user';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCurrentUser } from '@/hooks/index';
+import { useEffect, useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const LoginPage = () => {
   useEffect(() => {
     // redirect to home if user is authenticated
     if (user) router.push('/');
-  }, [user]);
+  }, [user, router]);
 
   async function onSubmit(e) {
     e.preventDefault();

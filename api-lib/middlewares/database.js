@@ -9,7 +9,7 @@ import { MongoClient } from 'mongodb';
 global.mongo = global.mongo || {};
 
 let indexesCreated = false;
-export async function createIndexes(db) {
+async function createIndexes(db) {
   await Promise.all([
     db
       .collection('tokens')
@@ -32,7 +32,7 @@ export default async function database(req, res, next) {
   // See: https://github.com/mongodb/node-mongodb-native/blob/4.0/docs/CHANGES_4.0.0.md
   await global.mongo.client.connect();
   req.dbClient = global.mongo.client;
-  req.db = global.mongo.client.db(process.env.DB_NAME);
+  req.db = global.mongo.client.db(); // this use the one specified in the MONGODB_URI (after the "/")
   if (!indexesCreated) await createIndexes(req.db);
   return next();
 }

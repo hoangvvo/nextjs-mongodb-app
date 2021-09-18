@@ -1,5 +1,5 @@
+import { useCurrentUser } from '@/lib/user';
 import { useState } from 'react';
-import { useCurrentUser } from '@/hooks/index';
 
 export default function PostEditor() {
   const [user] = useCurrentUser();
@@ -34,10 +34,12 @@ export default function PostEditor() {
 
   return (
     <>
-      <p style={{ color: '#0070f3', textAlign: 'center' }}>
-        {msg}
-      </p>
-      <form onSubmit={hanldeSubmit} style={{ flexDirection: 'row' }} autoComplete="off">
+      <p style={{ color: '#0070f3', textAlign: 'center' }}>{msg}</p>
+      <form
+        onSubmit={hanldeSubmit}
+        style={{ flexDirection: 'row' }}
+        autoComplete="off"
+      >
         <label htmlFor="name">
           <input
             name="content"
@@ -45,7 +47,9 @@ export default function PostEditor() {
             placeholder="Say something, I'm giving up on you..."
           />
         </label>
-        <button type="submit" style={{ marginLeft: '0.5rem' }}>Post</button>
+        <button type="submit" style={{ marginLeft: '0.5rem' }}>
+          Post
+        </button>
       </form>
     </>
   );

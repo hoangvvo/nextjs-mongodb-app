@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useCurrentUser } from '@/lib/user';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useCurrentUser } from '@/hooks/index';
+import { useEffect, useState } from 'react';
 
 const SignupPage = () => {
   const [user, { mutate }] = useCurrentUser();
@@ -41,12 +41,7 @@ const SignupPage = () => {
         <form onSubmit={handleSubmit}>
           {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
           <label htmlFor="name">
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Your name"
-            />
+            <input id="name" name="name" type="text" placeholder="Your name" />
           </label>
           <label htmlFor="email">
             <input
@@ -67,8 +62,8 @@ const SignupPage = () => {
           <button type="submit">Sign up</button>
         </form>
         <p style={{ color: '#777', textAlign: 'center' }}>
-          Note: The database is public. For your privacy,
-          please avoid using your personal, work email.
+          Note: The database is public. For your privacy, please avoid using
+          your personal, work email.
         </p>
       </div>
     </>

@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useCurrentUser } from '@/lib/user';
 import Head from 'next/head';
-import { useCurrentUser } from '@/hooks/index';
+import { useEffect, useRef, useState } from 'react';
 
 const ProfileSection = () => {
   const [user, { mutate }] = useCurrentUser();
@@ -11,6 +11,7 @@ const ProfileSection = () => {
   const [msg, setMsg] = useState({ message: '', isError: false });
 
   useEffect(() => {
+    if (!user) return;
     nameRef.current.value = user.name;
     bioRef.current.value = user.bio;
   }, [user]);
@@ -20,7 +21,9 @@ const ProfileSection = () => {
     if (isUpdating) return;
     setIsUpdating(true);
     const formData = new FormData();
-    if (profilePictureRef.current.files[0]) { formData.append('profilePicture', profilePictureRef.current.files[0]); }
+    if (profilePictureRef.current.files[0]) {
+      formData.append('profilePicture', profilePictureRef.current.files[0]);
+    }
     formData.append('name', nameRef.current.value);
     formData.append('bio', bioRef.current.value);
     const res = await fetch('/api/user', {
@@ -82,16 +85,23 @@ const ProfileSection = () => {
       </Head>
       <section>
         <h2>Edit Profile</h2>
-        {msg.message ? <p style={{ color: msg.isError ? 'red' : '#0070f3', textAlign: 'center' }}>{msg.message}</p> : null}
+        {msg.message ? (
+          <p
+            style={{
+              color: msg.isError ? 'red' : '#0070f3',
+              textAlign: 'center',
+            }}
+          >
+            {msg.message}
+          </p>
+        ) : null}
         <form onSubmit={handleSubmit}>
           {!user.emailVerified ? (
             <p>
-              Your email has not been verify.
-              {' '}
-              {/* eslint-disable-next-line */}
+              Your email has not been verify. {/* eslint-disable-next-line */}
                 <a role="button" onClick={sendVerificationEmail}>
-                  Send verification email
-                </a>
+                Send verification email
+              </a>
             </p>
           ) : null}
           <label htmlFor="name">
@@ -125,7 +135,9 @@ const ProfileSection = () => {
               ref={profilePictureRef}
             />
           </label>
-          <button disabled={isUpdating} type="submit">Save</button>
+          <button disabled={isUpdating} type="submit">
+            Save
+          </button>
         </form>
         <form onSubmit={handleSubmitPasswordChange}>
           <label htmlFor="oldpassword">

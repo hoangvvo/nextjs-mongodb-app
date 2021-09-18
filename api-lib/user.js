@@ -1,5 +1,7 @@
-// take only needed user fields to avoid sensitive ones (such as password)
 const sensitiveFields = ['email', 'emailVerified', 'password'];
+/**
+ * Take only needed user fields and remove sensitive ones (such as password)
+ */
 export function extractUser(user) {
   if (!user) return null;
   const obj = {};
