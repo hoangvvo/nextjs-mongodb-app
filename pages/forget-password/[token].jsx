@@ -3,9 +3,11 @@ import { database } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 import Head from 'next/head';
-import Router from 'next/router';
+import { useState } from 'react';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
+  const [success, setSuccess] = useState(false);
+
   async function handleSubmit(event) {
     event.preventDefault();
     const body = {
@@ -19,7 +21,9 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       body: JSON.stringify(body),
     });
 
-    if (res.status === 200) Router.replace('/');
+    if (res.status === 200) {
+      setSuccess(true);
+    }
   }
 
   return (
@@ -27,31 +31,32 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       <Head>
         <title>Forget password</title>
       </Head>
-      <style jsx>
-        {`
-          p {
-            text-align: center;
-          }
-        `}
-      </style>
       <h2>Forget password</h2>
-      {valid ? (
+      {success ? (
+        <p>Your password has been updated!</p>
+      ) : valid ? (
         <>
-          <p>Enter your new password.</p>
           <form onSubmit={handleSubmit}>
-            <div>
+            <p>Enter your new password.</p>
+            <label htmlFor="password">
               <input
-                name="password"
+                id="password"
+                autoComplete="new-password"
                 type="password"
-                placeholder="New password"
+                placeholder="New Password"
               />
-            </div>
+            </label>
             <button type="submit">Set new password</button>
           </form>
         </>
       ) : (
         <p>This link may have been expired</p>
       )}
+      <style jsx>{`
+        p {
+          text-align: center;
+        }
+      `}</style>
     </>
   );
 };

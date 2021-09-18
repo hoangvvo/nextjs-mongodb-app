@@ -1,19 +1,29 @@
-// This project uses SendGrid as a email service
-// but you can switch to any dedicated email service
-// like Mailgun
-import sgMail from '@sendgrid/mail';
+// This project uses the nodemailer library to send email
+// However, it is recommended to switch over to dedicated email services
+// like Mailgun, AWS SES, etc.
+import nodemailer from 'nodemailer';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const nodemailerConfig = process.env.NODEMAILER_CONFIG
+  ? JSON.parse(process.env.NODEMAILER_CONFIG)
+  : {};
 
-export async function sendMail(msg) {
+const transporter = nodemailer.createTransport(nodemailerConfig);
+
+export async function sendMail({ from, to, subject, html }) {
   try {
-    await sgMail.send(msg);
+    await transporter.sendMail({
+      from,
+      to,
+      subject,
+      html,
+    });
   } catch (e) {
-    throw new Error(`Could not send email: ${e.message}`);
+    console.error(e);
+    throw new Error(`Could not send email.`);
   }
 }
 
 export const CONFIG = {
   // TODO: Replace with the email you want to use to send email
-  from: `noreply@${new URL(process.env.WEB_URI).host}`,
+  from: nodemailerConfig?.auth?.user,
 };

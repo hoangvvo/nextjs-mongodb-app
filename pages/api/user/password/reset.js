@@ -27,7 +27,7 @@ handler.post(async (req, res) => {
     expireAt: new Date(Date.now() + 1000 * 60 * 20),
   });
 
-  const msg = {
+  await sendMail({
     to: user.email,
     from: MAIL_CONFIG.from,
     subject: '[nextjs-mongodb-app] Reset your password.',
@@ -37,8 +37,8 @@ handler.post(async (req, res) => {
         <p>Please follow <a href="${process.env.WEB_URI}/forget-password/${token._id}">this link</a> to reset your password.</p>
       </div>
       `,
-  };
-  await sendMail(msg);
+  });
+
   res.end('ok');
 });
 

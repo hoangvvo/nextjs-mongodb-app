@@ -20,7 +20,7 @@ handler.post(async (req, res) => {
     expireAt: new Date(Date.now() + 1000 * 60 * 60 * 24),
   });
 
-  const msg = {
+  await sendMail({
     to: req.user.email,
     from: MAIL_CONFIG.from,
     subject: `Verification Email for ${process.env.WEB_URI}`,
@@ -30,8 +30,8 @@ handler.post(async (req, res) => {
         <p>Please follow <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
       </div>
       `,
-  };
-  await sendMail(msg);
+  });
+
   res.end('ok');
 });
 
