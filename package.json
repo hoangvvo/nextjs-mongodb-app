@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
   "dependencies": {
-    "@sendgrid/mail": "^7.4.6",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.27.0",
     "connect-mongo": "^4.6.0",
@@ -30,6 +29,7 @@
     "nanoid": "^3.1.25",
     "next": "^11.1.2",
     "next-connect": "^0.10.2",
+    "nodemailer": "^6.6.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^17.0.2",
