@@ -75,6 +75,8 @@ This project accompanies the following posts:
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
+**Note:** Some of the detail in the posts above might not be up to date due to breaking changes in libraries used in this projects. See [#125](https://github.com/hoangvvo/nextjs-mongodb-app/pull/125).
+
 The project is designed to **as simple as possible** for learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **used in production**.
 
 <h3 align="center">Dependencies</h3>
@@ -115,7 +117,7 @@ Start the development server by running `yarn dev` or `npm run dev`. Getting sta
 
 I include my own environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env.local`.
 
-In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
+In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env.local`**.
 
 It is at upmost importance that you do not reuse these variables in production. Especially, the database in use is public so its data is visible to all.
 
