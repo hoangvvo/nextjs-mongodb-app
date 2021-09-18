@@ -46,14 +46,10 @@ export default function CommentEditor({ postId }) {
         autoComplete="off"
       >
         <label htmlFor="name">
-          <input
-            name="content"
-            type="text"
-            placeholder="Say something, I'm giving up on you..."
-          />
+          <input name="content" type="text" placeholder="Comment the post" />
         </label>
         <button type="submit" style={{ marginLeft: '0.5rem' }}>
-          Post
+          Comment
         </button>
       </form>
     </>
