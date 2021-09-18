@@ -1,12 +1,4 @@
 export async function findComments(db, postId, from, limit) {
-  console.log({
-    postId,
-    ...(from && {
-      createdAt: {
-        $lte: from,
-      },
-    }),
-  });
   return db
     .collection('comments')
     .find({
