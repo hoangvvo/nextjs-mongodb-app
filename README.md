@@ -75,6 +75,8 @@ This project accompanies the following posts:
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
+**Note:** Some of the detail in the posts above might not be up to date due to breaking changes in libraries used in this projects. See [#125](https://github.com/hoangvvo/nextjs-mongodb-app/pull/125).
+
 The project is designed to **as simple as possible** for learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **used in production**.
 
 <h3 align="center">Dependencies</h3>
@@ -97,8 +99,6 @@ This project uses the following dependencies:
 
 <h3 align="center">Environmental variables</h3>
 
-The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration) so avoid exposing sensitive ones like `MONGODB_URI` and others (make sure they are only in API Routes or GetServerSideProps).
-
 Environmental variables in this project include:
 
 - `MONGODB_URI` The MongoDB Connection String (with credentials)
@@ -111,13 +111,15 @@ Environmental variables in this project include:
 
 <h3 align="center">Development</h3>
 
-Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
+Start the development server by running `yarn dev` or `npm run dev`. Getting started by create a `.env.local` file with the above variables. See [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables).
 
-#### `.env`
+#### `.env.local`
 
-I include my own environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
+I include my own environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env.local`.
 
-In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
+In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env.local`**.
+
+It is at upmost importance that you do not reuse these variables in production. Especially, the database in use is public so its data is visible to all.
 
 <h2 align="center">Deployment</h2>
 

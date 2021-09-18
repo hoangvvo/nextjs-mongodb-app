@@ -35,6 +35,9 @@
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
     "no-nested-ternary": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/extensions": "off"
   }
 }

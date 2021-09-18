@@ -1,9 +1,8 @@
-import React from 'react';
-import { useSWRInfinite } from 'swr';
 import Link from 'next/link';
+import useSWRInfinite from 'swr/infinite';
 import { useUser } from '@/hooks/index';
-import fetcher from '@/lib/fetch';
 import { defaultProfilePicture } from '@/lib/default';
+import fetcher from '@/lib/fetch';
 
 function Post({ post }) {
   const user = useUser(post.creatorId);
@@ -71,6 +70,7 @@ export function usePostPages({ creatorId } = {}) {
     }`;
   }, fetcher, {
     refreshInterval: 10000, // Refresh every 10 seconds
+    revalidateAll: true,
   });
 }
 

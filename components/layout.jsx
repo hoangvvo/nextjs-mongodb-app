@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useCurrentUser } from '@/hooks/index';
@@ -164,7 +163,7 @@ export default function Layout({ children }) {
                 <Link href={`/user/${user._id}`}>
                   <a>Profile</a>
                 </Link>
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                {/* eslint-disable-next-line */}
                 <a tabIndex={0} role="button" onClick={handleLogout}>
                   Logout
                 </a>
@@ -201,4 +200,4 @@ export default function Layout({ children }) {
       </footer>
     </>
   );
-};
+}

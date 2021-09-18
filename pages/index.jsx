@@ -1,4 +1,3 @@
-import React from 'react';
 import { useCurrentUser } from '@/hooks/index';
 import PostEditor from '@/components/post/editor';
 import Posts from '@/components/post/posts';
