@@ -1,4 +1,5 @@
 import { useCurrentUser } from '@/lib/user';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function PostEditor() {
@@ -8,8 +9,12 @@ export default function PostEditor() {
 
   if (!user) {
     return (
-      <div style={{ color: '#555', textAlign: 'center' }}>
-        Please sign in to post
+      <div style={{ color: '#555', textAlign: 'center', marginBottom: 12 }}>
+        Please{' '}
+        <Link href="/login">
+          <a>sign in</a>
+        </Link>{' '}
+        to post
       </div>
     );
   }

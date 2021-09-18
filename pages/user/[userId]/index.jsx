@@ -1,10 +1,10 @@
 import { findUserById } from '@/api-lib/db';
-import { all } from '@/api-lib/middlewares';
+import { database } from '@/api-lib/middlewares';
 import { extractUser } from '@/api-lib/user';
-import Posts from '@/components/post/posts';
+import { Posts } from '@/components/post';
 import { defaultProfilePicture } from '@/lib/default';
 import { useCurrentUser } from '@/lib/user';
-import Error from 'next/error';
+import nc from 'next-connect';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -12,7 +12,6 @@ export default function UserPage({ user }) {
   const { name, email, bio, profilePicture, _id } = user || {};
   const [currentUser] = useCurrentUser();
   const isCurrentUser = currentUser?._id === user._id;
-  if (!user) return <Error statusCode={404} />;
   return (
     <>
       <style jsx>
@@ -79,10 +78,14 @@ export default function UserPage({ user }) {
 }
 
 export async function getServerSideProps(context) {
-  await all.run(context.req, context.res);
+  await nc().use(database).run(context.req, context.res);
   const user = extractUser(
     await findUserById(context.req.db, context.params.userId)
   );
-  if (!user) context.res.statusCode = 404;
+  if (!user) {
+    return {
+      notFound: true,
+    };
+  }
   return { props: { user } };
 }

@@ -3,27 +3,26 @@ import { usePostPages } from '@/lib/post';
 import { useUser } from '@/lib/user';
 import Link from 'next/link';
 
-function Post({ post }) {
+export function Post({ post, hideLink }) {
   const user = useUser(post.creatorId);
   return (
     <>
       <style jsx>
         {`
-          div {
+          .post {
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
             padding: 1.5rem;
             margin-bottom: 0.5rem;
             transition: box-shadow 0.2s ease 0s;
-          }
-          div:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            display: block;
           }
           small {
             color: #777;
           }
         `}
       </style>
-      <div>
+
+      <div className="post">
         {user && (
           <Link href={`/user/${user._id}`}>
             <a style={{ display: 'inline-flex', alignItems: 'center' }}>
@@ -44,6 +43,13 @@ function Post({ post }) {
         )}
         <p>{post.content}</p>
         <small>{new Date(post.createdAt).toLocaleString()}</small>
+        {!hideLink && (
+          <div>
+            <Link href={`/user/${post.creatorId}/post/${post._id}`}>
+              <a>View post</a>
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

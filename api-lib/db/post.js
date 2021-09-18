@@ -1,6 +1,10 @@
 import { nanoid } from 'nanoid';
 
-export async function getPosts(db, from = new Date(), by, limit) {
+export async function findPostById(db, id) {
+  return db.collection('posts').findOne({ _id: id });
+}
+
+export async function findPosts(db, from, by, limit = 10) {
   return db
     .collection('posts')
     .find({
@@ -12,8 +16,8 @@ export async function getPosts(db, from = new Date(), by, limit) {
       }),
       ...(by && { creatorId: by }),
     })
-    .sort({ createdAt: -1 })
-    .limit(limit || 10)
+    .sort({ $natural: -1 })
+    .limit(limit)
     .toArray();
 }
 
