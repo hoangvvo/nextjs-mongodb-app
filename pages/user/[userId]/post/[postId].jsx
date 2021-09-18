@@ -1,5 +1,6 @@
 import { findPostById } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
+import { CommentEditor, Comments } from '@/components/comment';
 import { Post } from '@/components/post';
 import nc from 'next-connect';
 import Head from 'next/head';
@@ -16,6 +17,8 @@ export default function UserPost({ post }) {
         </title>
       </Head>
       <Post key={post._id} post={post} hideLink />
+      <CommentEditor postId={post._id} />
+      <Comments postId={post._id} />
     </>
   );
 }

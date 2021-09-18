@@ -1,13 +1,13 @@
 import { findPosts, insertPost } from '@/api-lib/db';
-import { all, database } from '@/api-lib/middlewares';
+import { all } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-const maxAge = 1 * 24 * 60 * 60;
+handler.use(all);
 
-handler.get(database, async (req, res) => {
+handler.get(async (req, res) => {
   const posts = await findPosts(
     req.db,
     req.query.from ? new Date(req.query.from) : undefined,
@@ -18,7 +18,7 @@ handler.get(database, async (req, res) => {
   res.send({ posts });
 });
 
-handler.post(all, async (req, res) => {
+handler.post(async (req, res) => {
   if (!req.user) {
     return res.status(401).send('unauthenticated');
   }
