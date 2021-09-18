@@ -1,5 +1,4 @@
-import PostEditor from '@/components/post/editor';
-import Posts from '@/components/post/posts';
+import { PostEditor, Posts } from '@/components/post';
 import { useCurrentUser } from '@/lib/user';
 
 const IndexPage = () => {

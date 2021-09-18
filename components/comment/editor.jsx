@@ -2,7 +2,7 @@ import { useCurrentUser } from '@/lib/user';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function PostEditor() {
+export default function CommentEditor({ postId }) {
   const [user] = useCurrentUser();
 
   const [msg, setMsg] = useState(null);
@@ -14,7 +14,7 @@ export default function PostEditor() {
         <Link href="/login">
           <a>sign in</a>
         </Link>{' '}
-        to post
+        to comment
       </div>
     );
   }
@@ -26,7 +26,7 @@ export default function PostEditor() {
     };
     if (!e.currentTarget.content.value) return;
     e.currentTarget.content.value = '';
-    const res = await fetch('/api/posts', {
+    const res = await fetch(`/api/posts/${postId}/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -46,14 +46,10 @@ export default function PostEditor() {
         autoComplete="off"
       >
         <label htmlFor="name">
-          <input
-            name="content"
-            type="text"
-            placeholder="Say something, I'm giving up on you..."
-          />
+          <input name="content" type="text" placeholder="Comment the post" />
         </label>
         <button type="submit" style={{ marginLeft: '0.5rem' }}>
-          Post
+          Comment
         </button>
       </form>
     </>

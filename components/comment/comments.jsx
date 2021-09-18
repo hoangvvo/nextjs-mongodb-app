@@ -1,15 +1,15 @@
+import { useCommentPages } from '@/lib/comment';
 import { defaultProfilePicture } from '@/lib/default';
-import { usePostPages } from '@/lib/post';
 import { useUser } from '@/lib/user';
 import Link from 'next/link';
 
-export function Post({ post, hideLink }) {
-  const user = useUser(post.creatorId);
+export function Comment({ comment }) {
+  const user = useUser(comment.creatorId);
   return (
     <>
       <style jsx>
         {`
-          .post {
+          .comment {
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
             padding: 1.5rem;
             margin-bottom: 0.5rem;
@@ -22,7 +22,7 @@ export function Post({ post, hideLink }) {
         `}
       </style>
 
-      <div className="post">
+      <div className="comment">
         {user && (
           <Link href={`/user/${user._id}`}>
             <a style={{ display: 'inline-flex', alignItems: 'center' }}>
@@ -41,15 +41,8 @@ export function Post({ post, hideLink }) {
             </a>
           </Link>
         )}
-        <p>{post.content}</p>
-        <small>{new Date(post.createdAt).toLocaleString()}</small>
-        {!hideLink && (
-          <div>
-            <Link href={`/user/${post.creatorId}/post/${post._id}`}>
-              <a>View post</a>
-            </Link>
-          </div>
-        )}
+        <p>{comment.content}</p>
+        <small>{new Date(comment.createdAt).toLocaleString()}</small>
       </div>
     </>
   );
@@ -57,13 +50,13 @@ export function Post({ post, hideLink }) {
 
 const PAGE_SIZE = 10;
 
-export default function Posts({ creatorId }) {
-  const { data, error, size, setSize } = usePostPages({
-    creatorId,
+export default function Comments({ postId }) {
+  const { data, error, size, setSize } = useCommentPages({
+    postId,
     limit: PAGE_SIZE,
   });
-  const posts = data
-    ? data.reduce((acc, val) => [...acc, ...val.posts], [])
+  const comments = data
+    ? data.reduce((acc, val) => [...acc, ...val.comments], [])
     : [];
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
@@ -71,12 +64,12 @@ export default function Posts({ creatorId }) {
     (size > 0 && data && typeof data[size - 1] === 'undefined');
   const isEmpty = data?.[0]?.length === 0;
   const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.posts?.length < PAGE_SIZE);
+    isEmpty || (data && data[data.length - 1]?.comments?.length < PAGE_SIZE);
 
   return (
     <div>
-      {posts.map((post) => (
-        <Post key={post._id} post={post} />
+      {comments.map((comment) => (
+        <Comment key={comment._id} comment={comment} />
       ))}
       {!isEmpty && (
         <button
@@ -90,7 +83,7 @@ export default function Posts({ creatorId }) {
           {isLoadingMore
             ? 'loading...'
             : isReachingEnd
-            ? 'no more posts'
+            ? 'no more comments'
             : 'load more'}
         </button>
       )}
