@@ -1,8 +1,9 @@
 import { getPosts, insertPost } from '@/api-lib/db';
 import { all, database } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
-const handler = nc();
+const handler = nc(ncOpts);
 
 const maxAge = 1 * 24 * 60 * 60;
 

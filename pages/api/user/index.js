@@ -1,12 +1,13 @@
 import { updateUserById } from '@/api-lib/db';
 import { all } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import { extractUser } from '@/api-lib/user';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import nc from 'next-connect';
 
 const upload = multer({ dest: '/tmp' });
-const handler = nc();
+const handler = nc(ncOpts);
 
 /* eslint-disable camelcase */
 const {

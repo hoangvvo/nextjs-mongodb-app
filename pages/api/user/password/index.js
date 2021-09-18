@@ -1,9 +1,10 @@
 import { updateUserById } from '@/api-lib/db';
 import { all } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 
-const handler = nc();
+const handler = nc(ncOpts);
 handler.use(all);
 
 handler.put(async (req, res) => {

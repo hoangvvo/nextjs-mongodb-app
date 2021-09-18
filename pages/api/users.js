@@ -1,12 +1,13 @@
 import { findUserByEmail, insertUser } from '@/api-lib/db';
 import { all } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import { extractUser } from '@/api-lib/user';
 import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
-const handler = nc();
+const handler = nc(ncOpts);
 
 handler.use(all);
 

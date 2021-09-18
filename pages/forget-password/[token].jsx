@@ -1,5 +1,6 @@
 import { findTokenByIdAndType } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 import Head from 'next/head';
 import Router from 'next/router';
@@ -56,7 +57,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 };
 
 export async function getServerSideProps(ctx) {
-  const handler = nc();
+  const handler = nc(ncOpts);
   handler.use(database);
   await handler.run(ctx.req, ctx.res);
   const { token } = ctx.query;

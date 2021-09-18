@@ -1,15 +1,16 @@
 import {
+  createToken,
   findAndDeleteTokenByIdAndType,
   findUserByEmail,
-  insertToken,
   updateUserById,
 } from '@/api-lib/db';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
 import { database } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 
-const handler = nc();
+const handler = nc(ncOpts);
 
 handler.use(database);
 
@@ -20,7 +21,7 @@ handler.post(async (req, res) => {
     return;
   }
 
-  const token = await insertToken(req.db, {
+  const token = await createToken(req.db, {
     creatorId: user._id,
     type: 'passwordReset',
     expireAt: new Date(Date.now() + 1000 * 60 * 20),

@@ -1,9 +1,10 @@
 import { findUserById } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import { extractUser } from '@/api-lib/user';
 import nc from 'next-connect';
 
-const handler = nc();
+const handler = nc(ncOpts);
 
 handler.use(database);
 

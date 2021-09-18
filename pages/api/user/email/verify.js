@@ -1,9 +1,10 @@
-import { insertToken } from '@/api-lib/db';
+import { createToken } from '@/api-lib/db';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
 import { all } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
-const handler = nc();
+const handler = nc(ncOpts);
 
 handler.use(all);
 
@@ -13,7 +14,7 @@ handler.post(async (req, res) => {
     return;
   }
 
-  const token = await insertToken(req.db, {
+  const token = await createToken(req.db, {
     creatorId: req.user._id,
     type: 'emailVerify',
     expireAt: new Date(Date.now() + 1000 * 60 * 60 * 24),
