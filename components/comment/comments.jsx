@@ -83,7 +83,7 @@ export default function Comments({ postId }) {
           {isLoadingMore
             ? 'loading...'
             : isReachingEnd
-            ? 'no more issues'
+            ? 'no more comments'
             : 'load more'}
         </button>
       )}

@@ -90,7 +90,7 @@ export default function Posts({ creatorId }) {
           {isLoadingMore
             ? 'loading...'
             : isReachingEnd
-            ? 'no more issues'
+            ? 'no more posts'
             : 'load more'}
         </button>
       )}
