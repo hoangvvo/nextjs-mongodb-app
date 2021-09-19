@@ -4,7 +4,7 @@
 
 <div align="center">
   
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app&env=MONGODB_URI,CLOUDINARY_URL,NODEMAILER_CONFIG,WEB_URI,SESSION_SECRET&envDescription=Environment%20Variables&envLink=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app%23environmental-variables&demo-title=nextjs-mongodb-app%20demo&demo-description=A%20demo%20deployed%20on%20Vercel&demo-url=https%3A%2F%2Fnextjs-mongodb.vercel.app%2F)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app&env=MONGODB_URI,CLOUDINARY_URL,NODEMAILER_CONFIG,WEB_URI&envDescription=Environment%20Variables&envLink=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app%23environmental-variables&demo-title=nextjs-mongodb-app%20demo&demo-description=A%20demo%20deployed%20on%20Vercel&demo-url=https%3A%2F%2Fnextjs-mongodb.vercel.app%2F)
 
 An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application, designed with simplicity for learning and real-world applicability in mind.
 
@@ -90,7 +90,7 @@ This project uses the following dependencies:
 - `mongodb` - may be replaced by `mongoose`.
 - `passport`, `passport-local` - required after [#39](https://github.com/hoangvvo/nextjs-mongodb-app/pull/39) for authentication
 - `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
-- `express-session`, `connect-mongo` - required for session, may be replaced with other session libraries such as `cookie-session` or `next-iron-session`.
+- `next-session`, `connect-mongo` - required for session, may be replaced with other session libraries such as `cookie-session`, `next-iron-session`, or `express-session` (`express-session` is observed not to work properly on Next.js 11+).
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
 - `validator` - optional but recommended.
 - `multer` - may be replaced with any middleware that handles `multipart/form-data`
@@ -102,7 +102,6 @@ Environmental variables in this project include:
 
 - `MONGODB_URI` The MongoDB Connection String (with credentials and database name)
 - `WEB_URI` The _URL_ of your web.
-- `SESSION_SECRET` (only if you use `express-session`) The secret to be used in `express-session`.
 - `CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
 - `NODEMAILER_CONFIG` (optional, if using nodemailer **only**) JSON stringified nodemailer config. See `.env.example`.
 
