@@ -1,5 +1,6 @@
 import { findPostById } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
+import { extractUser } from '@/api-lib/user';
 import { CommentEditor, Comments } from '@/components/comment';
 import { Post } from '@/components/post';
 import nc from 'next-connect';
@@ -13,7 +14,7 @@ export default function UserPost({ post }) {
     <>
       <Head>
         <title>
-          {post.creatorId}: {post.text}
+          {post.creator.username}: {post.text}
         </title>
       </Head>
       <Post key={post._id} post={post} hideLink />
@@ -25,22 +26,23 @@ export default function UserPost({ post }) {
 
 export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
-  const post = await findPostById(context.req.db, context.params.postId);
+  const post = await findPostById(context.req.db, context.params.postId, true);
   if (!post) {
     return {
       notFound: true,
     };
   }
-  if (context.params.userId !== post.creatorId) {
+  if (context.params.username !== post.creator.username) {
     // mismatch params in url, redirect to correct one
     // eg. post x belongs to user a, but url is /user/b/post/x
     return {
       redirect: {
-        destination: `/user/${post.creatorId}/post/${post._id}`,
+        destination: `/user/${post.creator.username}/post/${post._id}`,
         permanent: false,
       },
     };
   }
+  post.creator = extractUser(post.creator);
   post.createdAt = post.createdAt.toJSON();
   return { props: { post } };
 }

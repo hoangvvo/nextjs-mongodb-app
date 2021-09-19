@@ -10,6 +10,15 @@ export async function findUserById(db, userId) {
     .then((user) => user || null);
 }
 
+export async function findUserByUsername(db, username) {
+  return db
+    .collection('users')
+    .findOne({
+      username,
+    })
+    .then((user) => user || null);
+}
+
 export async function findUserByEmail(db, email) {
   email = normalizeEmail(email);
   return db
@@ -33,7 +42,7 @@ export async function updateUserById(db, id, update) {
 
 export async function insertUser(
   db,
-  { email, password, bio = '', name, profilePicture }
+  { email, password, bio = '', name, profilePicture, username }
 ) {
   const user = {
     _id: nanoid(12),
@@ -42,6 +51,7 @@ export async function insertUser(
     email,
     password,
     name,
+    username,
     bio,
   };
   await db.collection('users').insertOne(user);

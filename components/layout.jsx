@@ -50,7 +50,6 @@ export default function Layout({ children }) {
           }
           input,
           textarea {
-            font-family: monospace;
             flex: 1 1 0%;
             margin-left: 0.5rem;
             box-shadow: none;
@@ -160,7 +159,7 @@ export default function Layout({ children }) {
               </>
             ) : (
               <>
-                <Link href={`/user/${user._id}`}>
+                <Link href={`/user/${user.username}`}>
                   <a>Profile</a>
                 </Link>
                 {/* eslint-disable-next-line */}

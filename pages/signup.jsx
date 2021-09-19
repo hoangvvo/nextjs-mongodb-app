@@ -1,4 +1,4 @@
-import { useCurrentUser } from '@/lib/user';
+import { slugUsername, useCurrentUser } from '@/lib/user';
 import Head from 'next/head';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
@@ -17,6 +17,7 @@ const SignupPage = () => {
       email: e.currentTarget.email.value,
       name: e.currentTarget.name.value,
       password: e.currentTarget.password.value,
+      username: e.currentTarget.username.value,
     };
     const res = await fetch('/api/users', {
       method: 'POST',
@@ -40,8 +41,19 @@ const SignupPage = () => {
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
-          <label htmlFor="name">
-            <input id="name" name="name" type="text" placeholder="Your name" />
+          <label htmlFor="username">
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Username"
+              onBlur={(event) => {
+                event.currentTarget.value = slugUsername(
+                  event.currentTarget.value,
+                  '_'
+                );
+              }}
+            />
           </label>
           <label htmlFor="email">
             <input
@@ -58,6 +70,9 @@ const SignupPage = () => {
               type="password"
               placeholder="Create a password"
             />
+          </label>
+          <label htmlFor="name">
+            <input id="name" name="name" type="text" placeholder="Your name" />
           </label>
           <button type="submit">Sign up</button>
         </form>
