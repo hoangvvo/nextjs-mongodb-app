@@ -24,7 +24,7 @@ export function Post({ post, hideLink }) {
 
       <div className="post">
         {user && (
-          <Link href={`/user/${user._id}`}>
+          <Link href={`/user/${user.username}`}>
             <a style={{ display: 'inline-flex', alignItems: 'center' }}>
               <img
                 width="27"
@@ -34,7 +34,9 @@ export function Post({ post, hideLink }) {
                   objectFit: 'cover',
                   marginRight: '0.3rem',
                 }}
-                src={user.profilePicture || defaultProfilePicture(user._id)}
+                src={
+                  user.profilePicture || defaultProfilePicture(user.username)
+                }
                 alt={user.name}
               />
               <b>{user.name}</b>
@@ -45,7 +47,7 @@ export function Post({ post, hideLink }) {
         <small>{new Date(post.createdAt).toLocaleString()}</small>
         {!hideLink && (
           <div>
-            <Link href={`/user/${post.creatorId}/post/${post._id}`}>
+            <Link href={`/user/${user?.username}/post/${post._id}`}>
               <a>View post</a>
             </Link>
           </div>

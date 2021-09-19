@@ -24,7 +24,7 @@ export function Comment({ comment }) {
 
       <div className="comment">
         {user && (
-          <Link href={`/user/${user._id}`}>
+          <Link href={`/user/${user.username}`}>
             <a style={{ display: 'inline-flex', alignItems: 'center' }}>
               <img
                 width="27"

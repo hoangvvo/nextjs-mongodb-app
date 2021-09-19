@@ -1,7 +1,14 @@
 import { nanoid } from 'nanoid';
 
-export async function findPostById(db, id) {
-  return db.collection('posts').findOne({ _id: id });
+export async function findPostById(db, id, withUser) {
+  const post = await db.collection('posts').findOne({ _id: id });
+  if (!post) return null;
+  if (withUser) {
+    post.creator = await db
+      .collection('users')
+      .findOne({ _id: post.creatorId });
+  }
+  return post;
 }
 
 export async function findPosts(db, from, by, limit = 10) {
