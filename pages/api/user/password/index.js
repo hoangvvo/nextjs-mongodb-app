@@ -1,4 +1,4 @@
-import { updateUserById } from '@/api-lib/db';
+import { UNSAFE_findUserForAuth, updateUserById } from '@/api-lib/db';
 import { all } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import bcrypt from 'bcryptjs';
@@ -13,7 +13,15 @@ handler.put(async (req, res) => {
     return;
   }
   const { oldPassword, newPassword } = req.body;
-  if (!(await bcrypt.compare(oldPassword, req.user.password))) {
+
+  if (
+    !(await bcrypt.compare(
+      oldPassword,
+      (
+        await UNSAFE_findUserForAuth(req.db, req.user._id, true)
+      ).password
+    ))
+  ) {
     res.status(401).send('The password you has entered is incorrect.');
     return;
   }

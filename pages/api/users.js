@@ -1,7 +1,6 @@
 import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
 import { all } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
-import { extractUser } from '@/api-lib/user';
 import { slugUsername } from '@/lib/user';
 import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
@@ -43,7 +42,7 @@ handler.post(async (req, res) => {
   req.logIn(user, (err) => {
     if (err) throw err;
     res.status(201).json({
-      user: extractUser(req.user),
+      user,
     });
   });
 });
