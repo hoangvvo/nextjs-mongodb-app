@@ -35,16 +35,12 @@ export async function findUserByEmail(db, email) {
     .then((user) => user || null);
 }
 
-export async function updateUserById(
-  db,
-  id,
-  { bio = '', password, name, profilePicture }
-) {
+export async function updateUserById(db, id, data) {
   return db
     .collection('users')
     .findOneAndUpdate(
       { _id: id },
-      { $set: { bio, password, name, profilePicture } },
+      { $set: data },
       { returnDocument: 'after', projection: dbProjectionUsers() }
     )
     .then(({ value }) => value);
