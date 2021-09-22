@@ -1,0 +1,25 @@
+.button {
+  border-radius: 5px;
+  color: var(--background);
+  background: var(--foreground);
+  border: 1px solid var(--foreground);
+  font-weight: 500;
+  padding: 0 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-property: border-color, background, color;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+  font-size: 0.875rem;
+  height: 40px;
+}
+
+.button:hover {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.button:active {
+  background: var(--accents-2);
+}

@@ -5,6 +5,7 @@
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
       "@/api-lib/*": ["api-lib/*"],
+      "@/assets/*": ["assets/*"]
     }
   }
 }

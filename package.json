@@ -24,6 +24,7 @@
     "cloudinary": "^1.27.0",
     "connect-mongo": "^4.6.0",
     "express-session": "^1.17.2",
+    "modern-normalize": "^1.1.0",
     "mongodb": "^4.1.2",
     "multer": "^1.4.3",
     "nanoid": "^3.1.25",
