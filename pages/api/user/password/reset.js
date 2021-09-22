@@ -52,9 +52,10 @@ handler.put(
   validateBody({
     type: 'object',
     properties: {
-      password: ValidateProps.user.email,
+      password: ValidateProps.user.password,
+      token: { type: 'string', minLength: 0 },
     },
-    required: ['password'],
+    required: ['password', 'token'],
     additionalProperties: false,
   }),
   async (req, res) => {
