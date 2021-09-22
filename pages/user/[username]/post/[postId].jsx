@@ -25,7 +25,7 @@ export default function UserPost({ post }) {
 
 export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
-  const post = await findPostById(context.req.db, context.params.postId);
+  const post = await findPostById(context.req.db, context.params.postId, true);
   if (!post) {
     return {
       notFound: true,
