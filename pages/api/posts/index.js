@@ -1,5 +1,6 @@
+import { ValidateProps } from '@/api-lib/constants';
 import { findPosts, insertPost } from '@/api-lib/db';
-import { all } from '@/api-lib/middlewares';
+import { all, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
@@ -18,20 +19,27 @@ handler.get(async (req, res) => {
   res.send({ posts });
 });
 
-handler.post(async (req, res) => {
-  if (!req.user) {
-    return res.status(401).send('unauthenticated');
+handler.post(
+  validateBody({
+    type: 'object',
+    properties: {
+      content: ValidateProps.post.content,
+    },
+    required: ['content'],
+    additionalProperties: false,
+  }),
+  async (req, res) => {
+    if (!req.user) {
+      return res.status(401).send('unauthenticated');
+    }
+
+    const post = await insertPost(req.db, {
+      content: req.body.content,
+      creatorId: req.user._id,
+    });
+
+    return res.json({ post });
   }
-
-  if (!req.body.content)
-    return res.status(400).send('You must write something');
-
-  const post = await insertPost(req.db, {
-    content: req.body.content,
-    creatorId: req.user._id,
-  });
-
-  return res.json({ post });
-});
+);
 
 export default handler;
