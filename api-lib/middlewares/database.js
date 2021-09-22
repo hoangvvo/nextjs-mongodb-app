@@ -23,19 +23,23 @@ async function createIndexes(db) {
   indexesCreated = true;
 }
 
-export default async function database(req, res, next) {
+export async function getMongoClient() {
   if (!global.mongo.client) {
-    global.mongo.client = new MongoClient(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    global.mongo.client = new MongoClient(process.env.MONGODB_URI);
   }
   // It is okay to call connect() even if it is connected
   // using node-mongodb-native v4 (it will be no-op)
   // See: https://github.com/mongodb/node-mongodb-native/blob/4.0/docs/CHANGES_4.0.0.md
   await global.mongo.client.connect();
-  req.dbClient = global.mongo.client;
-  req.db = global.mongo.client.db(); // this use the one specified in the MONGODB_URI (after the "/")
+  return global.mongo.client;
+}
+
+export default async function database(req, res, next) {
+  if (!global.mongo.client) {
+    global.mongo.client = new MongoClient(process.env.MONGODB_URI);
+  }
+  req.dbClient = await getMongoClient();
+  req.db = req.dbClient.db(); // this use the database specified in the MONGODB_URI (after the "/")
   if (!indexesCreated) await createIndexes(req.db);
   return next();
 }
