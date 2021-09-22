@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { dbProjectionUsers } from './user';
 
-export async function findPostById(db, id) {
+export async function findPostById(db, id, withUser) {
   const post = await db.collection('posts').findOne({ _id: id });
   if (!post) return null;
   post.creator = await db

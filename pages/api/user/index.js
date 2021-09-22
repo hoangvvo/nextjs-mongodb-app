@@ -1,5 +1,6 @@
+import { ValidateProps } from '@/api-lib/constants';
 import { updateUserById } from '@/api-lib/db';
-import { all } from '@/api-lib/middlewares';
+import { all, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
@@ -30,30 +31,41 @@ handler.get(async (req, res) => {
   return res.json({ user: u });
 });
 
-handler.patch(upload.single('profilePicture'), async (req, res) => {
-  if (!req.user) {
-    req.status(401).end();
-    return;
-  }
-  let profilePicture;
-  if (req.file) {
-    const image = await cloudinary.uploader.upload(req.file.path, {
-      width: 512,
-      height: 512,
-      crop: 'fill',
+handler.patch(
+  validateBody({
+    type: 'object',
+    properties: {
+      name: ValidateProps.user.name,
+      bio: ValidateProps.user.bio,
+    },
+    additionalProperties: false,
+  }),
+  upload.single('profilePicture'),
+  async (req, res) => {
+    if (!req.user) {
+      req.status(401).end();
+      return;
+    }
+    let profilePicture;
+    if (req.file) {
+      const image = await cloudinary.uploader.upload(req.file.path, {
+        width: 512,
+        height: 512,
+        crop: 'fill',
+      });
+      profilePicture = image.secure_url;
+    }
+    const { name, bio } = req.body;
+
+    const user = await updateUserById(req.db, req.user._id, {
+      ...(name && { name }),
+      ...(typeof bio === 'string' && { bio }),
+      ...(profilePicture && { profilePicture }),
     });
-    profilePicture = image.secure_url;
+
+    res.json({ user });
   }
-  const { name, bio } = req.body;
-
-  const user = await updateUserById(req.db, req.user._id, {
-    ...(name && { name }),
-    ...(typeof bio === 'string' && { bio }),
-    ...(profilePicture && { profilePicture }),
-  });
-
-  res.json({ user });
-});
+);
 
 export const config = {
   api: {

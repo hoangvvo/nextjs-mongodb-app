@@ -92,7 +92,8 @@ This project uses the following dependencies:
 - `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
 - `next-session`, `connect-mongo` - required for session, may be replaced with other session libraries such as `cookie-session`, `next-iron-session`, or `express-session` (`express-session` is observed not to work properly on Next.js 11+).
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
-- `validator` - optional but recommended.
+- `validator` - optional but recommended, to validate email.
+- `ajv` - optional but recommended, to validate request body.
 - `multer` - may be replaced with any middleware that handles `multipart/form-data`
 - `cloudinary` - optional, **only if** you are using [Cloudinary](https://cloudinary.com) for image upload.
 
