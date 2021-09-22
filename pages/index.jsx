@@ -1,14 +1,7 @@
-import { Button } from '@/components/Button';
-import { useCurrentUser } from '@/lib/user';
+import { Index } from 'page-components/Index';
 
 const IndexPage = () => {
-  const [user] = useCurrentUser();
-
-  return (
-    <>
-      <Button>test</Button>
-    </>
-  );
+  return <Index />;
 };
 
 export default IndexPage;

@@ -1,0 +1,8 @@
+.root {
+  margin: 2rem 0;
+}
+
+.input {
+  flex: 1 1 0%;
+  margin-left: 8px;
+}

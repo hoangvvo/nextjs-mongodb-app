@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
   "dependencies": {
+    "@lukeed/ms": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.27.0",
+    "clsx": "^1.1.1",
     "connect-mongo": "^4.6.0",
     "express-session": "^1.17.2",
     "modern-normalize": "^1.1.0",

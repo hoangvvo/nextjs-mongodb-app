@@ -1,3 +1,5 @@
+@import 'node_modules/modern-normalize/modern-normalize.css';
+
 :root {
   --background: #fff;
   --foreground: #000;
@@ -12,6 +14,10 @@
   --success-light: #3291ff;
   --success: #0070f3;
   --success-dark: #0761d1;
+  --error-light: #ff1a1a;
+  --error: #e00;
+  --error-dark: #c50000;
+  --secondary: #666;
 }
 
 [data-theme='dark'] {

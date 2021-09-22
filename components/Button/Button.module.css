@@ -1,8 +1,9 @@
 .button {
+  display: block;
   border-radius: 5px;
-  color: var(--background);
-  background: var(--foreground);
-  border: 1px solid var(--foreground);
+  color: var(--themed-fg, var(--background));
+  background: var(--themed-bg, var(--foreground));
+  border: 1px solid var(--themed-border, var(--foreground));
   font-weight: 500;
   padding: 0 12px;
   display: flex;
@@ -13,13 +14,39 @@
   transition-timing-function: ease;
   font-size: 0.875rem;
   height: 40px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .button:hover {
   background: transparent;
-  color: var(--foreground);
+  color: var(--themed-bg, var(--foreground));
 }
 
 .button:active {
   background: var(--accents-2);
+}
+
+.secondary {
+  --themed-bg: var(--background);
+  --themed-fg: var(--secondary);
+  --themed-border: var(--accents-2);
+}
+
+.secondary.button:hover {
+  background: var(--background);
+  color: var(--foreground);
+  border-color: var(--foreground);
+}
+
+.success {
+  --themed-fg: #fff;
+  --themed-bg: var(--success);
+  --themed-border: var(--success);
+}
+
+.error {
+  --themed-fg: #fff;
+  --themed-bg: var(--error);
+  --themed-border: var(--error);
 }
