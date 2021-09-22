@@ -38,13 +38,13 @@ export async function findUserByEmail(db, email) {
 export async function updateUserById(
   db,
   id,
-  { bio = '', password, name, profilePicture, username }
+  { bio = '', password, name, profilePicture }
 ) {
   return db
     .collection('users')
     .findOneAndUpdate(
       { _id: id },
-      { $set: { bio, password, name, profilePicture, username } },
+      { $set: { bio, password, name, profilePicture } },
       { returnDocument: 'after', projection: dbProjectionUsers() }
     )
     .then(({ value }) => value);
