@@ -1,6 +1,5 @@
 import { findUserByUsername } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
-import { extractUser } from '@/api-lib/user';
 import { Posts } from '@/components/post';
 import { defaultProfilePicture } from '@/lib/default';
 import { useCurrentUser } from '@/lib/user';
@@ -79,8 +78,9 @@ export default function UserPage({ user }) {
 
 export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
-  const user = extractUser(
-    await findUserByUsername(context.req.db, context.params.username)
+  const user = await findUserByUsername(
+    context.req.db,
+    context.params.username
   );
   if (!user) {
     return {

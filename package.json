@@ -21,6 +21,7 @@
   "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
   "dependencies": {
     "@lukeed/ms": "^2.0.0",
+    "ajv": "^8.6.3",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.27.0",
     "clsx": "^1.1.1",

@@ -1,6 +1,5 @@
 import { findPostById } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
-import { extractUser } from '@/api-lib/user';
 import { CommentEditor, Comments } from '@/components/comment';
 import { Post } from '@/components/post';
 import nc from 'next-connect';
@@ -42,7 +41,6 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  post.creator = extractUser(post.creator);
   post.createdAt = post.createdAt.toJSON();
   return { props: { post } };
 }
