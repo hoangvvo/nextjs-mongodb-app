@@ -9,18 +9,19 @@ import nc from 'next-connect';
 const upload = multer({ dest: '/tmp' });
 const handler = nc(ncOpts);
 
-/* eslint-disable camelcase */
-const {
-  hostname: cloud_name,
-  username: api_key,
-  password: api_secret,
-} = new URL(process.env.CLOUDINARY_URL);
+if (process.env.CLOUDINARY_URL) {
+  const {
+    hostname: cloud_name,
+    username: api_key,
+    password: api_secret,
+  } = new URL(process.env.CLOUDINARY_URL);
 
-cloudinary.config({
-  cloud_name,
-  api_key,
-  api_secret,
-});
+  cloudinary.config({
+    cloud_name,
+    api_key,
+    api_secret,
+  });
+}
 
 handler.use(all);
 
