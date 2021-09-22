@@ -1,7 +1,6 @@
 import { updateUserById } from '@/api-lib/db';
 import { all } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
-import { extractUser } from '@/api-lib/user';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import nc from 'next-connect';
@@ -53,7 +52,7 @@ handler.patch(upload.single('profilePicture'), async (req, res) => {
     ...(profilePicture && { profilePicture }),
   });
 
-  res.json({ user: extractUser(user) });
+  res.json({ user });
 });
 
 export const config = {
