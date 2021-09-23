@@ -1,5 +1,10 @@
 import { ValidateProps } from '@/api-lib/constants';
-import { createToken, findUserByEmail, updateUserById } from '@/api-lib/db';
+import {
+  createToken,
+  findAndDeleteTokenByIdAndType,
+  findUserByEmail,
+  updateUserById,
+} from '@/api-lib/db';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
 import { database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
