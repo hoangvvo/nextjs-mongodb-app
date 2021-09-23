@@ -1,0 +1,86 @@
+.button {
+  display: block;
+  border-radius: 5px;
+  color: var(--themed-fg, var(--background));
+  background: var(--themed-bg, var(--foreground));
+  border: 1px solid var(--themed-border, var(--foreground));
+  font-weight: 500;
+  padding: 0 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-property: border-color, background, color;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+  font-size: 0.875rem;
+  height: 40px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/** Type **/
+
+.secondary {
+  --themed-bg: var(--background);
+  --themed-fg: var(--secondary);
+  --themed-border: var(--accents-2);
+}
+
+.secondary.button:hover {
+  background: var(--background);
+  color: var(--foreground);
+  border-color: var(--foreground);
+}
+
+.success {
+  --themed-fg: #fff;
+  --themed-bg: var(--success);
+  --themed-border: var(--success);
+}
+
+.error {
+  --themed-fg: #fff;
+  --themed-bg: var(--error);
+  --themed-border: var(--error);
+}
+
+/** Size **/
+
+.large {
+  height: 48px;
+  font-size: 1rem;
+}
+
+/** Variants **/
+
+.invert:hover {
+  background: transparent;
+  color: var(--themed-bg, var(--foreground));
+}
+
+.invert:active {
+  background: var(--accents-2);
+}
+
+.ghost {
+  background: none;
+  border-color: transparent;
+  color: var(--themed-bg);
+  --lighten-color: hsla(0, 0%, 100%, 0.8);
+}
+
+.ghost {
+  background-image: linear-gradient(
+    to right,
+    var(--lighten-color),
+    var(--lighten-color)
+  );
+}
+
+.ghost:hover {
+  background-color: var(--themed-bg, var(--accents-4));
+}
+
+.ghost:focus {
+  --lighten-color: hsla(0, 0%, 100%, 0.7);
+}

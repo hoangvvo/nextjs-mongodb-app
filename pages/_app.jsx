@@ -1,4 +1,5 @@
-import Layout from '@/components/layout';
+import '@/assets/base.css';
+import { Layout } from '@/components/Layout';
 import Head from 'next/head';
 
 export default function MyApp({ Component, pageProps }) {

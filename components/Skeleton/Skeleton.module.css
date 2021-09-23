@@ -1,0 +1,21 @@
+.skeleton {
+  border-radius: 5px;
+  background-image: linear-gradient(
+    270deg,
+    var(--accents-1),
+    var(--accents-2),
+    var(--accents-2),
+    var(--accents-1)
+  );
+  background-size: 400% 100%;
+  animation: loading 8s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

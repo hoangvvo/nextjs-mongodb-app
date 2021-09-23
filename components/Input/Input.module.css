@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  font-size: 0.875rem;
+  align-items: center;
+  max-width: 100%;
+}
+
+.root label {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  display: inline-flex;
+  border: 1px solid var(--accents-2);
+  border-radius: 5px;
+  padding: 0px 12px;
+  background: var(--background);
+  color: var(--foreground);
+  height: 40px;
+  transition: border-color 0.15s ease;
+  outline: 0;
+}
+
+.input:focus {
+  border-color: var(--accents-5);
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--secondary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  max-width: 100%;
+}
+
+.large {
+  height: 48px;
+  font-size: 1rem;
+}

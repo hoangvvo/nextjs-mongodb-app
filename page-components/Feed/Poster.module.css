@@ -1,0 +1,25 @@
+.root {
+  background: var(--background);
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  height: 132px;
+}
+
+.input {
+  flex: 1 1 0%;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.poster {
+  width: 100%;
+}
+
+.heading {
+  font-size: 0.85rem;
+  letter-spacing: 0.2rem;
+  margin-top: 0;
+  padding-left: 0.2rem;
+  color: var(--accents-7);
+}

@@ -1,0 +1,47 @@
+.title {
+  font-size: 8rem;
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 24px 0 64px;
+}
+
+.title > span {
+  display: block;
+}
+
+.nextjs {
+  background: linear-gradient(90deg, #7928ca, #ff0080);
+}
+
+.mongodb {
+  background: linear-gradient(90deg, rgb(110, 96, 245), rgb(131, 219, 167));
+}
+
+.nextjs,
+.mongodb {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.buttons {
+  max-width: 26rem;
+  margin: 0 auto 64px;
+}
+
+.button {
+  height: 50px;
+  padding: 0px 25px;
+  min-width: 200px;
+}
+
+.subtitle {
+  color: var(--secondary);
+  font-weight: 400;
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 8px 0 64px;
+}

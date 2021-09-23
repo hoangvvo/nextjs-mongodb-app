@@ -1,16 +1,16 @@
 import { useCurrentUser } from '@/lib/user';
+import { Login } from '@/page-components/Auth';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
-  const [user, { mutate }] = useCurrentUser();
+  const { data: { user } = {}, mutate } = useCurrentUser();
   useEffect(() => {
     // redirect to home if user is authenticated
-    if (user) router.push('/');
+    // if (user) router.push('/');
   }, [user, router]);
 
   async function onSubmit(e) {
@@ -35,32 +35,9 @@ const LoginPage = () => {
   return (
     <>
       <Head>
-        <title>Sign in</title>
+        <title>Login</title>
       </Head>
-      <h2>Sign in</h2>
-      <form onSubmit={onSubmit}>
-        {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
-        <label htmlFor="email">
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Email address"
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
-        </label>
-        <button type="submit">Sign in</button>
-        <Link href="/forget-password">
-          <a>Forget password</a>
-        </Link>
-      </form>
+      <Login />
     </>
   );
 };

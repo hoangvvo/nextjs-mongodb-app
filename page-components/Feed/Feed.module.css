@@ -1,0 +1,4 @@
+.root {
+  background: var(--accents-1);
+  min-height: calc(100vh);
+}

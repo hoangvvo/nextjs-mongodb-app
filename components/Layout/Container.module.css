@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  min-width: 1px;
+  max-width: 100%;
+}
+
+.column {
+  flex-direction: column;
+}

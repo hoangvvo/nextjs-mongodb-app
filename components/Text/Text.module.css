@@ -1,0 +1,14 @@
+.text {
+  margin: 0;
+  color: var(--color);
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.highlight:hover {
+  text-decoration: underline;
+}

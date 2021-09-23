@@ -1,0 +1,44 @@
+@import 'node_modules/modern-normalize/modern-normalize.css';
+
+:root {
+  --background: #fff;
+  --foreground: #000;
+  --accents-1: #fafafa;
+  --accents-2: #eaeaea;
+  --accents-3: #999;
+  --accents-4: #888;
+  --accents-5: #666;
+  --accents-6: #444;
+  --accents-7: #333;
+  --accents-8: #111;
+  --success-light: #3291ff;
+  --success: #0070f3;
+  --success-dark: #0761d1;
+  --error-light: #ff1a1a;
+  --error: #e00;
+  --error-dark: #c50000;
+  --secondary: #666;
+  --link: var(--success);
+  --nav-height: 48px;
+}
+
+[data-theme='dark'] {
+  --foreground: #fff;
+  --background: #000;
+  --accents-8: #fafafa;
+  --accents-7: #eaeaea;
+  --accents-6: #999;
+  --accents-5: #888;
+  --accents-4: #666;
+  --accents-3: #444;
+  --accents-2: #333;
+  --accents-1: #111;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
+}

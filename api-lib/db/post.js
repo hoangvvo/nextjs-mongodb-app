@@ -1,29 +1,51 @@
 import { nanoid } from 'nanoid';
 import { dbProjectionUsers } from './user';
 
-export async function findPostById(db, id, withUser) {
-  const post = await db.collection('posts').findOne({ _id: id });
-  if (!post) return null;
-  post.creator = await db
-    .collection('users')
-    .findOne({ _id: post.creatorId }, { projection: dbProjectionUsers() });
-  return post;
+export async function findPostById(db, id) {
+  const posts = await db.collection('posts').aggregate([
+    { $match: { _id: id } },
+    { $limit: 1 },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'creatorId',
+        foreignField: '_id',
+        as: 'creator',
+      },
+    },
+    { $unwind: '$creator' },
+    { $project: dbProjectionUsers('creator.') },
+  ]);
+  if (!posts[0]) return null;
+  return posts[0];
 }
 
 export async function findPosts(db, from, by, limit = 10) {
   return db
     .collection('posts')
-    .find({
-      // Pagination: Fetch posts from before the input date or fetch from newest
-      ...(from && {
-        createdAt: {
-          $lte: from,
+    .aggregate([
+      {
+        $match: {
+          ...(from && {
+            createdAt: {
+              $lte: from,
+            },
+          }),
+          ...(by && { creatorId: by }),
         },
-      }),
-      ...(by && { creatorId: by }),
-    })
-    .sort({ $natural: -1 })
-    .limit(limit)
+      },
+      { $limit: limit },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'creatorId',
+          foreignField: '_id',
+          as: 'creator',
+        },
+      },
+      { $unwind: '$creator' },
+      { $project: dbProjectionUsers('creator.') },
+    ])
     .toArray();
 }
 

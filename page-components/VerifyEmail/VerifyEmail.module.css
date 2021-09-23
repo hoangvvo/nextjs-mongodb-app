@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - var(--nav-height));
+}
+
+.text {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
