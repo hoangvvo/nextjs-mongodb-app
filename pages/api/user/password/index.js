@@ -1,8 +1,7 @@
 import { ValidateProps } from '@/api-lib/constants';
-import { UNSAFE_findUserForAuth, updateUserById } from '@/api-lib/db';
+import { updateUserPasswordByOldPassword } from '@/api-lib/db';
 import { all, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
-import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
@@ -25,20 +24,17 @@ handler.put(
     }
     const { oldPassword, newPassword } = req.body;
 
-    if (
-      !(await bcrypt.compare(
-        oldPassword,
-        (
-          await UNSAFE_findUserForAuth(req.db, req.user._id, true)
-        ).password
-      ))
-    ) {
+    const success = await updateUserPasswordByOldPassword(
+      req.db,
+      req.user._id,
+      oldPassword,
+      newPassword
+    );
+
+    if (!success) {
       res.status(401).send('The password you has entered is incorrect.');
       return;
     }
-    const password = await bcrypt.hash(newPassword, 10);
-
-    await updateUserById(req.db, req.user._id, { password });
 
     res.end('ok');
   }

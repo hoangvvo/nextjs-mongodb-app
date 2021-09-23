@@ -11,10 +11,9 @@ handler.post(passport.authenticate('local'), (req, res) => {
   res.json({ user: req.user });
 });
 
-handler.delete((req, res) => {
-  req.session.destroy(() => {
-    res.status(204).end();
-  });
+handler.delete(async (req, res) => {
+  await req.session.destroy();
+  res.status(204).end();
 });
 
 export default handler;

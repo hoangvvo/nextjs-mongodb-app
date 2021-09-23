@@ -3,12 +3,11 @@ import {
   createToken,
   findAndDeleteTokenByIdAndType,
   findUserByEmail,
-  updateUserById,
+  UNSAFE_updateUserPassword,
 } from '@/api-lib/db';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
 import { database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
-import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
@@ -75,8 +74,11 @@ handler.put(
       res.status(403).send('This link may have been expired.');
       return;
     }
-    const password = await bcrypt.hash(req.body.password, 10);
-    await updateUserById(req.db, deletedToken.creatorId, { password });
+    await UNSAFE_updateUserPassword(
+      req.db,
+      deletedToken.creatorId,
+      req.body.password
+    );
     res.end('ok');
   }
 );
