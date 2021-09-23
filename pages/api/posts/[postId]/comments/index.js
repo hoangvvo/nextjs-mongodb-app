@@ -13,7 +13,7 @@ handler.get(async (req, res) => {
   const post = await findPostById(req.db, req.query.postId);
 
   if (!post) {
-    return res.status(404).send('post not found');
+    return res.status(404).json({ error: { message: 'Post is not found' } });
   }
 
   const comments = await findComments(
@@ -23,7 +23,7 @@ handler.get(async (req, res) => {
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
 
-  return res.send({ comments });
+  return res.json({ comments });
 });
 
 handler.post(
@@ -37,7 +37,7 @@ handler.post(
   }),
   async (req, res) => {
     if (!req.user) {
-      return res.status(401).send('unauthenticated');
+      return res.status(401).end();
     }
 
     const content = req.body.content;
@@ -45,7 +45,7 @@ handler.post(
     const post = await findPostById(req.db, req.query.postId);
 
     if (!post) {
-      return res.status(404).send('post not found');
+      return res.status(404).json({ error: { message: 'Post is not found' } });
     }
 
     const comment = await insertComment(req.db, post._id, {

@@ -16,7 +16,7 @@ handler.get(async (req, res) => {
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
 
-  res.send({ posts });
+  res.json({ posts });
 });
 
 handler.post(
@@ -30,7 +30,7 @@ handler.post(
   }),
   async (req, res) => {
     if (!req.user) {
-      return res.status(401).send('unauthenticated');
+      return res.status(401).end();
     }
 
     const post = await insertPost(req.db, {

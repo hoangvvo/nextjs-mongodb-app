@@ -9,9 +9,11 @@ export function validateBody(schema) {
       return next();
     } else {
       const error = validate.errors[0];
-      return res
-        .status(400)
-        .end(`"${error.instancePath.substring(1)}" ${error.message}`);
+      return res.status(400).json({
+        error: {
+          message: `"${error.instancePath.substring(1)}" ${error.message}`,
+        },
+      });
     }
   };
 }

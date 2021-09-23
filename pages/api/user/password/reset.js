@@ -27,7 +27,9 @@ handler.post(
   async (req, res) => {
     const user = await findUserByEmail(req.db, req.body.email);
     if (!user) {
-      res.status(401).send('The email is not found');
+      res.status(401).json({
+        error: { message: 'We couldn’t find that email. Please try again.' },
+      });
       return;
     }
 
@@ -49,7 +51,7 @@ handler.post(
       `,
     });
 
-    res.end('ok');
+    res.status(204).end();
   }
 );
 
@@ -70,12 +72,12 @@ handler.put(
       'passwordReset'
     );
     if (!deletedToken) {
-      res.status(403).send('This link may have been expired.');
+      res.status(403).end();
       return;
     }
     const password = await bcrypt.hash(req.body.password, 10);
     await updateUserById(req.db, deletedToken.creatorId, { password });
-    res.end('ok');
+    res.status(204).end();
   }
 );
 

@@ -10,7 +10,7 @@ handler.use(all);
 
 handler.post(async (req, res) => {
   if (!req.user) {
-    res.json(401).send('you need to be authenticated');
+    res.json(401).end();
     return;
   }
 
@@ -32,7 +32,7 @@ handler.post(async (req, res) => {
       `,
   });
 
-  res.end('ok');
+  res.status(204).end();
 });
 
 export default handler;

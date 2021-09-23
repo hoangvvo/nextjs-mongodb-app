@@ -9,7 +9,7 @@ handler.use(database);
 
 handler.get(async (req, res) => {
   const user = await findUserById(req.db, req.query.userId);
-  res.send({ user });
+  res.json({ user });
 });
 
 export default handler;
