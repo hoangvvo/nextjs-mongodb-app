@@ -1,9 +1,9 @@
-import { nanoid } from 'nanoid';
+import { ObjectId } from 'mongodb';
 import { dbProjectionUsers } from './user';
 
 export async function findPostById(db, id) {
   const posts = await db.collection('posts').aggregate([
-    { $match: { _id: id } },
+    { $match: { _id: new ObjectId(id) } },
     { $limit: 1 },
     {
       $lookup: {
@@ -35,6 +35,7 @@ export async function findPosts(db, from, by, limit = 10) {
         },
       },
       { $limit: limit },
+      { $sort: { _id: -1 } },
       {
         $lookup: {
           from: 'users',
@@ -51,11 +52,11 @@ export async function findPosts(db, from, by, limit = 10) {
 
 export async function insertPost(db, { content, creatorId }) {
   const post = {
-    _id: nanoid(12),
     content,
     creatorId,
     createdAt: new Date(),
   };
-  await db.collection('posts').insertOne(post);
+  const { insertedId } = await db.collection('posts').insertOne(post);
+  post._id = insertedId;
   return post;
 }
