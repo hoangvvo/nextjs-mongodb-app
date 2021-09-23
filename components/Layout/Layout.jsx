@@ -1,4 +1,22 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import Container from './Container';
+import styles from './Layout.module.css';
+import Wrapper from './Wrapper';
+
+const Header = () => {
+  return (
+    <nav className={styles.nav}>
+      <Wrapper className={styles.navWrap}>
+        <Container className={styles.navContent} alignItems="center">
+          <Link href="/">
+            <a className={styles.logo}>Next.js MongoDB App</a>
+          </Link>
+        </Container>
+      </Wrapper>
+    </nav>
+  );
+};
 
 const Layout = ({ children }) => {
   return (
@@ -24,7 +42,8 @@ const Layout = ({ children }) => {
           content="https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd"
         />
       </Head>
-      <main>{children}</main>
+      <Header />
+      <main className={styles.main}>{children}</main>
     </>
   );
 };

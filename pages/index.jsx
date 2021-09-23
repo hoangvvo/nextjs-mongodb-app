@@ -1,4 +1,4 @@
-import { Index } from 'page-components/Index';
+import { Index } from '@/page-components/Index';
 
 const IndexPage = () => {
   return <Index />;

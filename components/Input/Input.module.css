@@ -36,3 +36,8 @@
   margin-bottom: 8px;
   max-width: 100%;
 }
+
+.large {
+  height: 48px;
+  font-size: 1rem;
+}

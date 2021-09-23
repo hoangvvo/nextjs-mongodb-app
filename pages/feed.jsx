@@ -1,4 +1,4 @@
-import { Feed } from 'page-components/Feed';
+import { Feed } from '@/page-components/Feed';
 
 const FeedPage = () => {
   return <Feed />;

@@ -18,6 +18,8 @@
   --error: #e00;
   --error-dark: #c50000;
   --secondary: #666;
+  --link: var(--success);
+  --nav-height: 48px;
 }
 
 [data-theme='dark'] {
@@ -37,4 +39,6 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
 }

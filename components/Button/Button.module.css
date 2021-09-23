@@ -18,14 +18,7 @@
   text-decoration: none;
 }
 
-.button:hover {
-  background: transparent;
-  color: var(--themed-bg, var(--foreground));
-}
-
-.button:active {
-  background: var(--accents-2);
-}
+/** Type **/
 
 .secondary {
   --themed-bg: var(--background);
@@ -49,4 +42,45 @@
   --themed-fg: #fff;
   --themed-bg: var(--error);
   --themed-border: var(--error);
+}
+
+/** Size **/
+
+.large {
+  height: 48px;
+  font-size: 1rem;
+}
+
+/** Variants **/
+
+.invert:hover {
+  background: transparent;
+  color: var(--themed-bg, var(--foreground));
+}
+
+.invert:active {
+  background: var(--accents-2);
+}
+
+.ghost {
+  background: none;
+  border-color: transparent;
+  color: var(--themed-bg);
+  --lighten-color: hsla(0, 0%, 100%, 0.8);
+}
+
+.ghost {
+  background-image: linear-gradient(
+    to right,
+    var(--lighten-color),
+    var(--lighten-color)
+  );
+}
+
+.ghost:hover {
+  background-color: var(--themed-bg, var(--accents-4));
+}
+
+.ghost:focus {
+  --lighten-color: hsla(0, 0%, 100%, 0.7);
 }

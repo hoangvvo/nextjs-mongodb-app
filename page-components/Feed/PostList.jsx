@@ -1,3 +1,5 @@
+import { Spacer } from '@/components/Layout';
+import Wrapper from '@/components/Layout/Wrapper';
 import { Post } from '@/components/Post';
 import { usePostPages } from '@/lib/post';
 import Link from 'next/link';
@@ -19,14 +21,20 @@ const PostList = () => {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.posts?.length < PAGE_SIZE);
   return (
-    <div>
-      {posts.map((post) => (
-        <Link key={post._id} href={`/user/${post.creatorId}/${post._id}`}>
-          <a className={styles.wrapper}>
-            <Post className={styles.post} post={post} />
-          </a>
-        </Link>
-      ))}
+    <div className={styles.root}>
+      <Spacer axis="vertical" size={1} />
+      <Wrapper>
+        {posts.map((post) => (
+          <Link
+            key={post._id}
+            href={`/user/${post.creator.username}/${post._id}`}
+          >
+            <a className={styles.wrap}>
+              <Post className={styles.post} post={post} />
+            </a>
+          </Link>
+        ))}
+      </Wrapper>
     </div>
   );
 };

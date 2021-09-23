@@ -3,12 +3,18 @@ import { forwardRef } from 'react';
 import styles from './Button.module.css';
 
 export const Button = forwardRef(function Button(
-  { children, type, className, onClick },
+  { children, type, className, onClick, size, variant = 'invert' },
   ref
 ) {
   return (
     <button
-      className={clsx(styles.button, type && styles[type], className)}
+      className={clsx(
+        styles.button,
+        type && styles[type],
+        size && styles[size],
+        styles[variant],
+        className
+      )}
       ref={ref}
       onClick={onClick}
     >
@@ -18,12 +24,18 @@ export const Button = forwardRef(function Button(
 });
 
 export const ButtonLink = forwardRef(function Button(
-  { children, type, className, href, onClick },
+  { children, type, className, href, onClick, size, variant = 'invert' },
   ref
 ) {
   return (
     <a
-      className={clsx(styles.button, type && styles[type], className)}
+      className={clsx(
+        styles.button,
+        type && styles[type],
+        size && styles[size],
+        variant && styles[variant],
+        className
+      )}
       ref={ref}
       href={href}
       onClick={onClick}

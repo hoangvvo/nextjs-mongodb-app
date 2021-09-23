@@ -8,7 +8,6 @@ export function validateBody(schema) {
     if (valid) {
       return next();
     } else {
-      console.log(validate.errors);
       const error = validate.errors[0];
       return res
         .status(400)

@@ -1,6 +1,5 @@
 import { Avatar } from '@/components/Avatar';
 import { Container } from '@/components/Layout';
-import { useUser } from '@/lib/user';
 import { format } from '@lukeed/ms';
 import clsx from 'clsx';
 import { useMemo } from 'react';
@@ -9,7 +8,6 @@ import styles from './Post.module.css';
 const _now = Date.now();
 
 const Post = ({ post, className }) => {
-  const { data: { user } = {} } = useUser(post.creatorId);
   const timestampTxt = useMemo(
     () => format(_now - new Date(post.createdAt).getTime(), true),
     [post.createdAt]
@@ -19,12 +17,12 @@ const Post = ({ post, className }) => {
       <Container>
         <Avatar
           size={36}
-          url={user?.profilePicture}
-          username={user?.username || '?'}
+          url={post.creator.profilePicture}
+          username={post.creator.username}
         />
         <Container column className={styles.meta}>
-          <p className={styles.name}>{user?.name}</p>
-          <p className={styles.username}>{user?.username}</p>
+          <p className={styles.name}>{post.creator.name}</p>
+          <p className={styles.username}>{post.creator.username}</p>
         </Container>
       </Container>
       <div className={styles.wrap}>

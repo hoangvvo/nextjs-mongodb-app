@@ -3,25 +3,15 @@ import { all } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 import Head from 'next/head';
+import { VerifyEmail } from 'page-components/VerifyEmail';
 
-export default function EmailVerifyPage({ success }) {
+export default function EmailVerifyPage({ valid }) {
   return (
     <>
       <Head>
         <title>Sign up</title>
       </Head>
-      <style jsx>
-        {`
-          p {
-            text-align: center;
-          }
-        `}
-      </style>
-      <p>
-        {success
-          ? 'Thank you for verifying your email address. You may close this page.'
-          : 'This link may have been expired.'}
-      </p>
+      <VerifyEmail valid={valid} />
     </>
   );
 }
@@ -39,11 +29,11 @@ export async function getServerSideProps(ctx) {
     'emailVerify'
   );
 
-  if (!deletedToken) return { props: { success: false } };
+  if (!deletedToken) return { props: { valid: false } };
 
   await updateUserById(ctx.req.db, deletedToken.creatorId, {
     emailVerified: true,
   });
 
-  return { props: { success: true } };
+  return { props: { valid: true } };
 }
