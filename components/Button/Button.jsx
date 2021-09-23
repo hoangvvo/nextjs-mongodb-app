@@ -1,9 +1,19 @@
+import { LoadingDots } from '@/components/LoadingDots';
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import styles from './Button.module.css';
 
 export const Button = forwardRef(function Button(
-  { children, type, className, onClick, size, variant = 'invert' },
+  {
+    children,
+    type,
+    className,
+    onClick,
+    size,
+    variant = 'invert',
+    loading,
+    disabled,
+  },
   ref
 ) {
   return (
@@ -17,7 +27,9 @@ export const Button = forwardRef(function Button(
       )}
       ref={ref}
       onClick={onClick}
+      disabled={loading || disabled}
     >
+      {loading && <LoadingDots className={styles.loading} />}
       <span>{children}</span>
     </button>
   );

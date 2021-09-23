@@ -10,6 +10,7 @@ import { database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
+import normalizeEmail from 'validator/lib/normalizeEmail';
 
 const handler = nc(ncOpts);
 
@@ -25,9 +26,10 @@ handler.post(
     additionalProperties: false,
   }),
   async (req, res) => {
-    const user = await findUserByEmail(req.db, req.body.email);
+    const email = normalizeEmail(req.body.email);
+    const user = await findUserByEmail(req.db, email);
     if (!user) {
-      res.status(401).json({
+      res.status(400).json({
         error: { message: 'We couldn’t find that email. Please try again.' },
       });
       return;
@@ -40,7 +42,7 @@ handler.post(
     });
 
     await sendMail({
-      to: user.email,
+      to: email,
       from: MAIL_CONFIG.from,
       subject: '[nextjs-mongodb-app] Reset your password.',
       html: `

@@ -6,9 +6,7 @@ export async function UNSAFE_findUserForAuth(db, userId, all) {
     .collection('users')
     .findOne(
       { _id: new ObjectId(userId) },
-      {
-        projection: !all ? { password: 0 } : undefined,
-      }
+      { projection: !all ? { password: 0 } : undefined }
     )
     .then((user) => user || null);
 }

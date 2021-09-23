@@ -1,6 +1,7 @@
 .text {
   margin: 0;
   color: var(--color);
+  line-height: normal;
 }
 
 .link {
