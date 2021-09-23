@@ -1,12 +1,12 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { UNSAFE_findUserForAuth, updateUserById } from '@/api-lib/db';
-import { all, validateBody } from '@/api-lib/middlewares';
+import { auth, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
-handler.use(all);
+handler.use(database, auth);
 
 handler.put(
   validateBody({

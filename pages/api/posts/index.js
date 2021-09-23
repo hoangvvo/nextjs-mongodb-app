@@ -1,12 +1,12 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findPosts, insertPost } from '@/api-lib/db';
-import { all, validateBody } from '@/api-lib/middlewares';
+import { auth, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(all);
+handler.use(database);
 
 handler.get(async (req, res) => {
   const posts = await findPosts(
@@ -20,6 +20,7 @@ handler.get(async (req, res) => {
 });
 
 handler.post(
+  auth,
   validateBody({
     type: 'object',
     properties: {
