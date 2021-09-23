@@ -1,11 +1,11 @@
-import { nanoid } from 'nanoid';
+import { ObjectId } from 'mongodb';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
 export async function UNSAFE_findUserForAuth(db, userId, all) {
   return db
     .collection('users')
     .findOne(
-      { _id: userId },
+      { _id: new ObjectId(userId) },
       {
         projection: !all ? { password: 0 } : undefined,
       }
@@ -16,7 +16,7 @@ export async function UNSAFE_findUserForAuth(db, userId, all) {
 export async function findUserById(db, userId) {
   return db
     .collection('users')
-    .findOne({ _id: userId }, { projection: dbProjectionUsers() })
+    .findOne({ _id: new ObjectId(userId) }, { projection: dbProjectionUsers() })
     .then((user) => user || null);
 }
 
@@ -39,7 +39,7 @@ export async function updateUserById(db, id, data) {
   return db
     .collection('users')
     .findOneAndUpdate(
-      { _id: id },
+      { _id: new ObjectId(id) },
       { $set: data },
       { returnDocument: 'after', projection: dbProjectionUsers() }
     )
@@ -51,7 +51,6 @@ export async function insertUser(
   { email, password, bio = '', name, profilePicture, username }
 ) {
   const user = {
-    _id: nanoid(12),
     emailVerified: false,
     profilePicture,
     email,
@@ -59,7 +58,10 @@ export async function insertUser(
     username,
     bio,
   };
-  await db.collection('users').insertOne({ ...user, password });
+  const { insertedId } = await db
+    .collection('users')
+    .insertOne({ ...user, password });
+  user._id = insertedId;
   return user;
 }
 

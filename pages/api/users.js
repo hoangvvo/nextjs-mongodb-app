@@ -1,6 +1,6 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
-import { all, validateBody } from '@/api-lib/middlewares';
+import { auth, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
 import bcrypt from 'bcryptjs';
@@ -10,7 +10,7 @@ import normalizeEmail from 'validator/lib/normalizeEmail';
 
 const handler = nc(ncOpts);
 
-handler.use(all);
+handler.use(database, auth);
 
 handler.post(
   validateBody({
@@ -29,15 +29,21 @@ handler.post(
     username = slugUsername(req.body.username);
     email = normalizeEmail(req.body.email);
     if (!isEmail(email)) {
-      res.status(400).send('The email you entered is invalid.');
+      res
+        .status(400)
+        .json({ error: { message: 'The email you entered is invalid.' } });
       return;
     }
     if (await findUserByEmail(req.db, email)) {
-      res.status(403).send('The email has already been used.');
+      res
+        .status(403)
+        .json({ error: { message: 'The email has already been used.' } });
       return;
     }
     if (await findUserByUsername(req.db, username)) {
-      res.status(403).send('The username has already been taken.');
+      res
+        .status(403)
+        .json({ error: { message: 'The username has already been taken.' } });
       return;
     }
     const hashedPassword = await bcrypt.hash(password, 10);

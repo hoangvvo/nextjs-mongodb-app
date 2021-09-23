@@ -1,5 +1,10 @@
 import { ValidateProps } from '@/api-lib/constants';
-import { createToken, findUserByEmail, updateUserById } from '@/api-lib/db';
+import {
+  createToken,
+  findAndDeleteTokenByIdAndType,
+  findUserByEmail,
+  updateUserById,
+} from '@/api-lib/db';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
 import { database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
@@ -22,7 +27,9 @@ handler.post(
   async (req, res) => {
     const user = await findUserByEmail(req.db, req.body.email);
     if (!user) {
-      res.status(401).send('The email is not found');
+      res.status(401).json({
+        error: { message: 'We couldn’t find that email. Please try again.' },
+      });
       return;
     }
 
@@ -44,7 +51,7 @@ handler.post(
       `,
     });
 
-    res.end('ok');
+    res.status(204).end();
   }
 );
 
@@ -65,12 +72,12 @@ handler.put(
       'passwordReset'
     );
     if (!deletedToken) {
-      res.status(403).send('This link may have been expired.');
+      res.status(403).end();
       return;
     }
     const password = await bcrypt.hash(req.body.password, 10);
     await updateUserById(req.db, deletedToken.creatorId, { password });
-    res.end('ok');
+    res.status(204).end();
   }
 );
 

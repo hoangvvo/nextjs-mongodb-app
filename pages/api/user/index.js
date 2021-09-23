@@ -1,6 +1,6 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { updateUserById } from '@/api-lib/db';
-import { all, validateBody } from '@/api-lib/middlewares';
+import { auth, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
@@ -23,13 +23,11 @@ if (process.env.CLOUDINARY_URL) {
   });
 }
 
-handler.use(all);
+handler.use(database, auth);
 
 handler.get(async (req, res) => {
-  // Filter out password
   if (!req.user) return res.json({ user: null });
-  const { password, ...u } = req.user;
-  return res.json({ user: u });
+  return res.json({ user: req.user });
 });
 
 handler.patch(

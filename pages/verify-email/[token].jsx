@@ -1,5 +1,5 @@
 import { findAndDeleteTokenByIdAndType, updateUserById } from '@/api-lib/db';
-import { all } from '@/api-lib/middlewares';
+import { auth, database } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 import Head from 'next/head';
@@ -16,22 +16,22 @@ export default function EmailVerifyPage({ valid }) {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(context) {
   const handler = nc(ncOpts);
-  handler.use(all);
-  await handler.run(ctx.req, ctx.res);
+  handler.use(database, auth);
+  await handler.run(context.req, context.res);
 
-  const { token } = ctx.query;
+  const { token } = context.query;
 
   const deletedToken = await findAndDeleteTokenByIdAndType(
-    ctx.req.db,
+    context.req.db,
     token,
     'emailVerify'
   );
 
   if (!deletedToken) return { props: { valid: false } };
 
-  await updateUserById(ctx.req.db, deletedToken.creatorId, {
+  await updateUserById(context.req.db, deletedToken.creatorId, {
     emailVerified: true,
   });
 

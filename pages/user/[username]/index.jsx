@@ -19,6 +19,7 @@ export default function UserPage({ user }) {
 
 export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
+
   const user = await findUserByUsername(
     context.req.db,
     context.params.username

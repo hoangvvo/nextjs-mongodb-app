@@ -1,19 +1,19 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findPostById } from '@/api-lib/db';
 import { findComments, insertComment } from '@/api-lib/db/comment';
-import { all, validateBody } from '@/api-lib/middlewares';
+import { auth, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(all);
+handler.use(database);
 
 handler.get(async (req, res) => {
   const post = await findPostById(req.db, req.query.postId);
 
   if (!post) {
-    return res.status(404).send('post not found');
+    return res.status(404).json({ error: { message: 'Post is not found.' } });
   }
 
   const comments = await findComments(
@@ -23,10 +23,11 @@ handler.get(async (req, res) => {
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
 
-  return res.send({ comments });
+  return res.json({ comments });
 });
 
 handler.post(
+  auth,
   validateBody({
     type: 'object',
     properties: {
@@ -37,7 +38,7 @@ handler.post(
   }),
   async (req, res) => {
     if (!req.user) {
-      return res.status(401).send('unauthenticated');
+      return res.status(401).end();
     }
 
     const content = req.body.content;
@@ -45,7 +46,7 @@ handler.post(
     const post = await findPostById(req.db, req.query.postId);
 
     if (!post) {
-      return res.status(404).send('post not found');
+      return res.status(404).json({ error: { message: 'Post is not found.' } });
     }
 
     const comment = await insertComment(req.db, post._id, {
