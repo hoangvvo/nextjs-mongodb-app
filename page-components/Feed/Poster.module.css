@@ -1,9 +1,14 @@
 .root {
   background: var(--background);
   padding: 32px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-smallest);
   border-radius: 8px;
   height: 132px;
+  transition: ease 0.2s box-shadow;
+}
+
+.root:hover {
+  box-shadow: var(--shadow-medium);
 }
 
 .input {

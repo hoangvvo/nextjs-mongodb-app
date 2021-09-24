@@ -1,0 +1,29 @@
+.root {
+  background: var(--background);
+  padding: 32px;
+  box-shadow: var(--shadow-smallest);
+  border-radius: 8px;
+  height: 132px;
+  transition: ease 0.2s box-shadow;
+}
+
+.root:hover {
+  box-shadow: var(--shadow-medium);
+}
+
+.input {
+  flex: 1 1 0%;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.poster {
+  width: 100%;
+}
+
+.heading {
+  font-size: 0.85rem;
+  margin-top: 0;
+  padding-left: 0.2rem;
+  color: var(--accents-6);
+}

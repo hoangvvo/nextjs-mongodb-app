@@ -1,15 +1,20 @@
+import bcrypt from 'bcryptjs';
 import { ObjectId } from 'mongodb';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
-export async function UNSAFE_findUserForAuth(db, userId, all) {
+export async function findUserWithEmailAndPassword(db, email, password) {
+  email = normalizeEmail(email);
+  const user = await db.collection('users').findOne({ email });
+  if (user && (await bcrypt.compare(password, user.password))) {
+    return { ...user, password: undefined }; // filtered out password
+  }
+  return null;
+}
+
+export async function UNSAFE_findUserForAuth(db, userId) {
   return db
     .collection('users')
-    .findOne(
-      { _id: new ObjectId(userId) },
-      {
-        projection: !all ? { password: 0 } : undefined,
-      }
-    )
+    .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })
     .then((user) => user || null);
 }
 
@@ -41,14 +46,14 @@ export async function updateUserById(db, id, data) {
     .findOneAndUpdate(
       { _id: new ObjectId(id) },
       { $set: data },
-      { returnDocument: 'after', projection: dbProjectionUsers() }
+      { returnDocument: 'after', projection: { password: 0 } }
     )
     .then(({ value }) => value);
 }
 
 export async function insertUser(
   db,
-  { email, password, bio = '', name, profilePicture, username }
+  { email, originalPassword, bio = '', name, profilePicture, username }
 ) {
   const user = {
     emailVerified: false,
@@ -58,11 +63,36 @@ export async function insertUser(
     username,
     bio,
   };
+  const password = await bcrypt.hash(originalPassword, 10);
   const { insertedId } = await db
     .collection('users')
     .insertOne({ ...user, password });
   user._id = insertedId;
   return user;
+}
+
+export async function updateUserPasswordByOldPassword(
+  db,
+  id,
+  oldPassword,
+  newPassword
+) {
+  const user = await db.collection('users').findOne(new ObjectId(id));
+  if (!user) return false;
+  const matched = await bcrypt.compare(oldPassword, user.password);
+  if (!matched) return false;
+  const password = await bcrypt.hash(newPassword, 10);
+  await db
+    .collection('users')
+    .updateOne({ _id: new ObjectId(id) }, { $set: { password } });
+  return true;
+}
+
+export async function UNSAFE_updateUserPassword(db, id, newPassword) {
+  const password = await bcrypt.hash(newPassword, 10);
+  await db
+    .collection('users')
+    .updateOne({ _id: new ObjectId(id) }, { $set: { password } });
 }
 
 export function dbProjectionUsers(prefix = '') {

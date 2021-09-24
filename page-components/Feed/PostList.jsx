@@ -1,25 +1,18 @@
-import { Spacer } from '@/components/Layout';
+import { Button } from '@/components/Button';
+import { Container, Spacer } from '@/components/Layout';
 import Wrapper from '@/components/Layout/Wrapper';
 import { Post } from '@/components/Post';
+import { Text } from '@/components/Text';
 import { usePostPages } from '@/lib/post';
 import Link from 'next/link';
 import styles from './PostList.module.css';
-const PAGE_SIZE = 10;
 
 const PostList = () => {
-  const { data, error, size, setSize } = usePostPages({
-    limit: PAGE_SIZE,
-  });
+  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages();
   const posts = data
     ? data.reduce((acc, val) => [...acc, ...val.posts], [])
     : [];
-  const isLoadingInitialData = !data && !error;
-  const isLoadingMore =
-    isLoadingInitialData ||
-    (size > 0 && data && typeof data[size - 1] === 'undefined');
-  const isEmpty = data?.[0]?.length === 0;
-  const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.posts?.length < PAGE_SIZE);
+
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
@@ -27,13 +20,28 @@ const PostList = () => {
         {posts.map((post) => (
           <Link
             key={post._id}
-            href={`/user/${post.creator.username}/${post._id}`}
+            href={`/user/${post.creator.username}/post/${post._id}`}
+            passHref
           >
-            <a className={styles.wrap}>
+            <div className={styles.wrap}>
               <Post className={styles.post} post={post} />
-            </a>
+            </div>
           </Link>
         ))}
+        <Container justifyContent="center">
+          {isReachingEnd ? (
+            <Text color="secondary">No more posts are found</Text>
+          ) : (
+            <Button
+              variant="ghost"
+              type="success"
+              loading={isLoadingMore}
+              onClick={() => setSize(size + 1)}
+            >
+              Load more
+            </Button>
+          )}
+        </Container>
       </Wrapper>
     </div>
   );

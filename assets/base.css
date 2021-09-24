@@ -18,6 +18,11 @@
   --error: #e00;
   --error-dark: #c50000;
   --secondary: #666;
+  --header-background: hsla(0, 0%, 100%, 0.8);
+  --shadow-smallest: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-large: 0 30px 60px rgba(0, 0, 0, 0.12);
+
   --link: var(--success);
   --nav-height: 48px;
 }
@@ -33,6 +38,11 @@
   --accents-3: #444;
   --accents-2: #333;
   --accents-1: #111;
+  --secondary: var(--accents-5);
+  --header-background: rgba(0, 0, 0, 0.5);
+  --shadow-smallest: 0 0 0 1px var(--accents-2);
+  --shadow-medium: 0 0 0 1px var(--accents-2);
+  --shadow-large: 0 0 0 1px var(--accents-2);
 }
 
 body {

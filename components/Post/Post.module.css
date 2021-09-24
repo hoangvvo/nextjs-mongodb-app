@@ -5,10 +5,24 @@
   background: var(--background);
   border: 1px solid var(--accents-2);
   border-radius: 5px;
+  box-shadow: var(--shadow-smallest);
+}
+
+.root a {
+  text-decoration: none;
+}
+
+.creator {
+  display: inline-flex;
 }
 
 .meta {
   margin-left: 8px;
+}
+
+.meta:hover .name,
+.meta:focus .name {
+  text-decoration: underline;
 }
 
 .name {

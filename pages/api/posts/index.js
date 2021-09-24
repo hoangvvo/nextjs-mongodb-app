@@ -6,12 +6,12 @@ import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(database);
+handler.use(database, auth);
 
 handler.get(async (req, res) => {
   const posts = await findPosts(
     req.db,
-    req.query.from ? new Date(req.query.from) : undefined,
+    req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
@@ -20,7 +20,6 @@ handler.get(async (req, res) => {
 });
 
 handler.post(
-  auth,
   validateBody({
     type: 'object',
     properties: {

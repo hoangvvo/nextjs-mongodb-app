@@ -18,18 +18,27 @@
   text-decoration: none;
 }
 
+.button[disabled] {
+  background: var(--accents-1);
+  color: var(--accents-3);
+  border-color: var(--accents-2);
+  cursor: not-allowed;
+}
+
+.loading {
+  margin-right: 8px;
+}
+
+.loading span {
+  background-color: var(--accents-3);
+}
+
 /** Type **/
 
 .secondary {
   --themed-bg: var(--background);
   --themed-fg: var(--secondary);
   --themed-border: var(--accents-2);
-}
-
-.secondary.button:hover {
-  background: var(--background);
-  color: var(--foreground);
-  border-color: var(--foreground);
 }
 
 .success {
@@ -46,6 +55,11 @@
 
 /** Size **/
 
+.small {
+  height: 32px;
+  font-size: 0.875rem;
+}
+
 .large {
   height: 48px;
   font-size: 1rem;
@@ -53,13 +67,18 @@
 
 /** Variants **/
 
-.invert:hover {
+.invert:not([disabled]):hover {
   background: transparent;
   color: var(--themed-bg, var(--foreground));
 }
 
-.invert:active {
+.invert:not([disabled]):active {
   background: var(--accents-2);
+}
+
+.invert:not([disabled]).secondary:hover {
+  color: var(--foreground);
+  border-color: var(--foreground);
 }
 
 .ghost {
@@ -67,9 +86,6 @@
   border-color: transparent;
   color: var(--themed-bg);
   --lighten-color: hsla(0, 0%, 100%, 0.8);
-}
-
-.ghost {
   background-image: linear-gradient(
     to right,
     var(--lighten-color),
@@ -77,10 +93,18 @@
   );
 }
 
-.ghost:hover {
+[data-theme='dark'] .ghost {
+  --lighten-color: rgba(0, 0, 0, 0.75);
+}
+
+.ghost:not([disabled]):hover {
   background-color: var(--themed-bg, var(--accents-4));
 }
 
-.ghost:focus {
+.ghost:not([disabled]):focus {
   --lighten-color: hsla(0, 0%, 100%, 0.7);
+}
+
+[data-theme='dark'] .ghost:not([disabled]):focus {
+  --lighten-color: rgba(0, 0, 0, 0.7);
 }

@@ -1,29 +1,3 @@
-.header {
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-  margin: 18px auto;
-  max-width: 720px;
-  padding: 32px;
-}
-
-.avatar {
-  margin: 24px 0 12px;
-}
-
-.name {
-  font-size: 2.5rem;
-  text-align: center;
-  color: var(--accents-8);
-}
-
-.username {
-  font-size: 1.5rem;
-  color: var(--success);
-  text-align: center;
-}
-
-.bio {
-  color: var(--secondary);
-  text-align: center;
-  line-height: 1.5;
+.root {
+  padding: 18px 0;
 }

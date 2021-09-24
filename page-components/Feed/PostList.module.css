@@ -1,10 +1,12 @@
 .root {
+  padding-bottom: 4rem;
 }
 
 .wrap {
   display: block;
   margin-bottom: 21px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .post:hover {

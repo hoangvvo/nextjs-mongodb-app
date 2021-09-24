@@ -1,16 +1,10 @@
 import styles from './Avatar.module.css';
 
 const Avatar = ({ size, username, url }) => {
-  if (!url)
-    return (
-      <span className={styles.avatar} style={{ width: size, height: size }}>
-        {username[0]}
-      </span>
-    );
   return (
     <img
       className={styles.avatar}
-      src={url}
+      src={url || '/images/default_user.jpg'}
       alt={username}
       width={size}
       height={size}

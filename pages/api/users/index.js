@@ -3,7 +3,6 @@ import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
 import { auth, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
-import bcrypt from 'bcryptjs';
 import nc from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
@@ -46,10 +45,9 @@ handler.post(
         .json({ error: { message: 'The username has already been taken.' } });
       return;
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
     const user = await insertUser(req.db, {
       email,
-      password: hashedPassword,
+      originalPassword: password,
       bio: '',
       name,
       username,

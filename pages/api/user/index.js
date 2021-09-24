@@ -31,15 +31,15 @@ handler.get(async (req, res) => {
 });
 
 handler.patch(
+  upload.single('profilePicture'),
   validateBody({
     type: 'object',
     properties: {
       name: ValidateProps.user.name,
       bio: ValidateProps.user.bio,
     },
-    additionalProperties: false,
+    additionalProperties: true,
   }),
-  upload.single('profilePicture'),
   async (req, res) => {
     if (!req.user) {
       req.status(401).end();

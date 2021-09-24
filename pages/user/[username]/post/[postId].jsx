@@ -1,10 +1,10 @@
 import { findPostById } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
-import { Post } from '@/page-components/Post';
+import { UserPost } from '@/page-components/UserPost';
 import nc from 'next-connect';
 import Head from 'next/head';
 
-export default function UserPost({ post }) {
+export default function UserPostPage({ post }) {
   if (typeof post.createdAt !== 'string') {
     post.createdAt = new Date(post.createdAt);
   }
@@ -12,10 +12,10 @@ export default function UserPost({ post }) {
     <>
       <Head>
         <title>
-          {post.creator.username}: {post.text}
+          {post.creator.name} ({post.creator.username}): {post.content}
         </title>
       </Head>
-      <Post post={post} />
+      <UserPost post={post} />
     </>
   );
 }
@@ -29,6 +29,7 @@ export async function getServerSideProps(context) {
       notFound: true,
     };
   }
+
   if (context.params.username !== post.creator.username) {
     // mismatch params in url, redirect to correct one
     // eg. post x belongs to user a, but url is /user/b/post/x
@@ -39,6 +40,9 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  post._id = String(post._id);
+  post.creatorId = String(post.creatorId);
+  post.creator._id = String(post.creator._id);
   post.createdAt = post.createdAt.toJSON();
   return { props: { post } };
 }

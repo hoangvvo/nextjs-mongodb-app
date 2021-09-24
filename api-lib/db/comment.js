@@ -8,15 +8,11 @@ export async function findComments(db, postId, from, limit = 10) {
       {
         $match: {
           postId: new ObjectId(postId),
-          ...(from && {
-            createdAt: {
-              $lte: from,
-            },
-          }),
+          ...(from && { createdAt: { $lte: from } }),
         },
       },
-      { $limit: limit },
       { $sort: { _id: -1 } },
+      { $limit: limit },
       {
         $lookup: {
           from: 'users',
