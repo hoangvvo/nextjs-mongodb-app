@@ -8,7 +8,7 @@
 
 An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application, designed with simplicity for learning and real-world applicability in mind.
 
-:rocket: [Check out the demo](https://nextjs-mongodb.vercel.sh/) :rocket:
+:rocket: [Check out the demo](https://nextjs-mongodb.vercel.app/) :rocket:
 
 </div>
 
@@ -74,6 +74,7 @@ This project accompanies the following posts:
 - [User authentication (using Passport.js)](https://hoangvvo.com/blog/next-js-and-mongodb-app-1)
 - [User profile and Profile Picture](https://hoangvvo.com/blog/next-js-and-mongodb-app-2)
 - [Email Verification, Password Reset/Changee](https://hoangvvo.com/blog/next-js-and-mongodb-app-3)
+- [Posts and comments](https://hoangvvo.com/blog/next-js-and-mongodb-app-4)
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
