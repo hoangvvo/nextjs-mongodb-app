@@ -11,7 +11,7 @@ export async function findUserWithEmailAndPassword(db, email, password) {
   return null;
 }
 
-export async function UNSAFE_findUserForAuth(db, userId) {
+export async function findUserForAuth(db, userId) {
   return db
     .collection('users')
     .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })

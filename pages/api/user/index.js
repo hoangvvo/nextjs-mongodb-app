@@ -1,6 +1,6 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findUserByUsername, updateUserById } from '@/api-lib/db';
-import { auth, database, validateBody } from '@/api-lib/middlewares';
+import { auths, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
 import { v2 as cloudinary } from 'cloudinary';
@@ -24,7 +24,7 @@ if (process.env.CLOUDINARY_URL) {
   });
 }
 
-handler.use(database, auth);
+handler.use(database, ...auths);
 
 handler.get(async (req, res) => {
   if (!req.user) return res.json({ user: null });
@@ -62,7 +62,10 @@ handler.patch(
 
     if (req.body.username) {
       username = slugUsername(req.body.username);
-      if (await findUserByUsername(req.db, username)) {
+      if (
+        username !== req.user.username &&
+        (await findUserByUsername(req.db, username))
+      ) {
         res
           .status(403)
           .json({ error: { message: 'The username has already been taken.' } });

@@ -1,5 +1,5 @@
 import { findAndDeleteTokenByIdAndType, updateUserById } from '@/api-lib/db';
-import { auth, database } from '@/api-lib/middlewares';
+import { database } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { VerifyEmail } from '@/page-components/VerifyEmail';
 import nc from 'next-connect';
@@ -18,7 +18,7 @@ export default function EmailVerifyPage({ valid }) {
 
 export async function getServerSideProps(context) {
   const handler = nc(ncOpts);
-  handler.use(database, auth);
+  handler.use(database);
   await handler.run(context.req, context.res);
 
   const { token } = context.query;

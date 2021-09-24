@@ -1,12 +1,12 @@
 import { createToken } from '@/api-lib/db';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
-import { auth, database } from '@/api-lib/middlewares';
+import { auths, database } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(database, auth);
+handler.use(database, ...auths);
 
 handler.post(async (req, res) => {
   if (!req.user) {

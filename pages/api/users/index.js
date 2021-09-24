@@ -1,6 +1,6 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
-import { auth, database, validateBody } from '@/api-lib/middlewares';
+import { auths, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
 import nc from 'next-connect';
@@ -9,7 +9,7 @@ import normalizeEmail from 'validator/lib/normalizeEmail';
 
 const handler = nc(ncOpts);
 
-handler.use(database, auth);
+handler.use(database, ...auths);
 
 handler.post(
   validateBody({

@@ -1,7 +1,4 @@
-import {
-  findUserWithEmailAndPassword,
-  UNSAFE_findUserForAuth,
-} from '@/api-lib/db';
+import { findUserForAuth, findUserWithEmailAndPassword } from '@/api-lib/db';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 
@@ -11,7 +8,7 @@ passport.serializeUser((user, done) => {
 
 // passport#160
 passport.deserializeUser((req, id, done) => {
-  UNSAFE_findUserForAuth(req.db, id).then(
+  findUserForAuth(req.db, id).then(
     (user) => done(null, user),
     (err) => done(err)
   );

@@ -1,13 +1,13 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findPostById } from '@/api-lib/db';
 import { findComments, insertComment } from '@/api-lib/db/comment';
-import { auth, database, validateBody } from '@/api-lib/middlewares';
+import { auths, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(database, auth);
+handler.use(database);
 
 handler.get(async (req, res) => {
   const post = await findPostById(req.db, req.query.postId);
@@ -27,6 +27,7 @@ handler.get(async (req, res) => {
 });
 
 handler.post(
+  ...auths,
   validateBody({
     type: 'object',
     properties: {
