@@ -9,7 +9,7 @@ export default function EmailVerifyPage({ valid }) {
   return (
     <>
       <Head>
-        <title>Sign up</title>
+        <title>Email verification</title>
       </Head>
       <VerifyEmail valid={valid} />
     </>
@@ -21,7 +21,7 @@ export async function getServerSideProps(context) {
   handler.use(database);
   await handler.run(context.req, context.res);
 
-  const { token } = context.query;
+  const { token } = context.params;
 
   const deletedToken = await findAndDeleteTokenByIdAndType(
     context.req.db,

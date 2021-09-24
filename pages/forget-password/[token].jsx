@@ -18,15 +18,13 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
 
-  const { token } = context.query;
-
   const tokenDoc = await findTokenByIdAndType(
     context.req.db,
-    context.query.token,
+    context.params.token,
     'passwordReset'
   );
 
-  return { props: { token, valid: !!tokenDoc } };
+  return { props: { token: context.params.token, valid: !!tokenDoc } };
 }
 
 export default ResetPasswordTokenPage;
