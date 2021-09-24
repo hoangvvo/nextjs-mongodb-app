@@ -1,0 +1,83 @@
+.nav {
+  height: var(--nav-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: var(--header-background);
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: saturate(180%) blur(5px);
+}
+
+[data-theme='dark'] .nav {
+  box-shadow: inset 0 -1px 0 0 hsla(0, 0%, 100%, 0.1);
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.content {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  height: 100%;
+  width: 100%;
+}
+
+.logo {
+  font-weight: 800;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.user {
+  position: relative;
+}
+
+.trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.popover {
+  top: 100%;
+  right: 0;
+  position: absolute;
+  z-index: 20;
+}
+
+.menu {
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: var(--shadow-medium);
+  border-radius: 5px;
+  display: inline-block;
+  min-width: 220px;
+}
+
+.item {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--accents-5);
+  display: block;
+  width: 100%;
+  align-items: center;
+  text-decoration: none;
+  padding: 14px 20px;
+  font-size: 14px;
+  text-align: left;
+  transition: ease 0.2s;
+  transition-property: background color;
+  font-weight: medium;
+}
+
+.item:focus,
+.item:hover {
+  color: var(--foreground);
+  background: var(--accents-1);
+}

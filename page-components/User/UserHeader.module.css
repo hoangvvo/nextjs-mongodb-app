@@ -1,0 +1,30 @@
+.root {
+  box-shadow: var(--shadow-large);
+  border-radius: 8px;
+  margin: 0 auto 18px;
+  max-width: 720px;
+  padding: 32px;
+  background-color: var(--background);
+}
+
+.avatar {
+  margin: 24px 0 12px;
+}
+
+.name {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--accents-8);
+}
+
+.username {
+  font-size: 1.5rem;
+  color: var(--success);
+  text-align: center;
+}
+
+.bio {
+  color: var(--secondary);
+  text-align: center;
+  line-height: 1.5;
+}

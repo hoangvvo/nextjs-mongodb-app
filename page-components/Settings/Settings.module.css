@@ -1,0 +1,65 @@
+.card {
+  margin-bottom: 1rem;
+  background: var(--background);
+  border-radius: 5px;
+  border: 1px solid var(--accents-2);
+  padding: 24px;
+}
+
+.wrapper {
+  width: 640px;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.submit {
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--secondary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  max-width: 100%;
+}
+
+.avatar {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  transition: ease 0.2s opacity;
+}
+
+.avatar:hover {
+  opacity: 0.5;
+}
+
+.avatar input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.note {
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid var(--accents-2);
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+
+.note .link {
+  color: var(--link);
+}

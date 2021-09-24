@@ -5,7 +5,7 @@
   background: var(--background);
   border: 1px solid var(--accents-2);
   border-radius: 5px;
-  box-shadow: var(--shadow-smallest);
+  box-shadow: var(--shadow-smallest) 0px 2px 4px rgb(0 0 0 / 10%);
 }
 
 .root a {

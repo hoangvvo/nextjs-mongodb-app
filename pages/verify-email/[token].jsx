@@ -1,9 +1,9 @@
 import { findAndDeleteTokenByIdAndType, updateUserById } from '@/api-lib/db';
 import { auth, database } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
+import { VerifyEmail } from '@/page-components/VerifyEmail';
 import nc from 'next-connect';
 import Head from 'next/head';
-import { VerifyEmail } from 'page-components/VerifyEmail';
 
 export default function EmailVerifyPage({ valid }) {
   return (

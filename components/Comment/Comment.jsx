@@ -4,41 +4,39 @@ import { format } from '@lukeed/ms';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import styles from './Post.module.css';
+import styles from './Comment.module.css';
 
-const Post = ({ post, className }) => {
+const Comment = ({ comment, className }) => {
   const timestampTxt = useMemo(() => {
-    const diff = Date.now() - new Date(post.createdAt).getTime();
+    const diff = Date.now() - new Date(comment.createdAt).getTime();
     if (diff < 1 * 60 * 1000) return 'Just now';
     return `${format(diff, true)} ago`;
-  }, [post.createdAt]);
+  }, [comment.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
-      <Link href={`/user/${post.creator.username}`}>
+      <Link href={`/user/${comment.creator.username}`}>
         <a>
           <Container className={styles.creator}>
             <Avatar
               size={36}
-              url={post.creator.profilePicture}
-              username={post.creator.username}
+              url={comment.creator.profilePicture}
+              username={comment.creator.username}
             />
             <Container column className={styles.meta}>
-              <p className={styles.name}>{post.creator.name}</p>
-              <p className={styles.username}>{post.creator.username}</p>
+              <p className={styles.name}>{comment.creator.name}</p>
+              <p className={styles.username}>{comment.creator.username}</p>
             </Container>
           </Container>
         </a>
       </Link>
       <div className={styles.wrap}>
-        <p className={styles.content}>{post.content}</p>
+        <p className={styles.content}>{comment.content}</p>
       </div>
       <div className={styles.wrap}>
-        <time dateTime={post.createdAt} className={styles.timestamp}>
-          {timestampTxt}
-        </time>
+        <p className={styles.timestamp}>{timestampTxt}</p>
       </div>
     </div>
   );
 };
 
-export default Post;
+export default Comment;

@@ -1,8 +1,8 @@
 import { findUserByUsername } from '@/api-lib/db';
 import { database } from '@/api-lib/middlewares';
+import { User } from '@/page-components/User';
 import nc from 'next-connect';
 import Head from 'next/head';
-import { User } from 'page-components/User';
 
 export default function UserPage({ user }) {
   return (

@@ -14,14 +14,14 @@ export async function findUserWithEmailAndPassword(db, email, password) {
 export async function UNSAFE_findUserForAuth(db, userId) {
   return db
     .collection('users')
-    .findOne(new ObjectId(userId), { projection: { password: 0 } })
+    .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })
     .then((user) => user || null);
 }
 
 export async function findUserById(db, userId) {
   return db
     .collection('users')
-    .findOne(new ObjectId(userId), { projection: dbProjectionUsers() })
+    .findOne({ _id: new ObjectId(userId) }, { projection: dbProjectionUsers() })
     .then((user) => user || null);
 }
 
@@ -44,9 +44,9 @@ export async function updateUserById(db, id, data) {
   return db
     .collection('users')
     .findOneAndUpdate(
-      new ObjectId(id),
+      { _id: new ObjectId(id) },
       { $set: data },
-      { returnDocument: 'after', projection: dbProjectionUsers() }
+      { returnDocument: 'after', projection: { password: 0 } }
     )
     .then(({ value }) => value);
 }
@@ -82,13 +82,17 @@ export async function updateUserPasswordByOldPassword(
   const matched = await bcrypt.compare(oldPassword, user.password);
   if (!matched) return false;
   const password = await bcrypt.hash(newPassword, 10);
-  await db.collection('users').updateOne({ _id: id }, { $set: { password } });
+  await db
+    .collection('users')
+    .updateOne({ _id: new ObjectId(id) }, { $set: { password } });
   return true;
 }
 
 export async function UNSAFE_updateUserPassword(db, id, newPassword) {
   const password = await bcrypt.hash(newPassword, 10);
-  await db.collection('users').updateOne({ _id: id }, { $set: { password } });
+  await db
+    .collection('users')
+    .updateOne({ _id: new ObjectId(id) }, { $set: { password } });
 }
 
 export function dbProjectionUsers(prefix = '') {

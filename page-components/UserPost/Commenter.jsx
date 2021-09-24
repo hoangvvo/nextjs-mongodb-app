@@ -1,34 +1,34 @@
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import { Container, Wrapper } from '@/components/Layout';
+import { Container } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
+import { useCommentPages } from '@/lib/comment';
 import { fetcher } from '@/lib/fetch';
-import { usePostPages } from '@/lib/post';
 import { useCurrentUser } from '@/lib/user';
 import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import styles from './Poster.module.css';
+import styles from './Commenter.module.css';
 
-const PosterInner = ({ user }) => {
+const CommenterInner = ({ user, post }) => {
   const contentRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate } = usePostPages();
+  const { mutate } = useCommentPages({ postId: post._id });
 
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
-        await fetcher('/api/posts', {
+        await fetcher(`/api/posts/${post._id}/comments`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: contentRef.current.value }),
         });
-        toast.success('You have posted successfully');
+        toast.success('You have added a comment');
         contentRef.current.value = '';
         // refresh post lists
         mutate();
@@ -38,7 +38,7 @@ const PosterInner = ({ user }) => {
         setIsLoading(false);
       }
     },
-    [mutate]
+    [mutate, post._id]
   );
 
   return (
@@ -48,43 +48,46 @@ const PosterInner = ({ user }) => {
         <Input
           ref={contentRef}
           className={styles.input}
-          placeholder={`What's on your mind, ${user.name}?`}
-          ariaLabel={`What's on your mind, ${user.name}?`}
+          placeholder="Add your comment"
+          ariaLabel="Add your comment"
         />
         <Button type="success" loading={isLoading}>
-          Post
+          Comment
         </Button>
       </Container>
     </form>
   );
 };
 
-const Poster = () => {
+const Commenter = ({ post }) => {
   const { data, error } = useCurrentUser();
   const loading = !data && !error;
 
   return (
-    <Wrapper>
-      <div className={styles.root}>
-        <h3 className={styles.heading}>Share your thoughts</h3>
-        {loading ? (
-          <LoadingDots>Loading</LoadingDots>
-        ) : data?.user ? (
-          <PosterInner user={data.user} />
-        ) : (
-          <Text color="secondary">
-            Please{' '}
-            <Link href="/login" passHref>
-              <TextLink color="link" variant="highlight">
-                sign in
-              </TextLink>
-            </Link>{' '}
-            to post
-          </Text>
-        )}
-      </div>
-    </Wrapper>
+    <div className={styles.root}>
+      <h3 className={styles.heading}>
+        Replying to{' '}
+        <Link href={`/user/${post.creator.username}`} passHref>
+          <TextLink color="link">@{post.creator.username}</TextLink>
+        </Link>
+      </h3>
+      {loading ? (
+        <LoadingDots>Loading</LoadingDots>
+      ) : data?.user ? (
+        <CommenterInner post={post} user={data.user} />
+      ) : (
+        <Text color="secondary">
+          Please{' '}
+          <Link href="/login" passHref>
+            <TextLink color="link" variant="highlight">
+              sign in
+            </TextLink>
+          </Link>{' '}
+          to comment
+        </Text>
+      )}
+    </div>
   );
 };
 
-export default Poster;
+export default Commenter;

@@ -7,7 +7,7 @@ import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(database);
+handler.use(database, auth);
 
 handler.get(async (req, res) => {
   const post = await findPostById(req.db, req.query.postId);
@@ -27,7 +27,6 @@ handler.get(async (req, res) => {
 });
 
 handler.post(
-  auth,
   validateBody({
     type: 'object',
     properties: {

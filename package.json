@@ -34,6 +34,7 @@
     "next": "^11.1.2",
     "next-connect": "^0.10.2",
     "next-session": "^4.0.2",
+    "next-themes": "^0.0.15",
     "nodemailer": "^6.6.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

@@ -2,40 +2,39 @@ import { ObjectId } from 'mongodb';
 import { dbProjectionUsers } from './user';
 
 export async function findPostById(db, id) {
-  const posts = await db.collection('posts').aggregate([
-    { $match: { _id: new ObjectId(id) } },
-    { $limit: 1 },
-    {
-      $lookup: {
-        from: 'users',
-        localField: 'creatorId',
-        foreignField: '_id',
-        as: 'creator',
+  const posts = await db
+    .collection('posts')
+    .aggregate([
+      { $match: { _id: new ObjectId(id) } },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'creatorId',
+          foreignField: '_id',
+          as: 'creator',
+        },
       },
-    },
-    { $unwind: '$creator' },
-    { $project: dbProjectionUsers('creator.') },
-  ]);
+      { $unwind: '$creator' },
+      { $project: dbProjectionUsers('creator.') },
+    ])
+    .toArray();
   if (!posts[0]) return null;
   return posts[0];
 }
 
-export async function findPosts(db, from, by, limit = 10) {
+export async function findPosts(db, before, by, limit = 10) {
   return db
     .collection('posts')
     .aggregate([
       {
         $match: {
-          ...(from && {
-            createdAt: {
-              $lte: from,
-            },
-          }),
-          ...(by && { creatorId: by }),
+          ...(by && { creatorId: new ObjectId(by) }),
+          ...(before && { createdAt: { $lte: before } }),
         },
       },
-      { $limit: limit },
       { $sort: { _id: -1 } },
+      { $limit: limit },
       {
         $lookup: {
           from: 'users',

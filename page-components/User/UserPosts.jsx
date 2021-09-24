@@ -5,10 +5,12 @@ import { Post } from '@/components/Post';
 import { Text } from '@/components/Text';
 import { usePostPages } from '@/lib/post';
 import Link from 'next/link';
-import styles from './PostList.module.css';
+import styles from './UserPosts.module.css';
 
-const PostList = () => {
-  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages();
+const UserPosts = ({ user }) => {
+  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages({
+    creatorId: user._id,
+  });
   const posts = data
     ? data.reduce((acc, val) => [...acc, ...val.posts], [])
     : [];
@@ -21,11 +23,10 @@ const PostList = () => {
           <Link
             key={post._id}
             href={`/user/${post.creator.username}/post/${post._id}`}
-            passHref
           >
-            <div className={styles.wrap}>
+            <a className={styles.wrap}>
               <Post className={styles.post} post={post} />
-            </div>
+            </a>
           </Link>
         ))}
         <Container justifyContent="center">
@@ -47,4 +48,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default UserPosts;

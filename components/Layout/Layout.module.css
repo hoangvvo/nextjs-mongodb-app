@@ -1,31 +1,3 @@
-.nav {
-  height: var(--nav-height);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  background-color: var(--background);
-  box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
-}
-
-.navWrap {
-  height: 100%;
-}
-
-.navContent {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  height: 100%;
-  width: 100%;
-}
-
-.logo {
-  font-weight: 800;
-  color: var(--foreground);
-  text-decoration: none;
-}
-
 .main {
   padding-top: 48px;
 }

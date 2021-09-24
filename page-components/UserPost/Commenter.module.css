@@ -23,8 +23,7 @@
 
 .heading {
   font-size: 0.85rem;
-  letter-spacing: 0.2rem;
   margin-top: 0;
   padding-left: 0.2rem;
-  color: var(--accents-7);
+  color: var(--accents-6);
 }

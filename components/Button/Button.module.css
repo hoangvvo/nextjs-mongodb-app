@@ -55,6 +55,11 @@
 
 /** Size **/
 
+.small {
+  height: 32px;
+  font-size: 0.875rem;
+}
+
 .large {
   height: 48px;
   font-size: 1rem;
@@ -88,10 +93,18 @@
   );
 }
 
+[data-theme='dark'] .ghost {
+  --lighten-color: rgba(0, 0, 0, 0.75);
+}
+
 .ghost:not([disabled]):hover {
   background-color: var(--themed-bg, var(--accents-4));
 }
 
 .ghost:not([disabled]):focus {
   --lighten-color: hsla(0, 0%, 100%, 0.7);
+}
+
+[data-theme='dark'] .ghost:not([disabled]):focus {
+  --lighten-color: rgba(0, 0, 0, 0.7);
 }

@@ -8,6 +8,8 @@
 
 .title > span {
   display: block;
+  padding-bottom: 10px;
+  margin-bottom: -20px;
 }
 
 .nextjs {
