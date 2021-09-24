@@ -131,7 +131,7 @@ const AboutYou = ({ user, mutate }) => {
       try {
         setIsLoading(true);
         const formData = new FormData();
-        formData.append('username', nameRef.current.value);
+        formData.append('username', usernameRef.current.value);
         formData.append('name', nameRef.current.value);
         formData.append('bio', bioRef.current.value);
         if (profilePictureRef.current.files[0]) {

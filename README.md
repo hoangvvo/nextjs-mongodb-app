@@ -17,13 +17,21 @@ An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www
 <div align="center">
 
 🐇 Fast and light without [bulky](https://bundlephobia.com/result?p=express@4.17.1), [slow](https://github.com/fastify/benchmarks#benchmarks) Express.js.
+
 ✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and 👻 Serverless ready
+
 🤠 Good ol' Middleware pattern, compatible with Express ecosystem, powered by [next-connect](https://github.com/hoangvvo/next-connect)
+
 💋 [KISS](https://en.wikipedia.org/wiki/KISS_principle): No fancy stuff like GraphQL, SASS, Redux, etc.
 ✍️ Come with explanatory blog posts
+
 📙 Can be adapted to any databases besides MongoDB (Just update [api-lib/db](api-lib/db))
 
 </div>
+
+<h3 align="center">:lock: Authentication and Account</h3>
+
+<div align="center">
 
 - [x] Session-based authentication ([Passport.js](https://github.com/jaredhanson/passport))
 - [x] Sign up/Log in/Sign out API

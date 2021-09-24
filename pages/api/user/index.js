@@ -1,7 +1,8 @@
 import { ValidateProps } from '@/api-lib/constants';
-import { updateUserById } from '@/api-lib/db';
+import { findUserByUsername, updateUserById } from '@/api-lib/db';
 import { auth, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
+import { slugUsername } from '@/lib/user';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import nc from 'next-connect';
@@ -35,6 +36,7 @@ handler.patch(
   validateBody({
     type: 'object',
     properties: {
+      username: ValidateProps.user.username,
       name: ValidateProps.user.name,
       bio: ValidateProps.user.bio,
     },
@@ -56,7 +58,20 @@ handler.patch(
     }
     const { name, bio } = req.body;
 
+    let username;
+
+    if (req.body.username) {
+      username = slugUsername(req.body.username);
+      if (await findUserByUsername(req.db, username)) {
+        res
+          .status(403)
+          .json({ error: { message: 'The username has already been taken.' } });
+        return;
+      }
+    }
+
     const user = await updateUserById(req.db, req.user._id, {
+      ...(username && { username }),
       ...(name && { name }),
       ...(typeof bio === 'string' && { bio }),
       ...(profilePicture && { profilePicture }),
