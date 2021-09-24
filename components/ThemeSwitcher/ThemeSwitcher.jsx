@@ -4,7 +4,6 @@ import styles from './ThemeSwitcher.module.css';
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
-  console.log(theme);
   const onChange = useCallback(
     (e) => {
       setTheme(e.currentTarget.value);
