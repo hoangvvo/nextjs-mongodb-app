@@ -33,7 +33,9 @@ const Comment = ({ comment, className }) => {
         <p className={styles.content}>{comment.content}</p>
       </div>
       <div className={styles.wrap}>
-        <p className={styles.timestamp}>{timestampTxt}</p>
+        <time dateTime={String(comment.createdAt)} className={styles.timestamp}>
+          {timestampTxt}
+        </time>
       </div>
     </div>
   );

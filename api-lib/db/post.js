@@ -30,7 +30,7 @@ export async function findPosts(db, before, by, limit = 10) {
       {
         $match: {
           ...(by && { creatorId: new ObjectId(by) }),
-          ...(before && { createdAt: { $lte: before } }),
+          ...(before && { createdAt: { $lt: before } }),
         },
       },
       { $sort: { _id: -1 } },

@@ -33,7 +33,7 @@ const Post = ({ post, className }) => {
         <p className={styles.content}>{post.content}</p>
       </div>
       <div className={styles.wrap}>
-        <time dateTime={post.createdAt} className={styles.timestamp}>
+        <time dateTime={String(post.createdAt)} className={styles.timestamp}>
           {timestampTxt}
         </time>
       </div>

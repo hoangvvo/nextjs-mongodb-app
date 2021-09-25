@@ -1,14 +1,14 @@
 import { ObjectId } from 'mongodb';
 import { dbProjectionUsers } from '.';
 
-export async function findComments(db, postId, from, limit = 10) {
+export async function findComments(db, postId, before, limit = 10) {
   return db
     .collection('comments')
     .aggregate([
       {
         $match: {
           postId: new ObjectId(postId),
-          ...(from && { createdAt: { $lte: from } }),
+          ...(before && { createdAt: { $lt: before } }),
         },
       },
       { $sort: { _id: -1 } },

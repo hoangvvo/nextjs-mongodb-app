@@ -19,7 +19,7 @@ handler.get(async (req, res) => {
   const comments = await findComments(
     req.db,
     req.query.postId,
-    req.query.from ? new Date(req.query.from) : undefined,
+    req.query.before ? new Date(req.query.before) : undefined,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
 
