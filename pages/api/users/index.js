@@ -1,6 +1,6 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
-import { database, validateBody } from '@/api-lib/middlewares';
+import { auths, database, validateBody } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
 import nc from 'next-connect';
@@ -23,6 +23,7 @@ handler.post(
     required: ['username', 'name', 'password', 'email'],
     additionalProperties: false,
   }),
+  ...auths,
   async (req, res) => {
     let { username, name, email, password } = req.body;
     username = slugUsername(req.body.username);
