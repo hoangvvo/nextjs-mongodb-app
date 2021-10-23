@@ -1,7 +1,6 @@
-import React from 'react';
+import { useCurrentUser } from '@/lib/user';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useCurrentUser } from '@/hooks/index';
 
 export default function Layout({ children }) {
   const [user, { mutate }] = useCurrentUser();
@@ -51,7 +50,6 @@ export default function Layout({ children }) {
           }
           input,
           textarea {
-            font-family: monospace;
             flex: 1 1 0%;
             margin-left: 0.5rem;
             box-shadow: none;
@@ -161,10 +159,10 @@ export default function Layout({ children }) {
               </>
             ) : (
               <>
-                <Link href={`/user/${user._id}`}>
+                <Link href={`/user/${user.username}`}>
                   <a>Profile</a>
                 </Link>
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                {/* eslint-disable-next-line */}
                 <a tabIndex={0} role="button" onClick={handleLogout}>
                   Logout
                 </a>
@@ -177,28 +175,21 @@ export default function Layout({ children }) {
       <main>{children}</main>
       <footer>
         <p>
-          Made with
-          {' '}
+          Made with{' '}
           <span role="img" aria-label="Love">
             ❤️
           </span>
-          ,
-          {' '}
+          ,{' '}
           <span role="img" aria-label="Fire">
             🔥
           </span>
-          , and a keyboard by
-          {' '}
-          <a href="https://hoangvvo.com/">Hoang Vo</a>
-          .
+          , and a keyboard by <a href="https://hoangvvo.com/">Hoang Vo</a>.
         </p>
         <p>
-          Source code is on
-          {' '}
-          <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
-          .
+          Source code is on{' '}
+          <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>.
         </p>
       </footer>
     </>
   );
-};
+}

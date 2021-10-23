@@ -1,19 +1,14 @@
-import React from 'react';
+import { findUserByUsername } from '@/api-lib/db';
+import { database } from '@/api-lib/middlewares';
+import { Posts } from '@/components/post';
+import { defaultProfilePicture } from '@/lib/default';
+import { useCurrentUser } from '@/lib/user';
+import nc from 'next-connect';
 import Head from 'next/head';
 import Link from 'next/link';
-import Error from 'next/error';
-import { all } from '@/middlewares/index';
-import { useCurrentUser } from '@/hooks/index';
-import Posts from '@/components/post/posts';
-import { extractUser } from '@/lib/api-helpers';
-import { findUserById } from '@/db/index';
-import { defaultProfilePicture } from '@/lib/default';
 
 export default function UserPage({ user }) {
-  if (!user) return <Error statusCode={404} />;
-  const {
-    name, email, bio, profilePicture, _id
-  } = user || {};
+  const { name, email, bio, profilePicture, _id } = user || {};
   const [currentUser] = useCurrentUser();
   const isCurrentUser = currentUser?._id === user._id;
   return (
@@ -52,22 +47,25 @@ export default function UserPage({ user }) {
         <title>{name}</title>
       </Head>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={profilePicture || defaultProfilePicture(_id)} width="256" height="256" alt={name} />
+        <img
+          src={profilePicture || defaultProfilePicture(_id)}
+          width="256"
+          height="256"
+          alt={name}
+        />
         <section>
           <div>
             <h2>{name}</h2>
             {isCurrentUser && (
-            <Link href="/settings">
-              <button type="button">Edit</button>
-            </Link>
+              <Link href="/settings">
+                <button>Edit</button>
+              </Link>
             )}
           </div>
           Bio
           <p>{bio}</p>
           Email
-          <p>
-            {email}
-          </p>
+          <p>{email}</p>
         </section>
       </div>
       <div>
@@ -79,8 +77,15 @@ export default function UserPage({ user }) {
 }
 
 export async function getServerSideProps(context) {
-  await all.run(context.req, context.res);
-  const user = extractUser(await findUserById(context.req.db, context.params.userId));
-  if (!user) context.res.statusCode = 404;
+  await nc().use(database).run(context.req, context.res);
+  const user = await findUserByUsername(
+    context.req.db,
+    context.params.username
+  );
+  if (!user) {
+    return {
+      notFound: true,
+    };
+  }
   return { props: { user } };
 }

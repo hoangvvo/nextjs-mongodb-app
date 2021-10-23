@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useCurrentUser } from '@/hooks/index';
+import { useCurrentUser } from '@/lib/user';
+import Link from 'next/link';
+import { useState } from 'react';
 
 export default function PostEditor() {
   const [user] = useCurrentUser();
@@ -8,8 +9,12 @@ export default function PostEditor() {
 
   if (!user) {
     return (
-      <div style={{ color: '#555', textAlign: 'center' }}>
-        Please sign in to post
+      <div style={{ color: '#555', textAlign: 'center', marginBottom: 12 }}>
+        Please{' '}
+        <Link href="/login">
+          <a>sign in</a>
+        </Link>{' '}
+        to post
       </div>
     );
   }
@@ -34,10 +39,12 @@ export default function PostEditor() {
 
   return (
     <>
-      <p style={{ color: '#0070f3', textAlign: 'center' }}>
-        {msg}
-      </p>
-      <form onSubmit={handleSubmit} style={{ flexDirection: 'row' }} autoComplete="off">
+      <p style={{ color: '#0070f3', textAlign: 'center' }}>{msg}</p>
+      <form
+        onSubmit={hanldeSubmit}
+        style={{ flexDirection: 'row' }}
+        autoComplete="off"
+      >
         <label htmlFor="name">
           <input
             name="content"
@@ -45,7 +52,9 @@ export default function PostEditor() {
             placeholder="Say something, I'm giving up on you..."
           />
         </label>
-        <button type="submit" style={{ marginLeft: '0.5rem' }}>Post</button>
+        <button type="submit" style={{ marginLeft: '0.5rem' }}>
+          Post
+        </button>
       </form>
     </>
   );

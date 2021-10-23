@@ -1,59 +1,71 @@
-import nc from 'next-connect';
-import multer from 'multer';
+import { ValidateProps } from '@/api-lib/constants';
+import { updateUserById } from '@/api-lib/db';
+import { all, validateBody } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import { v2 as cloudinary } from 'cloudinary';
-import { all } from '@/middlewares/index';
-import { updateUserById } from '@/db/index';
-import { extractUser } from '@/lib/api-helpers';
+import multer from 'multer';
+import nc from 'next-connect';
 
 const upload = multer({ dest: '/tmp' });
-const handler = nc();
+const handler = nc(ncOpts);
 
-/* eslint-disable camelcase */
-const {
-  hostname: cloud_name,
-  username: api_key,
-  password: api_secret,
-} = new URL(process.env.CLOUDINARY_URL);
+if (process.env.CLOUDINARY_URL) {
+  const {
+    hostname: cloud_name,
+    username: api_key,
+    password: api_secret,
+  } = new URL(process.env.CLOUDINARY_URL);
 
-cloudinary.config({
-  cloud_name,
-  api_key,
-  api_secret,
-});
+  cloudinary.config({
+    cloud_name,
+    api_key,
+    api_secret,
+  });
+}
 
 handler.use(all);
 
 handler.get(async (req, res) => {
   // Filter out password
   if (!req.user) return res.json({ user: null });
-  const { password, ...u } = req.user;
-  res.json({ user: u });
+  return res.json({ user: req.user });
 });
 
-handler.patch(upload.single('profilePicture'), async (req, res) => {
-  if (!req.user) {
-    req.status(401).end();
-    return;
-  }
-  let profilePicture;
-  if (req.file) {
-    const image = await cloudinary.uploader.upload(req.file.path, {
-      width: 512,
-      height: 512,
-      crop: 'fill',
+handler.patch(
+  upload.single('profilePicture'),
+  validateBody({
+    type: 'object',
+    properties: {
+      name: ValidateProps.user.name,
+      bio: ValidateProps.user.bio,
+    },
+    additionalProperties: false,
+  }),
+  async (req, res) => {
+    if (!req.user) {
+      req.status(401).end();
+      return;
+    }
+    let profilePicture;
+    if (req.file) {
+      const image = await cloudinary.uploader.upload(req.file.path, {
+        width: 512,
+        height: 512,
+        crop: 'fill',
+      });
+      profilePicture = image.secure_url;
+    }
+    const { name, bio } = req.body;
+
+    const user = await updateUserById(req.db, req.user._id, {
+      ...(name && { name }),
+      ...(typeof bio === 'string' && { bio }),
+      ...(profilePicture && { profilePicture }),
     });
-    profilePicture = image.secure_url;
+
+    res.json({ user });
   }
-  const { name, bio } = req.body;
-
-  const user = await updateUserById(req.db, req.user._id, {
-    ...(name && { name }),
-    ...(typeof bio === 'string' && { bio }),
-    ...(profilePicture && { profilePicture }),
-  });
-
-  res.json({ user: extractUser(user) });
-});
+);
 
 export const config = {
   api: {

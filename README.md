@@ -4,7 +4,7 @@
 
 <div align="center">
   
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/hoangvvo/nextjs-mongodb-app)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app&env=MONGODB_URI,CLOUDINARY_URL,NODEMAILER_CONFIG,WEB_URI&envDescription=Environment%20Variables&envLink=https%3A%2F%2Fgithub.com%2Fhoangvvo%2Fnextjs-mongodb-app%23environmental-variables&demo-title=nextjs-mongodb-app%20demo&demo-description=A%20demo%20deployed%20on%20Vercel&demo-url=https%3A%2F%2Fnextjs-mongodb.vercel.app%2F)
 
 An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www.mongodb.com/) web application, designed with simplicity for learning and real-world applicability in mind.
 
@@ -16,12 +16,12 @@ An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www
 
 <div align="center">
 
-  - 🐇 [Fast](https://github.com/fastify/benchmarks#benchmarks) and light without [bulky](https://bundlephobia.com/result?p=express@4.17.1) Express.js.
-  - ✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and 👻 Serverless ready
-  - 🤠 Good ol' Middleware pattern
-  - 💋 [KISS](https://en.wikipedia.org/wiki/KISS_principle): No fancy stuff like GraphQL, SASS, Redux, etc.
-  - ✍️ Come with explanatory blog posts
-  - ✌️ Can be adapted to any databases besides MongoDB
+- 🐇 Fast and light without [bulky](https://bundlephobia.com/result?p=express@4.17.1), [slow](https://github.com/fastify/benchmarks#benchmarks) Express.js.
+- ✨ Full [API Routes](https://nextjs.org/blog/next-9#api-routes) implementation and 👻 Serverless ready
+- 🤠 Good ol' Middleware pattern, compatible with Express ecosystem, powered by [next-connect](https://github.com/hoangvvo/next-connect)
+- 💋 [KISS](https://en.wikipedia.org/wiki/KISS_principle): No fancy stuff like GraphQL, SASS, Redux, etc.
+- ✍️ Come with explanatory blog posts
+- ✌️ Can be adapted to any databases besides MongoDB
 
 </div>
 
@@ -29,7 +29,7 @@ An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www
 
 <div align="center">
 
-<sup>*without passportjs*: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) *with passportjs*: `master`</sup>
+<sup>_without passportjs_: [`a1747b7`](https://github.com/hoangvvo/nextjs-mongodb-app/commit/c36c5826f691032803760b5404ccec3446575504) _with passportjs_: `master`</sup>
 
 - [x] Session-based authentication
 - [x] Sign up/Sign in/Sign out API
@@ -75,6 +75,8 @@ This project accompanies the following posts:
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
+**Note:** Some of the detail in the posts above might not be up to date due to breaking changes in libraries used in this projects. See [#125](https://github.com/hoangvvo/nextjs-mongodb-app/pull/125).
+
 The project is designed to **as simple as possible** for learning purpose. Due to its simplicity, aspects such as **security** must be reconsidered before being **used in production**.
 
 <h3 align="center">Dependencies</h3>
@@ -88,36 +90,33 @@ This project uses the following dependencies:
 - `mongodb` - may be replaced by `mongoose`.
 - `passport`, `passport-local` - required after [#39](https://github.com/hoangvvo/nextjs-mongodb-app/pull/39) for authentication
 - `next-connect` - recommended if you want to use Express/Connect middleware and easier method routing.
-- `express-session`, `connect-mongo` - required for session, may be replaced with other session libraries such as `cookie-session` or `next-iron-session`.
+- `next-session`, `connect-mongo` - required for session, may be replaced with other session libraries such as `cookie-session`, `next-iron-session`, or `express-session` (`express-session` is observed not to work properly on Next.js 11+).
 - `bcryptjs` - optional, may be replaced with any password-hashing library. `argon2` recommended.
-- `validator` - optional but recommended.
+- `validator` - optional but recommended, to validate email.
+- `ajv` - optional but recommended, to validate request body.
 - `multer` - may be replaced with any middleware that handles `multipart/form-data`
 - `cloudinary` - optional, **only if** you are using [Cloudinary](https://cloudinary.com) for image upload.
-- `@sendgrid/mail` - optional, **only if** you are using [SendGrid](https://sendgrid.com/) to send emails.
 
 <h3 align="center">Environmental variables</h3>
 
-The environment variables [will be inlined during build time](https://nextjs.org/docs#build-time-configuration)
-
 Environmental variables in this project include:
 
-- `MONGODB_URI` The MongoDB Connection String (with credentials)
-- `EMAIL_FROM` The email address to send your emails from.
-- `DB_NAME` The name of the MongoDB database to be used.
-- `WEB_URI` The *URL* of your web.
-- `SESSION_SECRET` (only if you use `express-session`) The secret to be used in `express-session`.
+- `MONGODB_URI` The MongoDB Connection String (with credentials and database name)
+- `WEB_URI` The _URL_ of your web.
 - `CLOUDINARY_URL` (optional, Cloudinary **only**) Cloudinary environment variable for configuration. See [this](https://cloudinary.com/documentation/node_integration#configuration).
-- `SENDGRID_API_KEY` (optional, SendGrid **only**) SendGrid API Key. See [this](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
+- `NODEMAILER_CONFIG` (optional, if using nodemailer **only**) JSON stringified nodemailer config. See `.env.example`.
 
 <h3 align="center">Development</h3>
 
-Start the development server by running `yarn dev` or `npm run dev`. The project supports using `.env`. Getting started by create a `.env` file with the above variables.
+Start the development server by running `yarn dev` or `npm run dev`. Getting started by create a `.env.local` file with the above variables. See [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables).
 
-#### `.env`
+#### `.env.local`
 
-I include my own environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env`.
+I include my own environment variables in [.env.example](.env.example) for experimentation purposes. Please replace them with your owns and refrain from sabotaging them. You can try them in development by renaming it into `.env.local`.
 
-In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env`**.
+In production, it is recommended to set the environment variables using the options provided by your cloud/hosting providers. **Do not use or commit `.env.local`**.
+
+It is at upmost importance that you do not reuse these variables in production. Especially, the database in use is public so its data is visible to all.
 
 <h2 align="center">Deployment</h2>
 

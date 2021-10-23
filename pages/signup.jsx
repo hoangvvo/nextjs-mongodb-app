@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { slugUsername, useCurrentUser } from '@/lib/user';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useCurrentUser } from '@/hooks/index';
+import { useEffect, useState } from 'react';
 
 const SignupPage = () => {
   const [user, { mutate }] = useCurrentUser();
@@ -17,6 +17,7 @@ const SignupPage = () => {
       email: e.currentTarget.email.value,
       name: e.currentTarget.name.value,
       password: e.currentTarget.password.value,
+      username: e.currentTarget.username.value,
     };
     const res = await fetch('/api/users', {
       method: 'POST',
@@ -40,12 +41,18 @@ const SignupPage = () => {
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
-          <label htmlFor="name">
+          <label htmlFor="username">
             <input
-              id="name"
-              name="name"
+              id="username"
+              name="username"
               type="text"
-              placeholder="Your name"
+              placeholder="Username"
+              onBlur={(event) => {
+                event.currentTarget.value = slugUsername(
+                  event.currentTarget.value,
+                  '_'
+                );
+              }}
             />
           </label>
           <label htmlFor="email">
@@ -64,11 +71,14 @@ const SignupPage = () => {
               placeholder="Create a password"
             />
           </label>
+          <label htmlFor="name">
+            <input id="name" name="name" type="text" placeholder="Your name" />
+          </label>
           <button type="submit">Sign up</button>
         </form>
         <p style={{ color: '#777', textAlign: 'center' }}>
-          Note: The database is public. For your privacy,
-          please avoid using your personal, work email.
+          Note: The database is public. For your privacy, please avoid using
+          your personal, work email.
         </p>
       </div>
     </>

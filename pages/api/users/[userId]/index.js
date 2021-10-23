@@ -1,17 +1,14 @@
+import { findUserById } from '@/api-lib/db';
+import { database } from '@/api-lib/middlewares';
+import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
-import { all } from '@/middlewares/index';
-import { findUserById } from '@/db/index';
-import { extractUser } from '@/lib/api-helpers';
 
-const handler = nc();
+const handler = nc(ncOpts);
 
-handler.use(all);
-
-const maxAge = 4 * 60 * 60; // 4 hours
+handler.use(database);
 
 handler.get(async (req, res) => {
-  const user = extractUser(await findUserById(req.db, req.query.userId));
-  if (user) res.setHeader('cache-control', `public, max-age=${maxAge}`);
+  const user = await findUserById(req.db, req.query.userId);
   res.send({ user });
 });
 

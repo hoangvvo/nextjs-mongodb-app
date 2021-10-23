@@ -10,15 +10,18 @@ export function findTokenByIdAndType(db, id, type) {
 export function findAndDeleteTokenByIdAndType(db, id, type) {
   return db
     .collection('tokens')
-    .findOneAndDelete({ _id: id, type }).then(({ value }) => value);
+    .findOneAndDelete({ _id: id, type })
+    .then(({ value }) => value);
 }
 
-export function insertToken(db, { creatorId, type, expireAt }) {
+export async function createToken(db, { creatorId, type, expireAt }) {
   const securedTokenId = nanoid(32);
-  return db.collection('tokens').insertOne({
+  const token = {
     _id: securedTokenId,
     creatorId,
     type,
     expireAt,
-  }).then(({ ops }) => ops[0]);
+  };
+  await db.collection('tokens').insertOne(token);
+  return token;
 }

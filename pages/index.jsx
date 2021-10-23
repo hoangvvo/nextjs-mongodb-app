@@ -1,7 +1,5 @@
-import React from 'react';
-import { useCurrentUser } from '@/hooks/index';
-import PostEditor from '@/components/post/editor';
-import Posts from '@/components/post/posts';
+import { PostEditor, Posts } from '@/components/post';
+import { useCurrentUser } from '@/lib/user';
 
 const IndexPage = () => {
   const [user] = useCurrentUser();
@@ -20,19 +18,15 @@ const IndexPage = () => {
         `}
       </style>
       <div style={{ marginBottom: '2rem' }}>
-        <h2>
-          Hello,
-          {' '}
-          {user ? user.name : 'stranger'}
-          !
-        </h2>
+        <h2>Hello, {user ? user.name : 'stranger'}!</h2>
         <p>Have a wonderful day.</p>
       </div>
       <div>
         <h3>
-          All posts from the Web
-          {' '}
-          <span role="img" aria-label="Earth">🌎</span>
+          All posts from the Web{' '}
+          <span role="img" aria-label="Earth">
+            🌎
+          </span>
         </h3>
         <PostEditor />
         <Posts />
