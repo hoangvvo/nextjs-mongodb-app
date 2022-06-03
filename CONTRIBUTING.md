@@ -1,10 +1,10 @@
-# Contribute to nextjs-mongodb-app
+# Contribute to nextjs-mongodb-app-bt
 
-:+1::tada: Thank you for being here. It is people like you that make `nextjs-mongodb-app` great and help shape a better open-source community.
+:+1::tada: Thank you for being here. It is people like you that make `nextjs-mongodb-app-bt` great and help shape a better open-source community.
 
 Following this guideline improves communication and organization, which helps save your and other developers' times and effort in future development.
 
-## What `nextjs-mongodb-app` is looking for
+## What `nextjs-mongodb-app-bt` is looking for
 
 I welcome all contributions from the community. There are many ways to contribute:
 
@@ -45,7 +45,7 @@ The steps to submit a PR are:
 
 ### Javascript style
 
-`nextjs-mongodb-app` follows [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript). Please run `npm run lint` and fix any linting warnings.
+`nextjs-mongodb-app-bt` follows [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript). Please run `npm run lint` and fix any linting warnings.
 
 ### Commit message
 
@@ -53,4 +53,4 @@ The steps to submit a PR are:
 - Consider starting the commit message with an applicable emoji (ex. [gitmoji](https://gitmoji.carloscuesta.me)) for a more beautiful world :rainbow:.
 
 :heart: Thank you,
-Hoang Vo
+Bon Ngo

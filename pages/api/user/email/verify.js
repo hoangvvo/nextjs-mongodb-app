@@ -1,5 +1,5 @@
 import { createToken } from '@/api-lib/db';
-import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
+import { CONFIG, sendMail } from '@/api-lib/mail';
 import { auths, database } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
@@ -22,7 +22,7 @@ handler.post(async (req, res) => {
 
   await sendMail({
     to: req.user.email,
-    from: MAIL_CONFIG.from,
+    from: CONFIG.from,
     subject: `Verification Email for ${process.env.WEB_URI}`,
     html: `
       <div>

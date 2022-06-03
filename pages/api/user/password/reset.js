@@ -43,7 +43,7 @@ handler.post(
     await sendMail({
       to: email,
       from: MAIL_CONFIG.from,
-      subject: '[nextjs-mongodb-app] Reset your password.',
+      subject: '[nextjs-mongodb-app-bt] Reset your password.',
       html: `
       <div>
         <p>Hello, ${user.name}</p>

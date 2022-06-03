@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-mongodb-app",
-  "version": "1.0.0",
+  "name": "nextjs-mongodb-app-bt",
+  "version": "2.0.0",
   "description": "Full fledged app made with Next.JS and MongoDB",
   "main": "index.js",
   "scripts": {
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hoangvvo/nextjs-mongodb-app.git"
+    "url": "git+https://github.com/bonnv79/nextjs-mongodb-app-bt.git"
   },
-  "author": "Hoang Vo (https://hoangvvo.com)",
+  "author": "Bon Ngo (https://ngovanbon.wordpress.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hoangvvo/nextjs-mongodb-app/issues"
+    "url": "https://github.com/bonnv79/nextjs-mongodb-app-bt/issues"
   },
-  "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
+  "homepage": "https://github.com/bonnv79/nextjs-mongodb-app-bt#readme",
   "dependencies": {
     "@lukeed/ms": "^2.0.0",
     "ajv": "^8.11.0",

@@ -63,7 +63,7 @@ An [**Next.js**](https://github.com/zeit/next.js/) and [**MongoDB**](https://www
 
 <div align="center">
   
-<sup>Have any features that interest you, [make an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues). Would like to work on a feature, [make a PR](https://github.com/hoangvvo/nextjs-mongodb-app/pulls).<sup>
+<sup>Have any features that interest you, [make an issue](https://github.com/bonnv79/nextjs-mongodb-app-bt/issues). Would like to work on a feature, [make a PR](https://github.com/bonnv79/nextjs-mongodb-app-bt/pulls).<sup>
   
 </div>
 
@@ -78,7 +78,7 @@ This project accompanies the following posts:
 
 Also check them out on [dev.to](https://dev.to/hoangvvo).
 
-Although the project is written to be secure, its simplicity requires careful considerations for usage in sensitive productions. [File an issue](https://github.com/hoangvvo/nextjs-mongodb-app/issues/new/choose) if you spot any security problems.
+Although the project is written to be secure, its simplicity requires careful considerations for usage in sensitive productions. [File an issue](https://github.com/bonnv79/nextjs-mongodb-app-bt/issues/new/choose) if you spot any security problems.
 
 <h3 align="center">Dependencies</h3>
 

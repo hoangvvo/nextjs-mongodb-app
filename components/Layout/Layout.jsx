@@ -15,12 +15,12 @@ const Layout = ({ children }) => {
         />
         <meta
           name="description"
-          content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
+          content="nextjs-mongodb-app-bt is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
         />
         <meta property="og:title" content="Next.js + MongoDB App" />
         <meta
           property="og:description"
-          content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
+          content="nextjs-mongodb-app-bt is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
         />
         <meta
           property="og:image"
