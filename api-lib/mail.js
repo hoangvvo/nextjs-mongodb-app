@@ -3,14 +3,8 @@
 // like Mailgun, AWS SES, etc.
 import nodemailer from 'nodemailer';
 
-const nodemailerConfig = process.env.SMTP_USER
-  ? {
-    service: process.env.SMTP_SERVICE,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  }
+const nodemailerConfig = process.env.NODEMAILER_CONFIG
+  ? JSON.parse(process.env.NODEMAILER_CONFIG)
   : {};
 
 const transporter = nodemailer.createTransport(nodemailerConfig);
