@@ -24,7 +24,7 @@ const PostList = () => {
             passHref
           >
             <div className={styles.wrap}>
-              <Post className={styles.post} post={post} />
+              <Post className={styles.post} post={post} isDelete isPublished />
             </div>
           </Link>
         ))}

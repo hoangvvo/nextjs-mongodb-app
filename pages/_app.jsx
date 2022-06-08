@@ -1,4 +1,5 @@
 import '@/assets/base.css';
+import 'antd/dist/antd.css';
 import { Layout } from '@/components/Layout';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';

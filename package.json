@@ -1,6 +1,6 @@
 {
   "name": "nextjs-mongodb-app-bt",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Full fledged app made with Next.JS and MongoDB",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/bonnv79/nextjs-mongodb-app-bt#readme",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@lukeed/ms": "^2.0.0",
     "ajv": "^8.11.0",
+    "antd": "^4.21.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.29.0",
     "clsx": "^1.1.1",

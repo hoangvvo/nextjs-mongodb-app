@@ -49,13 +49,40 @@ export async function findPosts(db, before, by, limit = 10) {
     .toArray();
 }
 
-export async function insertPost(db, { content, creatorId }) {
+export async function insertPost(db, { title, content, creatorId }) {
+  const createTime = new Date();
   const post = {
+    title,
     content,
     creatorId,
-    createdAt: new Date(),
+    createdAt: createTime,
+    updateAt: createTime,
   };
   const { insertedId } = await db.collection('posts').insertOne(post);
   post._id = insertedId;
   return post;
+}
+
+export async function deletePost(db, { id }) {
+  const res = await db.collection('posts').deleteOne({ _id: new ObjectId(id) });
+  return res;
+}
+
+export async function putPost(db, { id, title, content, published }) {
+  const newPost = { updateAt: new Date() };
+  if (title) {
+    newPost.title = title;
+  }
+  if (content) {
+    newPost.content = content;
+  }
+
+  if (typeof published === 'boolean') {
+    newPost.published = published;
+  }
+  const newValues = {
+    $set: newPost
+  };
+  const res = await db.collection('posts').updateOne({ _id: new ObjectId(id) }, newValues);
+  return res;
 }

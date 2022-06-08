@@ -24,6 +24,7 @@ export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
 
   const post = await findPostById(context.req.db, context.params.postId);
+
   if (!post) {
     return {
       notFound: true,
@@ -44,5 +45,6 @@ export async function getServerSideProps(context) {
   post.creatorId = String(post.creatorId);
   post.creator._id = String(post.creator._id);
   post.createdAt = post.createdAt.toJSON();
+  post.updateAt = post.updateAt.toJSON();
   return { props: { post } };
 }

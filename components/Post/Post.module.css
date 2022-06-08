@@ -12,6 +12,10 @@
   text-decoration: none;
 }
 
+.creatorContainer {
+  display: flex;
+}
+
 .creator {
   display: inline-flex;
 }
@@ -53,6 +57,7 @@
   overflow: hidden;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  white-space: nowrap;
 }
 
 .timestamp {
@@ -61,4 +66,16 @@
   line-height: 1.25rem;
   margin: 0;
   color: var(--accents-5);
+}
+
+.closeBtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.publicBtn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }

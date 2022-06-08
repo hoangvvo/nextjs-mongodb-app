@@ -3,7 +3,7 @@ import styles from './Feed.module.css';
 import Poster from './Poster';
 import PostList from './PostList';
 
-export const Feed = () => {
+export const Post = () => {
   return (
     <div className={styles.root}>
       <Spacer size={1} axis="vertical" />

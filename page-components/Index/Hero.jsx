@@ -14,8 +14,8 @@ const Hero = () => {
         </h1>
         <Container justifyContent="center" className={styles.buttons}>
           <Container>
-            <Link passHref href="/feed">
-              <ButtonLink className={styles.button}>Explore Feed</ButtonLink>
+            <Link passHref href="/post">
+              <ButtonLink className={styles.button}>Explore Post</ButtonLink>
             </Link>
           </Container>
           <Spacer axis="horizontal" size={1} />
