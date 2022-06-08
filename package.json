@@ -1,6 +1,6 @@
 {
   "name": "nextjs-mongodb-app-bt",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Full fledged app made with Next.JS and MongoDB",
   "main": "index.js",
   "scripts": {

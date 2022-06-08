@@ -23,7 +23,7 @@ export async function findPostById(db, id) {
   return posts[0];
 }
 
-export async function findPosts(db, before, by, limit = 10) {
+export async function findPosts(db, before, by, limit = 10, published = null) {
   return db
     .collection('posts')
     .aggregate([
@@ -31,6 +31,7 @@ export async function findPosts(db, before, by, limit = 10) {
         $match: {
           ...(by && { creatorId: new ObjectId(by) }),
           ...(before && { createdAt: { $lt: before } }),
+          ...(published !== null && { published: published === 'true' }),
         },
       },
       { $sort: { _id: -1 } },
@@ -64,8 +65,12 @@ export async function insertPost(db, { title, content, creatorId }) {
 }
 
 export async function deletePost(db, { id }) {
-  const res = await db.collection('posts').deleteOne({ _id: new ObjectId(id) });
-  return res;
+  const postRes = await db.collection('posts').deleteOne({ _id: new ObjectId(id) });
+  const commentRes = await db.collection('comments').deleteMany({ postId: new ObjectId(id) });
+  return {
+    post: postRes,
+    comment: commentRes
+  };
 }
 
 export async function putPost(db, { id, title, content, published }) {

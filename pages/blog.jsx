@@ -1,11 +1,11 @@
-import { Post } from '@/page-components/Post';
+import { Post } from '@/page-components/Blog';
 import Head from 'next/head';
 
 const PostPage = () => {
   return (
     <>
       <Head>
-        <title>Manage Posts</title>
+        <title>Blog</title>
       </Head>
       <Post />
     </>

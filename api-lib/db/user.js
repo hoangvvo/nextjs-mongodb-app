@@ -15,7 +15,11 @@ export async function findUserForAuth(db, userId) {
   return db
     .collection('users')
     .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })
-    .then((user) => user || null);
+    .then(async (user) => {
+      const permission = await db.collection('permission').findOne({ role_id: user.role_id });
+      user.roles = permission?.roles;
+      return user || null;
+    });
 }
 
 export async function findUserById(db, userId) {

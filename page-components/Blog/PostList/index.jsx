@@ -4,18 +4,14 @@ import Wrapper from '@/components/Layout/Wrapper';
 import { Post } from '@/components/Post';
 import { Text } from '@/components/Text';
 import { usePostPages } from '@/lib/post';
-import { PERMISSION } from 'constants/permission';
 import Link from 'next/link';
-import { checkPermission } from 'utils';
-import styles from './PostList.module.css';
+import styles from './styles.module.css';
 
-const PostList = ({ user }) => {
-  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages();
+const PostList = () => {
+  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages({ published: true });
   const posts = data
     ? data.reduce((acc, val) => [...acc, ...val.posts], [])
     : [];
-  const isDelete = checkPermission(user, PERMISSION.POST.POST_DELETE);
-  const isEdit = checkPermission(user, PERMISSION.POST.POST_EDIT);
 
   return (
     <div className={styles.root}>
@@ -28,7 +24,7 @@ const PostList = ({ user }) => {
             passHref
           >
             <div className={styles.wrap}>
-              <Post className={styles.post} post={post} isDelete={isDelete} isPublished={isEdit} />
+              <Post className={styles.post} post={post} detailMode />
             </div>
           </Link>
         ))}

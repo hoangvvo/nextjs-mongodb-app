@@ -2,16 +2,17 @@ import { Avatar } from '@/components/Avatar';
 import { Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
-import { useCurrentUser } from '@/lib/user';
+import { PERMISSION } from '@/constants/permission';
+import { checkPermission } from 'utils';
 import Link from 'next/link';
 import styles from './Poster.module.css';
 import PosterInner from './PosterInner';
 
-const Poster = () => {
-  const { data, error } = useCurrentUser();
+const Poster = ({ data, error }) => {
   const loading = !data && !error;
+  const isCreate = checkPermission(data, PERMISSION.POST.POST_CREATE);
 
-  return (
+  return isCreate && (
     <Wrapper>
       <div className={styles.root}>
         <h3 className={styles.heading}>

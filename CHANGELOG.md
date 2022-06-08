@@ -6,3 +6,4 @@
 
 ##### Release date: 8/6/2022
 - new-feature: add function published and delete post
+- new-feature: add function update post, blog page, set permission
