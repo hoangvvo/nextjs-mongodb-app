@@ -2,11 +2,11 @@ import { Avatar } from '@/components/Avatar';
 import { Wrapper } from '@/components/Layout';
 import { LoadingDots } from '@/components/LoadingDots';
 import { Text, TextLink } from '@/components/Text';
-import { PERMISSION } from '@/constants/permission';
 import { checkPermission } from 'utils';
 import Link from 'next/link';
 import styles from './Poster.module.css';
 import PosterInner from './PosterInner';
+import { PERMISSION } from 'constants/permission';
 
 const Poster = ({ data, error }) => {
   const loading = !data && !error;
