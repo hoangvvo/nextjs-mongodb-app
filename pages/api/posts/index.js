@@ -1,16 +1,17 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findPosts, insertPost } from '@/api-lib/db';
-import { auths, database, validateBody } from '@/api-lib/middlewares';
+import { auths, validateBody } from '@/api-lib/middlewares';
+import { getMongoDb } from '@/api-lib/mongodb';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
 
-handler.use(database);
-
 handler.get(async (req, res) => {
+  const db = await getMongoDb();
+
   const posts = await findPosts(
-    req.db,
+    db,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
@@ -34,7 +35,9 @@ handler.post(
       return res.status(401).end();
     }
 
-    const post = await insertPost(req.db, {
+    const db = await getMongoDb();
+
+    const post = await insertPost(db, {
       content: req.body.content,
       creatorId: req.user._id,
     });

@@ -1,7 +1,6 @@
 import { findUserByUsername } from '@/api-lib/db';
-import { database } from '@/api-lib/middlewares';
+import { getMongoDb } from '@/api-lib/mongodb';
 import { User } from '@/page-components/User';
-import nc from 'next-connect';
 import Head from 'next/head';
 
 export default function UserPage({ user }) {
@@ -18,12 +17,9 @@ export default function UserPage({ user }) {
 }
 
 export async function getServerSideProps(context) {
-  await nc().use(database).run(context.req, context.res);
+  const db = await getMongoDb();
 
-  const user = await findUserByUsername(
-    context.req.db,
-    context.params.username
-  );
+  const user = await findUserByUsername(db, context.params.username);
   if (!user) {
     return {
       notFound: true,

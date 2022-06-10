@@ -1,6 +1,7 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findUserByUsername, updateUserById } from '@/api-lib/db';
-import { auths, database, validateBody } from '@/api-lib/middlewares';
+import { auths, validateBody } from '@/api-lib/middlewares';
+import { getMongoDb } from '@/api-lib/mongodb';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
 import { v2 as cloudinary } from 'cloudinary';
@@ -24,7 +25,7 @@ if (process.env.CLOUDINARY_URL) {
   });
 }
 
-handler.use(database, ...auths);
+handler.use(...auths);
 
 handler.get(async (req, res) => {
   if (!req.user) return res.json({ user: null });
@@ -47,6 +48,9 @@ handler.patch(
       req.status(401).end();
       return;
     }
+
+    const db = await getMongoDb();
+
     let profilePicture;
     if (req.file) {
       const image = await cloudinary.uploader.upload(req.file.path, {
@@ -64,7 +68,7 @@ handler.patch(
       username = slugUsername(req.body.username);
       if (
         username !== req.user.username &&
-        (await findUserByUsername(req.db, username))
+        (await findUserByUsername(db, username))
       ) {
         res
           .status(403)
@@ -73,7 +77,7 @@ handler.patch(
       }
     }
 
-    const user = await updateUserById(req.db, req.user._id, {
+    const user = await updateUserById(db, req.user._id, {
       ...(username && { username }),
       ...(name && { name }),
       ...(typeof bio === 'string' && { bio }),

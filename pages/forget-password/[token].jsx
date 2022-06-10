@@ -1,7 +1,6 @@
 import { findTokenByIdAndType } from '@/api-lib/db';
-import { database } from '@/api-lib/middlewares';
+import { getMongoDb } from '@/api-lib/mongodb';
 import { ForgetPasswordToken } from '@/page-components/ForgetPassword';
-import nc from 'next-connect';
 import Head from 'next/head';
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
@@ -16,10 +15,10 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 };
 
 export async function getServerSideProps(context) {
-  await nc().use(database).run(context.req, context.res);
+  const db = await getMongoDb();
 
   const tokenDoc = await findTokenByIdAndType(
-    context.req.db,
+    db,
     context.params.token,
     'passwordReset'
   );

@@ -1,6 +1,7 @@
 import { ValidateProps } from '@/api-lib/constants';
 import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
-import { auths, database, validateBody } from '@/api-lib/middlewares';
+import { auths, validateBody } from '@/api-lib/middlewares';
+import { getMongoDb } from '@/api-lib/mongodb';
 import { ncOpts } from '@/api-lib/nc';
 import { slugUsername } from '@/lib/user';
 import nc from 'next-connect';
@@ -8,8 +9,6 @@ import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
 const handler = nc(ncOpts);
-
-handler.use(database);
 
 handler.post(
   validateBody({
@@ -25,6 +24,8 @@ handler.post(
   }),
   ...auths,
   async (req, res) => {
+    const db = await getMongoDb();
+
     let { username, name, email, password } = req.body;
     username = slugUsername(req.body.username);
     email = normalizeEmail(req.body.email);
@@ -34,19 +35,19 @@ handler.post(
         .json({ error: { message: 'The email you entered is invalid.' } });
       return;
     }
-    if (await findUserByEmail(req.db, email)) {
+    if (await findUserByEmail(db, email)) {
       res
         .status(403)
         .json({ error: { message: 'The email has already been used.' } });
       return;
     }
-    if (await findUserByUsername(req.db, username)) {
+    if (await findUserByUsername(db, username)) {
       res
         .status(403)
         .json({ error: { message: 'The username has already been taken.' } });
       return;
     }
-    const user = await insertUser(req.db, {
+    const user = await insertUser(db, {
       email,
       originalPassword: password,
       bio: '',
