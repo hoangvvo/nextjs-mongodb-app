@@ -27,8 +27,10 @@ handler.post(
     const db = await getMongoDb();
 
     let { username, name, email, password } = req.body;
+    const emailOriginal = email;
     username = slugUsername(req.body.username);
     email = normalizeEmail(req.body.email);
+
     if (!isEmail(email)) {
       res
         .status(400)
@@ -47,13 +49,16 @@ handler.post(
         .json({ error: { message: 'The username has already been taken.' } });
       return;
     }
+
     const user = await insertUser(db, {
+      emailOriginal,
       email,
       originalPassword: password,
       bio: '',
       name,
       username,
     });
+
     req.logIn(user, (err) => {
       if (err) throw err;
       res.status(201).json({

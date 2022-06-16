@@ -53,12 +53,13 @@ export async function updateUserById(db, id, data) {
 
 export async function insertUser(
   db,
-  { email, originalPassword, bio = '', name, profilePicture, username }
+  { emailOriginal, email, originalPassword, bio = '', name, profilePicture, username }
 ) {
   const user = {
+    emailOriginal,
+    email,
     emailVerified: false,
     profilePicture,
-    email,
     name,
     username,
     bio,
@@ -98,6 +99,7 @@ export async function UNSAFE_updateUserPassword(db, id, newPassword) {
 export function dbProjectionUsers(prefix = '') {
   return {
     [`${prefix}password`]: 0,
+    [`${prefix}emailOriginal`]: 0,
     [`${prefix}email`]: 0,
     [`${prefix}emailVerified`]: 0,
   };
