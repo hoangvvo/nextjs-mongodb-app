@@ -31,7 +31,7 @@ const EmailVerify = ({ user }) => {
       <Container flex={1}>
         <p>
           <strong>Note:</strong> <span>Your email</span> (
-          <span className={styles.link}>{user.email}</span>) is unverified.
+          <span className={styles.link}>{user.emailOriginal}</span>) is unverified.
         </p>
       </Container>
       <Spacer size={1} axis="horizontal" />
@@ -204,6 +204,7 @@ export const Settings = () => {
       router.replace('/login');
     }
   }, [router, data, error]);
+
   return (
     <Wrapper className={styles.wrapper}>
       <Spacer size={2} axis="vertical" />
